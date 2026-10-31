@@ -17,6 +17,7 @@ import { ALL_PRODUCTS, Product } from "@/data/products";
 import { useShop } from "@/context/ShopContext";
 import ShopOverlays from "@/components/ShopOverlays";
 import Brands from "@/components/Brands";
+import LatestBlogs from "@/components/LatestBlogs";
 
 function TiltProductCard({ prod }: { prod: Product }) {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -237,10 +238,9 @@ export default function HomePage() {
       ),
     [],
   );
-  const discountedItems = useMemo(
-    () => ALL_PRODUCTS.filter((p) => p.isSale),
-    [],
-  );
+  const discountedItems = ALL_PRODUCTS.filter((p) => p.isSale)
+    .slice(-5)
+    .reverse();
   const lamps = useMemo(
     () => ALL_PRODUCTS.filter((p) => p.categorySlug === "sanatebi"),
     [],
@@ -479,48 +479,8 @@ export default function HomePage() {
       <AstromanCarousel title="მხოლოდ ასტრომანში" items={onlyInAstroman} />
 
       {/* 9. ბლოგის სექცია */}
-      <section className="mb-12">
-        <div className="mb-3">
-          <span className="text-[11px] font-bold uppercase tracking-widest text-yellow-500/80">
-            პირველი ასტრო მაღაზია საქართველოში
-          </span>
-          <div className="flex items-center justify-between">
-            <h2 className="text-sm font-black uppercase tracking-wider text-white sm:text-base">
-              გაეცანი ბლოგს
-            </h2>
-            <Link
-              href="/blog"
-              className="text-xs font-semibold text-yellow-400 hover:underline"
-            >
-              ყველა სტატია →
-            </Link>
-          </div>
-        </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 mt-3">
-          {blogPosts.map((post) => (
-            <Link
-              key={post.id}
-              href={post.link}
-              className="group overflow-hidden rounded-2xl border border-white/5 bg-[#0e1320] transition hover:border-yellow-500/40 hover:shadow-xl flex flex-col"
-            >
-              <div className="aspect-[4/3] w-full overflow-hidden bg-slate-900">
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
-                  loading="lazy"
-                />
-              </div>
-              <div className="p-3.5 flex grow flex-col justify-between">
-                <h4 className="line-clamp-3 text-xs font-bold text-white group-hover:text-yellow-400 transition leading-snug">
-                  {post.title}
-                </h4>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
+      <LatestBlogs />
 
       {/* 10. ქვედა უპირატესობების 4-იანი ზოლი */}
       <section className="grid grid-cols-2 gap-4 rounded-2xl border border-white/5 bg-[#0d111d]/70 p-6 backdrop-blur-md md:grid-cols-4">

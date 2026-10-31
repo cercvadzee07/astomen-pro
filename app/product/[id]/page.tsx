@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useRef } from "react";
+import { useState, useMemo, useRef, useEffect, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import {
@@ -17,6 +17,10 @@ import {
   Headphones,
   Rocket,
   Star,
+  X,
+  ZoomIn,
+  ZoomOut,
+  RotateCcw,
 } from "lucide-react";
 import { ALL_PRODUCTS, Product } from "@/data/products";
 import { useShop } from "@/context/ShopContext";
@@ -53,7 +57,10 @@ function TiltProductCard({ prod }: { prod: Product }) {
         width: "calc((100% - 4 * 1rem) / 5)",
         minWidth: "calc((100% - 4 * 1rem) / 5)",
         transform: `perspective(1000px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
-        transition: rotate.x === 0 ? "transform 0.4s ease-out" : "transform 0.08s ease-out",
+        transition:
+          rotate.x === 0
+            ? "transform 0.4s ease-out"
+            : "transform 0.08s ease-out",
       }}
       className="group relative flex shrink-0 flex-col overflow-hidden rounded-2xl border border-white/5 bg-[#0e1320] shadow-md transition-colors hover:border-yellow-500/40 hover:shadow-xl hover:shadow-yellow-500/5 will-change-transform"
     >
@@ -84,7 +91,9 @@ function TiltProductCard({ prod }: { prod: Product }) {
           }`}
           title="ფავორიტები"
         >
-          <Heart className={`h-4 w-4 transition-transform duration-200 ${isFav ? "fill-black" : ""}`} />
+          <Heart
+            className={`h-4 w-4 transition-transform duration-200 ${isFav ? "fill-black" : ""}`}
+          />
         </button>
 
         <button
@@ -109,6 +118,7 @@ function TiltProductCard({ prod }: { prod: Product }) {
           <img
             src={prod.image}
             alt={prod.name}
+            referrerPolicy="no-referrer"
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             loading="lazy"
           />
@@ -177,24 +187,42 @@ export default function ProductDetailPage() {
 
   const relatedProducts = useMemo(() => {
     return ALL_PRODUCTS.filter(
-      (p) => p.categorySlug === product.categorySlug && p.id !== product.id
+      (p) => p.categorySlug === product.categorySlug && p.id !== product.id,
     );
   }, [product]);
 
   const galleryImages = useMemo(() => {
-    const list = [product.image];
-    const others = ALL_PRODUCTS.filter(
-      (p) => p.categorySlug === product.categorySlug && p.id !== product.id
-    ).map((p) => p.image);
-
-    return [...list, ...others].slice(0, 4);
+    const raw =
+      product.images && product.images.length > 0
+        ? product.images
+        : [product.image];
+    const seen = new Set<string>();
+    const clean: string[] = [];
+    for (const url of raw) {
+      if (!url) continue;
+      const normalized = decodeURIComponent(url).toLowerCase().trim();
+      if (!seen.has(normalized)) {
+        seen.add(normalized);
+        clean.push(url);
+      }
+    }
+    return clean.length > 0 ? clean : [product.image];
   }, [product]);
 
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
-  const [activeTab, setActiveTab] = useState<"desc" | "specs" | "reviews" | "shipping">("desc");
+  const [activeTab, setActiveTab] = useState<
+    "desc" | "specs" | "reviews" | "shipping"
+  >("desc");
   const [copiedShare, setCopiedShare] = useState(false);
   const [relatedIndex, setRelatedIndex] = useState(0);
+
+  // Lightbox Modal States
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalZoom, setModalZoom] = useState(1);
+
+  const thumbnailsRef = useRef<HTMLDivElement>(null);
+  const isTransitioningRef = useRef(false);
 
   const [reviews, setReviews] = useState<Review[]>([]);
   const [rating, setRating] = useState(5);
@@ -207,6 +235,95 @@ export default function ProductDetailPage() {
 
   const isFav = favorites?.includes(product.id) ?? false;
   const maxRelatedIndex = Math.max(0, relatedProducts.length - 5);
+
+  useEffect(() => {
+    if (!thumbnailsRef.current) return;
+    const container = thumbnailsRef.current;
+    const activeEl = container.children[activeImageIndex] as HTMLElement;
+    if (activeEl) {
+      const scrollTarget =
+        activeEl.offsetLeft -
+        container.offsetWidth / 2 +
+        activeEl.offsetWidth / 2;
+      container.scrollTo({
+        left: scrollTarget,
+        behavior: "smooth",
+      });
+    }
+  }, [activeImageIndex]);
+
+  const goToIndex = (newIndex: number) => {
+    if (isTransitioningRef.current) return;
+    isTransitioningRef.current = true;
+    setActiveImageIndex(newIndex);
+    setModalZoom(1); // სურათის გადართვისას ზუმი რესეტდება
+    setTimeout(() => {
+      isTransitioningRef.current = false;
+    }, 200);
+  };
+
+  const handlePrevThumb = useCallback(
+    (e?: React.MouseEvent) => {
+      e?.stopPropagation();
+      e?.preventDefault();
+      const nextIdx =
+        activeImageIndex === 0
+          ? galleryImages.length - 1
+          : activeImageIndex - 1;
+      goToIndex(nextIdx);
+    },
+    [activeImageIndex, galleryImages.length],
+  );
+
+  const handleNextThumb = useCallback(
+    (e?: React.MouseEvent) => {
+      e?.stopPropagation();
+      e?.preventDefault();
+      const nextIdx = (activeImageIndex + 1) % galleryImages.length;
+      goToIndex(nextIdx);
+    },
+    [activeImageIndex, galleryImages.length],
+  );
+
+  // კლავიატურით მართვა მოდალში (Esc, ArrowLeft, ArrowRight)
+  useEffect(() => {
+    if (!isModalOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsModalOpen(false);
+        setModalZoom(1);
+      } else if (e.key === "ArrowLeft") {
+        handlePrevThumb();
+      } else if (e.key === "ArrowRight") {
+        handleNextThumb();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isModalOpen, handlePrevThumb, handleNextThumb]);
+
+  // ზუმის კონტროლი
+  const handleZoomIn = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    setModalZoom((z) => Math.min(3, +(z + 0.3).toFixed(1)));
+  };
+
+  const handleZoomOut = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    setModalZoom((z) => Math.max(1, +(z - 0.3).toFixed(1)));
+  };
+
+  const handleResetZoom = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    setModalZoom(1);
+  };
+
+  const toggleZoomClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setModalZoom((z) => (z > 1 ? 1 : 2));
+  };
 
   const handleAddToCart = () => {
     for (let i = 0; i < quantity; i++) {
@@ -255,7 +372,7 @@ export default function ProductDetailPage() {
             მთავარი
           </Link>
           <span className="text-gray-600">/</span>
-          <Link href="/category/teleskopi" className="hover:text-yellow-400 transition">
+          <Link href="/magazia" className="hover:text-yellow-400 transition">
             მაღაზია
           </Link>
           <span className="text-gray-600">/</span>
@@ -269,10 +386,17 @@ export default function ProductDetailPage() {
           <span className="text-white line-clamp-1">{product.name}</span>
         </nav>
 
-        <section className="grid grid-cols-1 gap-8 md:grid-cols-12 mb-16">
+        <section className="grid grid-cols-1 gap-8 md:grid-cols-12 mb-16 items-start">
           <div className="md:col-span-6 flex flex-col gap-4">
-            <div className="group relative aspect-square w-full overflow-hidden rounded-3xl border border-white/10 bg-white p-6 shadow-2xl flex items-center justify-center">
-              <div className="absolute top-4 left-4 z-20 flex items-center gap-2">
+            {/* მთავარი ფოტო — დაკლიკებით იხსნება Lightbox Overlay */}
+            <div
+              onClick={() => {
+                setModalZoom(1);
+                setIsModalOpen(true);
+              }}
+              className="group relative w-full h-[480px] sm:h-[540px] overflow-hidden rounded-3xl border border-white/10 bg-black/60 shadow-2xl flex items-center justify-center p-4 cursor-zoom-in"
+            >
+              <div className="absolute top-4 left-4 z-20 flex items-center gap-2 pointer-events-none">
                 {product.isSale && (
                   <span className="rounded-xl bg-red-600 px-3 py-1.5 text-xs font-black uppercase tracking-wider text-white shadow-xl">
                     SALE
@@ -299,70 +423,84 @@ export default function ProductDetailPage() {
               <img
                 src={galleryImages[activeImageIndex] || product.image}
                 alt={product.name}
-                className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                referrerPolicy="no-referrer"
+                className="max-h-full max-w-full object-contain rounded-2xl transition-transform duration-300 group-hover:scale-[1.01]"
               />
 
               <button
                 type="button"
-                onClick={() =>
-                  window.open(galleryImages[activeImageIndex] || product.image, "_blank")
-                }
-                className="absolute bottom-4 left-4 flex h-9 w-9 items-center justify-center rounded-xl border border-gray-200 bg-white/95 text-gray-700 shadow-md transition hover:bg-black hover:text-white hover:scale-105 active:scale-95"
-                title="სრულად ნახვა"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setModalZoom(1);
+                  setIsModalOpen(true);
+                }}
+                className="absolute bottom-4 left-4 flex h-9 w-9 items-center justify-center rounded-xl border border-white/20 bg-black/60 text-white shadow-md backdrop-blur-md transition hover:bg-yellow-500 hover:text-black hover:scale-105 active:scale-95"
+                title="გადიდება"
               >
                 <Maximize2 className="h-4 w-4" />
               </button>
             </div>
 
-            <div className="relative flex items-center gap-3">
-              <button
-                type="button"
-                onClick={() =>
-                  setActiveImageIndex((prev) => (prev === 0 ? galleryImages.length - 1 : prev - 1))
-                }
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-[#0d111d] text-gray-300 shadow-md transition hover:bg-yellow-500 hover:text-black active:scale-95"
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </button>
+            {/* მინიატურების ზოლი */}
+            {galleryImages.length > 1 && (
+              <div className="relative w-full">
+                <button
+                  type="button"
+                  onClick={handlePrevThumb}
+                  className="absolute left-2 top-1/2 -translate-y-1/2 z-30 flex h-8 w-8 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-md transition hover:bg-yellow-500 hover:text-black hover:scale-110 active:scale-95"
+                  aria-label="Previous"
+                >
+                  <ChevronLeft className="h-5 w-5 stroke-[2.5]" />
+                </button>
 
-              <div className="flex gap-3 overflow-x-auto py-1 scrollbar-none w-full">
-                {galleryImages.map((img, idx) => (
-                  <button
-                    key={idx}
-                    type="button"
-                    onClick={() => setActiveImageIndex(idx)}
-                    className={`relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl border-2 p-1.5 bg-white transition-all ${
-                      activeImageIndex === idx
-                        ? "border-yellow-400 shadow-lg shadow-yellow-500/20 scale-105"
-                        : "border-transparent opacity-60 hover:opacity-100 hover:border-gray-300"
-                    }`}
-                  >
-                    <img
-                      src={img}
-                      alt={`${product.name} view ${idx + 1}`}
-                      className="h-full w-full object-contain"
-                    />
-                  </button>
-                ))}
+                <div
+                  ref={thumbnailsRef}
+                  className="flex gap-3 overflow-x-auto py-1 scrollbar-none w-full scroll-smooth px-1"
+                >
+                  {galleryImages.map((img, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => goToIndex(idx)}
+                      className="group/thumb relative h-24 w-24 sm:h-28 sm:w-28 shrink-0 overflow-hidden rounded-2xl bg-white shadow-md transition-all duration-200"
+                    >
+                      <img
+                        src={img}
+                        alt={`${product.name} thumbnail ${idx + 1}`}
+                        referrerPolicy="no-referrer"
+                        className="h-full w-full object-cover"
+                      />
+
+                      <div
+                        className={`absolute inset-0 transition-opacity duration-200 ${
+                          activeImageIndex === idx
+                            ? "bg-black/40 ring-2 ring-inset ring-black/30"
+                            : "bg-black/0 hover:bg-black/10"
+                        }`}
+                      />
+                    </button>
+                  ))}
+                </div>
+
+                <button
+                  type="button"
+                  onClick={handleNextThumb}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 z-30 flex h-8 w-8 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-md transition hover:bg-yellow-500 hover:text-black hover:scale-110 active:scale-95"
+                  aria-label="Next"
+                >
+                  <ChevronRight className="h-5 w-5 stroke-[2.5]" />
+                </button>
               </div>
-
-              <button
-                type="button"
-                onClick={() =>
-                  setActiveImageIndex((prev) => (prev + 1) % galleryImages.length)
-                }
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-[#0d111d] text-gray-300 shadow-md transition hover:bg-yellow-500 hover:text-black active:scale-95"
-              >
-                <ChevronRight className="h-4 w-4" />
-              </button>
-            </div>
+            )}
           </div>
 
           <div className="md:col-span-6 flex flex-col justify-between rounded-3xl border border-white/10 bg-[#0d111d]/85 p-6 md:p-8 shadow-2xl backdrop-blur-xl">
             <div>
               <div className="flex items-center justify-between text-xs font-bold uppercase tracking-widest text-yellow-500 mb-2">
                 <span>{product.categoryName}</span>
-                <span className="text-gray-400 font-mono">SKU: 22450</span>
+                <span className="text-gray-400 font-mono">
+                  SKU: {product.id}
+                </span>
               </div>
 
               <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white leading-snug">
@@ -375,7 +513,12 @@ export default function ProductDetailPage() {
                     <Star
                       key={i}
                       className={`h-3.5 w-3.5 ${
-                        reviews.length > 0 && i < Math.round(reviews.reduce((a, b) => a + b.rating, 0) / reviews.length)
+                        reviews.length > 0 &&
+                        i <
+                          Math.round(
+                            reviews.reduce((a, b) => a + b.rating, 0) /
+                              reviews.length,
+                          )
                           ? "fill-yellow-400 text-yellow-400"
                           : "text-gray-600"
                       }`}
@@ -383,7 +526,11 @@ export default function ProductDetailPage() {
                   ))}
                 </div>
                 <span className="text-gray-400 font-semibold">
-                  ({reviews.length === 0 ? "0 შეფასება" : `${reviews.length} შეფასება`})
+                  (
+                  {reviews.length === 0
+                    ? "0 შეფასება"
+                    : `${reviews.length} შეფასება`}
+                  )
                 </span>
               </div>
 
@@ -398,25 +545,37 @@ export default function ProductDetailPage() {
                 )}
                 {product.oldPrice && (
                   <span className="rounded-md bg-red-600/20 border border-red-500/30 px-2 py-0.5 text-xs font-black text-red-400">
-                    -{Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)}%
+                    -
+                    {Math.round(
+                      ((product.oldPrice - product.price) / product.oldPrice) *
+                        100,
+                    )}
+                    %
                   </span>
                 )}
               </div>
 
               <p className="mt-4 text-xs sm:text-sm text-gray-300 leading-relaxed">
-                70 მმ ლინზური ტელესკოპი StarSense სმარტფონის სისტემით: ინოვაციური
-                აპლიკაცია ცაზე ავტომატურად გაჩვენებთ მიმართულებას ვარსკვლავებისა და
-                პლანეტების სწრაფად სანახავად.
+                80 მმ ლინზური ტელესკოპი GoTo სისტემით: ხელის კონტროლერი
+                ავტომატურად მიმართავს ტელესკოპს არჩეულ ობიექტზე.
               </p>
 
               <div className="mt-5 grid grid-cols-2 gap-3 text-xs">
                 <div className="rounded-xl border border-white/5 bg-white/5 p-3">
-                  <span className="text-gray-400 block text-[10px] uppercase font-bold">წონა</span>
-                  <span className="font-extrabold text-white">3.35 კგ</span>
+                  <span className="text-gray-400 block text-[10px] uppercase font-bold">
+                    კატეგორია
+                  </span>
+                  <span className="font-extrabold text-white">
+                    {product.categoryName}
+                  </span>
                 </div>
                 <div className="rounded-xl border border-white/5 bg-white/5 p-3">
-                  <span className="text-gray-400 block text-[10px] uppercase font-bold">გარანტია</span>
-                  <span className="font-extrabold text-emerald-400">2 წელი ოფიციალური</span>
+                  <span className="text-gray-400 block text-[10px] uppercase font-bold">
+                    გარანტია
+                  </span>
+                  <span className="font-extrabold text-emerald-400">
+                    ოფიციალური ხარისხი
+                  </span>
                 </div>
               </div>
             </div>
@@ -431,7 +590,9 @@ export default function ProductDetailPage() {
                   >
                     -
                   </button>
-                  <span className="w-8 text-center text-sm font-black">{quantity}</span>
+                  <span className="w-8 text-center text-sm font-black">
+                    {quantity}
+                  </span>
                   <button
                     type="button"
                     onClick={() => setQuantity((q) => q + 1)}
@@ -465,7 +626,10 @@ export default function ProductDetailPage() {
                 type="button"
                 className="flex h-12 w-full items-center justify-center rounded-xl bg-[#ffc439] text-xs font-black text-[#003087] shadow-lg shadow-[#ffc439]/10 transition hover:bg-[#ffb81c] active:scale-[0.99]"
               >
-                Pay with <span className="ml-1.5 italic font-black text-[#0079c1] text-sm">PayPal</span>
+                Pay with{" "}
+                <span className="ml-1.5 italic font-black text-[#0079c1] text-sm">
+                  PayPal
+                </span>
               </button>
 
               <div className="flex items-center justify-between pt-2 text-xs">
@@ -476,7 +640,9 @@ export default function ProductDetailPage() {
                 >
                   <Heart
                     className={`h-4 w-4 ${
-                      isFav ? "fill-yellow-400 text-yellow-400" : "text-gray-400"
+                      isFav
+                        ? "fill-yellow-400 text-yellow-400"
+                        : "text-gray-400"
                     }`}
                   />
                   {isFav ? "ფავორიტებშია" : "ფავორიტებში დამატება"}
@@ -504,7 +670,6 @@ export default function ProductDetailPage() {
           </div>
         </section>
 
-        {/* 3. დეტალური ტაბები */}
         <section className="mb-16 overflow-hidden rounded-3xl border border-white/10 bg-[#0d111d]/85 p-6 md:p-8 shadow-2xl backdrop-blur-xl">
           <div className="flex flex-wrap gap-4 border-b border-white/10 pb-4 text-xs font-black uppercase tracking-wider">
             <button
@@ -557,47 +722,17 @@ export default function ProductDetailPage() {
             {activeTab === "desc" && (
               <div className="space-y-6">
                 <p>
-                  <strong className="text-white">{product.name}</strong> — პროფესიონალური
-                  დონის ასტრონომიული ოპტიკა. StarSense Explorer-ის უნიკალური ალგორითმი იყენებს
-                  სმარტფონის კამერას ცაზე ვარსკვლავური ველების ამოცნობისთვის და რეალურ დროში
-                  გიჩვენებთ ტელესკოპის მიმართვის ზუსტ კოორდინატებს.
+                  <strong className="text-white">{product.name}</strong> —
+                  Astroman-ის ორიგინალი პროდუქცია. იდეალურია როგორც ინტერიერის
+                  გასალამაზებლად, ისე დაუვიწყარი კოსმოსური საჩუქრისთვის.
                 </p>
 
-                <div className="rounded-2xl border border-white/5 bg-white/5 p-5">
-                  <h4 className="text-sm font-black text-yellow-400 uppercase tracking-wider mb-3">
-                    🔭 რა ობიექტების დანახვაა შესაძლებელი ცაზე:
-                  </h4>
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-gray-300">
-                    <li className="flex items-center gap-2">
-                      <span className="h-1.5 w-1.5 rounded-full bg-yellow-400" />
-                      მთვარის დეტალური კრატერები, ქედები და ზღვები
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="h-1.5 w-1.5 rounded-full bg-yellow-400" />
-                      იუპიტერის ზოლები და მისი 4 მთავარი გალილეის მთვარე
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="h-1.5 w-1.5 rounded-full bg-yellow-400" />
-                      სატურნის მომხიბვლელი რგოლების სისტემა
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="h-1.5 w-1.5 rounded-full bg-yellow-400" />
-                      ვენერასა და მარსის ფაზური დაკვირვება
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="h-1.5 w-1.5 rounded-full bg-yellow-400" />
-                      ორიონის ნისლეული და პლეადების ვარსკვლავთგროვა
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="h-1.5 w-1.5 rounded-full bg-yellow-400" />
-                      დღისით: სახმელეთო პეიზაჟები და შორეული ობიექტები
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="flex items-center gap-3 rounded-2xl border border-red-500/30 bg-red-500/10 p-4 text-red-400 font-bold">
+                <div className="flex items-center gap-3 rounded-2xl border border-yellow-500/20 bg-yellow-500/5 p-4 text-yellow-400 font-bold">
                   <AlertTriangle className="h-5 w-5 shrink-0" />
-                  <span>გაფრთხილება: არასოდეს შეხედოთ მზეს ტელესკოპით სპეციალური სერტიფიცირებული მზის ფილტრის გარეშე!</span>
+                  <span>
+                    პროდუქტი მოწმდება გაგზავნამდე. უსაფრთხო შეფუთვა
+                    გარანტირებულია.
+                  </span>
                 </div>
               </div>
             )}
@@ -606,45 +741,43 @@ export default function ProductDetailPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="rounded-2xl border border-white/5 bg-white/5 p-4 space-y-2">
                   <h4 className="font-black text-white text-xs uppercase mb-3 text-yellow-400">
-                    ოპტიკური პარამეტრები
+                    ძირითადი პარამეტრები
                   </h4>
                   <div className="flex justify-between py-1 border-b border-white/5">
-                    <span className="text-gray-400">ობიექტივის დიამეტრი:</span>
-                    <span className="font-bold text-white">70 მმ (2.75&quot;)</span>
+                    <span className="text-gray-400">დასახელება:</span>
+                    <span className="font-bold text-white">{product.name}</span>
                   </div>
                   <div className="flex justify-between py-1 border-b border-white/5">
-                    <span className="text-gray-400">ფოკუსური მანძილი:</span>
-                    <span className="font-bold text-white">700 მმ (f/10)</span>
-                  </div>
-                  <div className="flex justify-between py-1 border-b border-white/5">
-                    <span className="text-gray-400">მაქს. სასარგებლო გადიდება:</span>
-                    <span className="font-bold text-white">165x</span>
+                    <span className="text-gray-400">კატეგორია:</span>
+                    <span className="font-bold text-white">
+                      {product.categoryName}
+                    </span>
                   </div>
                   <div className="flex justify-between py-1">
-                    <span className="text-gray-400">ოკულარები:</span>
-                    <span className="font-bold text-white">25 მმ (28x), 10 მმ (70x)</span>
+                    <span className="text-gray-400">სტატუსი:</span>
+                    <span className="font-bold text-emerald-400">
+                      {product.inStock ? "მარაგშია" : "ამოიწურა"}
+                    </span>
                   </div>
                 </div>
 
                 <div className="rounded-2xl border border-white/5 bg-white/5 p-4 space-y-2">
                   <h4 className="font-black text-white text-xs uppercase mb-3 text-yellow-400">
-                    კომპლექტაცია და ზომები
+                    მიწოდება და შეფუთვა
                   </h4>
                   <div className="flex justify-between py-1 border-b border-white/5">
-                    <span className="text-gray-400">სადგამის ტიპი:</span>
-                    <span className="font-bold text-white">Alt-Azimuth ნელი რეგულატორით</span>
+                    <span className="text-gray-400">შეფუთვა:</span>
+                    <span className="font-bold text-white">სასაჩუქრე ყუთი</span>
                   </div>
                   <div className="flex justify-between py-1 border-b border-white/5">
-                    <span className="text-gray-400">შტატივი:</span>
-                    <span className="font-bold text-white">ალუმინის, რეგულირებადი 132 სმ</span>
-                  </div>
-                  <div className="flex justify-between py-1 border-b border-white/5">
-                    <span className="text-gray-400">საერთო წონა:</span>
-                    <span className="font-bold text-white">3.35 კგ</span>
+                    <span className="text-gray-400">გარანტია:</span>
+                    <span className="font-bold text-white">ოფიციალური</span>
                   </div>
                   <div className="flex justify-between py-1">
-                    <span className="text-gray-400">აპლიკაციის თავსებადობა:</span>
-                    <span className="font-bold text-white">iOS 12+ / Android 7.1+</span>
+                    <span className="text-gray-400">მიწოდება:</span>
+                    <span className="font-bold text-white">
+                      საქართველოს მასშტაბით
+                    </span>
                   </div>
                 </div>
               </div>
@@ -654,7 +787,7 @@ export default function ProductDetailPage() {
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
                 <div className="md:col-span-5 space-y-4">
                   <h3 className="text-base font-black text-white">მიმოხილვა</h3>
-                  
+
                   {reviews.length === 0 ? (
                     <p className="text-sm text-gray-400 italic">
                       მიმოხილვები ჯერ არ არის.
@@ -667,15 +800,21 @@ export default function ProductDetailPage() {
                           className="rounded-2xl border border-white/5 bg-white/5 p-4 space-y-2"
                         >
                           <div className="flex items-center justify-between">
-                            <span className="font-bold text-white text-xs">{rev.name}</span>
-                            <span className="text-[10px] text-gray-400">{rev.date}</span>
+                            <span className="font-bold text-white text-xs">
+                              {rev.name}
+                            </span>
+                            <span className="text-[10px] text-gray-400">
+                              {rev.date}
+                            </span>
                           </div>
                           <div className="flex gap-1 text-yellow-400">
                             {[...Array(5)].map((_, i) => (
                               <Star
                                 key={i}
                                 className={`h-3 w-3 ${
-                                  i < rev.rating ? "fill-yellow-400" : "text-gray-600"
+                                  i < rev.rating
+                                    ? "fill-yellow-400"
+                                    : "text-gray-600"
                                 }`}
                               />
                             ))}
@@ -692,13 +831,19 @@ export default function ProductDetailPage() {
                     იყავით პირველი შემფასებელი: „{product.name}“
                   </h3>
                   <p className="mt-1 text-xs text-gray-400">
-                    თქვენი ელფოსტის მისამართი გამოქვეყნებული არ იქნება. სავალდებულო ველები მონიშნულია <span className="text-red-400">*</span>
+                    თქვენი ელფოსტის მისამართი გამოქვეყნებული არ იქნება.
+                    სავალდებულო ველები მონიშნულია{" "}
+                    <span className="text-red-400">*</span>
                   </p>
 
-                  <form onSubmit={handleReviewSubmit} className="mt-6 space-y-4">
+                  <form
+                    onSubmit={handleReviewSubmit}
+                    className="mt-6 space-y-4"
+                  >
                     <div>
                       <label className="block text-xs font-bold text-gray-300 mb-1.5">
-                        თქვენი რეიტინგი <span className="text-red-400">*</span> :
+                        თქვენი რეიტინგი <span className="text-red-400">*</span>{" "}
+                        :
                       </label>
                       <div className="flex items-center gap-1.5">
                         {[1, 2, 3, 4, 5].map((star) => (
@@ -771,7 +916,9 @@ export default function ProductDetailPage() {
                         className="mt-0.5 rounded border-gray-600 bg-[#070a12] text-yellow-500 focus:ring-0"
                       />
                       <span>
-                        ჩემი სახელის, ელფოსტისა და ვებ-გვერდის მისამართის შენახვა ამ ბრაუზერში შემდგომში კომენტარებში გამოსაყენებლად.
+                        ჩემი სახელის, ელფოსტისა და ვებ-გვერდის მისამართის
+                        შენახვა ამ ბრაუზერში შემდგომში კომენტარებში
+                        გამოსაყენებლად.
                       </span>
                     </label>
 
@@ -800,6 +947,7 @@ export default function ProductDetailPage() {
                     <img
                       src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80"
                       alt="საკურიერო მიწოდება 1"
+                      referrerPolicy="no-referrer"
                       className="h-full w-full object-cover"
                     />
                   </div>
@@ -807,6 +955,7 @@ export default function ProductDetailPage() {
                     <img
                       src="https://images.unsplash.com/photo-1580674684081-7617fbf3d745?auto=format&fit=crop&w=600&q=80"
                       alt="საკურიერო მიწოდება 2"
+                      referrerPolicy="no-referrer"
                       className="h-full w-full object-cover"
                     />
                   </div>
@@ -818,11 +967,13 @@ export default function ProductDetailPage() {
                       საკურიერო მომსახურება
                     </h3>
                     <p className="mt-2 text-xs sm:text-sm text-gray-300">
-                      მიწოდება თბილისში ხდება 2 სამუშაო დღეში, რეგიონებში: 3-5 სამუშაო დღე.
+                      მიწოდება თბილისში ხდება 2 სამუშაო დღეში, რეგიონებში: 3-5
+                      სამუშაო დღე.
                     </p>
                     <p className="mt-3 text-xs text-gray-400">
-                      ექსპრეს მომსახურების შემთხვევაში შეკვეთა უნდა გაფორმდეს 13:00 საათამდე,
-                      ფეისბუქ მესენჯერის ან ტელეფონის დახმარებით.
+                      ექსპრეს მომსახურების შემთხვევაში შეკვეთა უნდა გაფორმდეს
+                      13:00 საათამდე, ფეისბუქ მესენჯერის ან ტელეფონის
+                      დახმარებით.
                     </p>
                   </div>
 
@@ -847,7 +998,6 @@ export default function ProductDetailPage() {
           </div>
         </section>
 
-        {/* 4. მსგავსი პროდუქტები */}
         {relatedProducts.length > 0 && (
           <section className="group/section relative mb-16">
             <div className="mb-4 flex items-center justify-between">
@@ -869,7 +1019,9 @@ export default function ProductDetailPage() {
             <button
               type="button"
               disabled={relatedIndex >= maxRelatedIndex}
-              onClick={() => setRelatedIndex((prev) => Math.min(maxRelatedIndex, prev + 1))}
+              onClick={() =>
+                setRelatedIndex((prev) => Math.min(maxRelatedIndex, prev + 1))
+              }
               className="absolute -right-4 top-[58%] z-30 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-[#070a12]/95 text-white shadow-2xl backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 group-hover/section:opacity-100 group-hover/section:pointer-events-auto hover:bg-yellow-500 hover:text-black hover:scale-105 active:scale-95 disabled:opacity-0 disabled:pointer-events-none"
               aria-label="Next"
             >
@@ -891,13 +1043,14 @@ export default function ProductDetailPage() {
           </section>
         )}
 
-        {/* 5. ქვედა უპირატესობების 4-იანი ზოლი */}
         <section className="grid grid-cols-2 gap-4 rounded-2xl border border-white/5 bg-[#0d111d]/70 p-6 backdrop-blur-md md:grid-cols-4 mb-6">
           <div className="flex items-center gap-3">
             <Truck className="h-6 w-6 text-yellow-400 shrink-0" />
             <div>
               <h4 className="text-xs font-bold text-white">უფასო მიტანა</h4>
-              <p className="text-[10px] text-gray-400">უფასო მიტანა 250 ლარის ზევით</p>
+              <p className="text-[10px] text-gray-400">
+                უფასო მიტანა 250 ლარის ზევით
+              </p>
             </div>
           </div>
 
@@ -905,7 +1058,9 @@ export default function ProductDetailPage() {
             <Headphones className="h-6 w-6 text-yellow-400 shrink-0" />
             <div>
               <h4 className="text-xs font-bold text-white">24/7 დახმარება</h4>
-              <p className="text-[10px] text-gray-400">მოგვწერე FB მესენჯერში, ნებისმიერ დროს</p>
+              <p className="text-[10px] text-gray-400">
+                მოგვწერე FB მესენჯერში, ნებისმიერ დროს
+              </p>
             </div>
           </div>
 
@@ -913,7 +1068,9 @@ export default function ProductDetailPage() {
             <CreditCard className="h-6 w-6 text-yellow-400 shrink-0" />
             <div>
               <h4 className="text-xs font-bold text-white">ონლაინ გადახდა</h4>
-              <p className="text-[10px] text-gray-400">გადაიხადე ონლაინ, სწრაფად და საიმედოდ</p>
+              <p className="text-[10px] text-gray-400">
+                გადაიხადე ონლაინ, სწრაფად და საიმედოდ
+              </p>
             </div>
           </div>
 
@@ -921,12 +1078,151 @@ export default function ProductDetailPage() {
             <Rocket className="h-6 w-6 text-yellow-400 shrink-0" />
             <div>
               <h4 className="text-xs font-bold text-white">სწრაფი მიტანა</h4>
-              <p className="text-[10px] text-gray-400">სტანდარტული მიწოდება, შეკვეთიდან 2 დღეში</p>
+              <p className="text-[10px] text-gray-400">
+                სტანდარტული მიწოდება, შეკვეთიდან 2 დღეში
+              </p>
             </div>
           </div>
         </section>
-
       </main>
+
+      {/* FULLSCREEN LIGHTBOX OVERLAY WITH ZOOM & NAVIGATION */}
+      {isModalOpen && (
+        <div
+          onClick={() => {
+            setIsModalOpen(false);
+            setModalZoom(1);
+          }}
+          className="fixed inset-0 z-[9999] flex flex-col items-center justify-between bg-black/95 p-4 backdrop-blur-xl animate-in fade-in duration-200"
+        >
+          {/* ზედა სამართავი პანელი */}
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="flex w-full max-w-6xl items-center justify-between pt-2 pb-4 text-white"
+          >
+            <div className="flex items-center gap-2 text-xs font-bold text-gray-300">
+              <span className="text-yellow-400">{activeImageIndex + 1}</span>
+              <span>/</span>
+              <span>{galleryImages.length}</span>
+              <span className="hidden sm:inline text-gray-500 ml-2">
+                | {product.name}
+              </span>
+            </div>
+
+            {/* ზუმის ღილაკები */}
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={handleZoomIn}
+                className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-gray-200 backdrop-blur-md transition hover:bg-yellow-500 hover:text-black"
+                title="გადიდება"
+              >
+                <ZoomIn className="h-4 w-4" />
+              </button>
+              <button
+                type="button"
+                onClick={handleZoomOut}
+                className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-gray-200 backdrop-blur-md transition hover:bg-yellow-500 hover:text-black"
+                title="დაპატარავება"
+              >
+                <ZoomOut className="h-4 w-4" />
+              </button>
+              {modalZoom > 1 && (
+                <button
+                  type="button"
+                  onClick={handleResetZoom}
+                  className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-gray-200 backdrop-blur-md transition hover:bg-yellow-500 hover:text-black"
+                  title="ზუმის რესეტი"
+                >
+                  <RotateCcw className="h-4 w-4" />
+                </button>
+              )}
+              <button
+                type="button"
+                onClick={() => {
+                  setIsModalOpen(false);
+                  setModalZoom(1);
+                }}
+                className="ml-2 flex h-9 w-9 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-white backdrop-blur-md transition hover:bg-red-600 hover:text-white"
+                title="დახურვა (Esc)"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
+
+          {/* ცენტრალური ფოტოს არეალი */}
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative flex flex-1 w-full max-w-6xl items-center justify-center overflow-hidden my-auto"
+          >
+            {/* წინა ისარი */}
+            {galleryImages.length > 1 && (
+              <button
+                type="button"
+                onClick={handlePrevThumb}
+                className="absolute left-2 sm:left-4 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-black/60 text-white backdrop-blur-md transition hover:bg-yellow-500 hover:text-black hover:scale-110 active:scale-90"
+              >
+                <ChevronLeft className="h-7 w-7 stroke-[2.5]" />
+              </button>
+            )}
+
+            {/* გადიდებული სურათი (დაკლიკებით ზუმდება) */}
+            <div className="relative flex max-h-[75vh] max-w-full items-center justify-center overflow-auto p-2">
+              <img
+                src={galleryImages[activeImageIndex] || product.image}
+                alt={product.name}
+                referrerPolicy="no-referrer"
+                onClick={toggleZoomClick}
+                style={{
+                  transform: `scale(${modalZoom})`,
+                  cursor: modalZoom > 1 ? "zoom-out" : "zoom-in",
+                }}
+                className="max-h-[72vh] max-w-full object-contain rounded-2xl select-none transition-transform duration-200 ease-out"
+              />
+            </div>
+
+            {/* შემდეგი ისარი */}
+            {galleryImages.length > 1 && (
+              <button
+                type="button"
+                onClick={handleNextThumb}
+                className="absolute right-2 sm:right-4 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-black/60 text-white backdrop-blur-md transition hover:bg-yellow-500 hover:text-black hover:scale-110 active:scale-90"
+              >
+                <ChevronRight className="h-7 w-7 stroke-[2.5]" />
+              </button>
+            )}
+          </div>
+
+          {/* ქვედა მინიატურების ზოლი მოდალში */}
+          {galleryImages.length > 1 && (
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="flex gap-2.5 overflow-x-auto py-3 max-w-2xl scrollbar-none px-2"
+            >
+              {galleryImages.map((img, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => goToIndex(idx)}
+                  className={`relative h-14 w-14 shrink-0 overflow-hidden rounded-xl border-2 transition-all ${
+                    activeImageIndex === idx
+                      ? "border-yellow-400 scale-105 shadow-lg shadow-yellow-500/20"
+                      : "border-transparent opacity-40 hover:opacity-90"
+                  }`}
+                >
+                  <img
+                    src={img}
+                    alt="thumbnail"
+                    referrerPolicy="no-referrer"
+                    className="h-full w-full object-cover"
+                  />
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

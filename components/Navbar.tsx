@@ -47,21 +47,29 @@ export default function Navbar() {
               >
                 მაღაზია
               </Link>
-              <a href="#" className="transition-colors hover:text-white">
+              <Link href="/blogi" className="hover:text-yellow-400 transition">
                 ბლოგი
-              </a>
-              <a href="#" className="transition-colors hover:text-white">
+              </Link>
+              <Link
+                href="/chven-shesaxeb"
+                className="transition-colors hover:text-white"
+              >
                 ჩვენ შესახებ
-              </a>
-              <a href="#" className="transition-colors hover:text-white">
+              </Link>
+              <Link
+                href="/kontakt"
+                className="transition-colors hover:text-white"
+              >
                 კონტაქტი
-              </a>
+              </Link>
             </div>
 
-            {/* Socials + TikTok */}
+            {/* Socials + TikTok (რეალური ლინკებით) */}
             <div className="flex items-center gap-3 border-l border-gray-700/80 pl-4 text-gray-400">
               <a
-                href="#"
+                href="https://www.facebook.com/AstrooMaan/"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Facebook"
                 className="hover:text-white hover:scale-110 transition-transform"
               >
@@ -70,7 +78,9 @@ export default function Navbar() {
                 </svg>
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/___astroman___/"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Instagram"
                 className="hover:text-white hover:scale-110 transition-transform"
               >
@@ -79,7 +89,9 @@ export default function Navbar() {
                 </svg>
               </a>
               <a
-                href="#"
+                href="https://www.tiktok.com/@astroman.ge"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="TikTok"
                 className="hover:text-white hover:scale-110 transition-transform"
               >
@@ -215,7 +227,6 @@ export default function Navbar() {
 
             {/* Wishlist, Cart & User Controls */}
             <div className="flex shrink-0 items-center gap-4">
-              {/* ფავორიტების ღილაკი ცოცხალი მთვლელით */}
               <button
                 type="button"
                 className="relative flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-300 transition-all duration-200 hover:border-yellow-500/40 hover:bg-white/10 hover:text-white active:scale-95"
@@ -231,7 +242,6 @@ export default function Navbar() {
                 )}
               </button>
 
-              {/* კალათის ღილაკი (ხსნის Slide-over პანელს) */}
               <button
                 type="button"
                 onClick={() => setIsCartOpen(true)}
