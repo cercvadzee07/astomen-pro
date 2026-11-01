@@ -11,7 +11,2764 @@ export interface Product {
   categoryName: string;
 }
 
+
+
+// --- დამატებითი ამოღებული პროდუქტები (275-მდე) ---
+export const EXTRA_PRODUCTS: Product[] = [
+  {
+    "id": "p_extra_1",
+    "name": "Ვარსკვლავური რუკა star map",
+    "categoryName": "ვარსკვლავური რუკა",
+    "categorySlug": "varskvlavuri-ruka",
+    "price": 65,
+    "image": "",
+    "link": "https://astroman.ge/%e1%83%95%e1%83%90%e1%83%a0%e1%83%a1%e1%83%99%e1%83%95%e1%83%9a%e1%83%90%e1%83%95%e1%83%a3%e1%83%a0%e1%83%98-%e1%83%a0%e1%83%a3%e1%83%99%e1%83%90-star-map/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_2",
+    "name": "Ვარსკვლავის დარქმევა star registry",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2026/09/star-registry-product.jpg",
+    "link": "https://astroman.ge/%e1%83%95%e1%83%90%e1%83%a0%e1%83%a1%e1%83%99%e1%83%95%e1%83%9a%e1%83%90%e1%83%95%e1%83%98%e1%83%a1-%e1%83%93%e1%83%90%e1%83%a0%e1%83%a5%e1%83%9b%e1%83%94%e1%83%95%e1%83%90-star-registry/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_3",
+    "name": "Მაგნიტური დინამიკი",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2026/01/%E1%83%91%E1%83%94%E1%83%A5%E1%83%98-02.jpg",
+    "link": "https://astroman.ge/%e1%83%9b%e1%83%90%e1%83%92%e1%83%9c%e1%83%98%e1%83%a2%e1%83%a3%e1%83%a0%e1%83%98-%e1%83%93%e1%83%98%e1%83%9c%e1%83%90%e1%83%9b%e1%83%98%e1%83%99%e1%83%98/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_4",
+    "name": "Projector speaker",
+    "categoryName": "პროექტორები",
+    "categorySlug": "proeqtorebi",
+    "price": 120,
+    "image": "https://astroman.ge/wp-content/uploads/2024/10/%E1%83%91%E1%83%94%E1%83%A5%E1%83%98-0222.jpg",
+    "link": "https://astroman.ge/projector-speaker/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_5",
+    "name": "Retro bluetooth speakerer",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2023/07/Retro-Bluetooth-Speaker-1-jpg.webp",
+    "link": "https://astroman.ge/retro-bluetooth-speakerer/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_6",
+    "name": "Infinity bluetooth speaker",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2024/02/Infinity-Bluetooth-Speaker-jpg.webp",
+    "link": "https://astroman.ge/infinity-bluetooth-speaker/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_7",
+    "name": "Foreseen 10x50 binokli",
+    "categoryName": "ბინოკლები",
+    "categorySlug": "binokli",
+    "price": 180,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/%E1%83%91%E1%83%98%E1%83%9C%E1%83%9D%E1%83%99%E1%83%9A%E1%83%98-2.jpg",
+    "link": "https://astroman.ge/foreseen-10x50-binokli/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_8",
+    "name": "Binokli",
+    "categoryName": "ბინოკლები",
+    "categorySlug": "binokli",
+    "price": 180,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/30-jpg.webp",
+    "link": "https://astroman.ge/binokli/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_9",
+    "name": "Robot bluetooth speaker",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A0%E1%83%9D%E1%83%91%E1%83%9D%E1%83%A2%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/robot-bluetooth-speaker/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_10",
+    "name": "Telefonis adapteeri",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/%E1%83%90%E1%83%93%E1%83%90%E1%83%9E%E1%83%A2%E1%83%94%E1%83%A0%E1%83%98.jpg",
+    "link": "https://astroman.ge/telefonis-adapteeri/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_11",
+    "name": "Cosmonaut moon speaker lamp",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/Cosmonaut-Moon-Speaker-Lamp-jpg.webp",
+    "link": "https://astroman.ge/cosmonaut-moon-speaker-lamp/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_12",
+    "name": "National geographic microscope incl smartphone adapter",
+    "categoryName": "მიკროსკოპები",
+    "categorySlug": "mikroskopi",
+    "price": 210,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%9B%E1%83%98%E1%83%99%E1%83%A0%E1%83%9D%E1%83%A1%E1%83%99%E1%83%9D%E1%83%9E%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/national-geographic-microscope-incl-smartphone-adapter/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_13",
+    "name": "National geographic 10x25 binoculars",
+    "categoryName": "ბინოკლები",
+    "categorySlug": "binokli",
+    "price": 180,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-7-jpg.webp",
+    "link": "https://astroman.ge/national-geographic-10x25-binoculars/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_14",
+    "name": "Celestron landscout",
+    "categoryName": "ტელესკოპები",
+    "categorySlug": "teleskopi",
+    "price": 950,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/Screenshot-2026-01-27-at-14.09.38.png",
+    "link": "https://astroman.ge/celestron-landscout/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_15",
+    "name": "National geographic 8x42 mm binoculars",
+    "categoryName": "ბინოკლები",
+    "categorySlug": "binokli",
+    "price": 180,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/42-jpg.webp",
+    "link": "https://astroman.ge/national-geographic-8x42-mm-binoculars/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_16",
+    "name": "Astronaut projector",
+    "categoryName": "პროექტორები",
+    "categorySlug": "proeqtorebi",
+    "price": 120,
+    "image": "https://astroman.ge/wp-content/uploads/2025/12/2212.jpg",
+    "link": "https://astroman.ge/astronaut-projector/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_17",
+    "name": "Moon wall lamp 2",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2025/02/%E1%83%91%E1%83%94%E1%83%A5%E1%83%98-01.jpg",
+    "link": "https://astroman.ge/moon-wall-lamp-2/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_18",
+    "name": "Cosmonaut projector",
+    "categoryName": "პროექტორები",
+    "categorySlug": "proeqtorebi",
+    "price": 120,
+    "image": "https://astroman.ge/wp-content/uploads/2024/03/34-1-1-scaled.webp",
+    "link": "https://astroman.ge/cosmonaut-projector/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_19",
+    "name": "Table lamp",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2024/11/%E1%83%91%E1%83%94%E1%83%A5%E1%83%98-01.jpg",
+    "link": "https://astroman.ge/table-lamp/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_20",
+    "name": "Proeqtori planetebi",
+    "categoryName": "პროექტორები",
+    "categorySlug": "proeqtorebi",
+    "price": 120,
+    "image": "https://astroman.ge/wp-content/uploads/2023/11/-1-jpg.webp",
+    "link": "https://astroman.ge/proeqtori-planetebi/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_21",
+    "name": "Projector speakercosmos",
+    "categoryName": "პროექტორები",
+    "categorySlug": "proeqtorebi",
+    "price": 120,
+    "image": "https://astroman.ge/wp-content/uploads/2024/02/-%E1%83%99%E1%83%9D%E1%83%A1%E1%83%9B%E1%83%9D%E1%83%A1%E1%83%981-jpg.webp",
+    "link": "https://astroman.ge/projector-speakercosmos/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_22",
+    "name": "Ufo nebula projector",
+    "categoryName": "პროექტორები",
+    "categorySlug": "proeqtorebi",
+    "price": 120,
+    "image": "https://astroman.ge/wp-content/uploads/2024/04/-02-jpg.webp",
+    "link": "https://astroman.ge/ufo-nebula-projector/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_23",
+    "name": "Projector earthmoon",
+    "categoryName": "პროექტორები",
+    "categorySlug": "proeqtorebi",
+    "price": 120,
+    "image": "https://astroman.ge/wp-content/uploads/2024/08/222122-02-scaled.jpg",
+    "link": "https://astroman.ge/projector-earthmoon/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_24",
+    "name": "Rocket projector",
+    "categoryName": "პროექტორები",
+    "categorySlug": "proeqtorebi",
+    "price": 120,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/Rocket-Projector-jpg.webp",
+    "link": "https://astroman.ge/rocket-projector/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_25",
+    "name": "Nebula projector",
+    "categoryName": "პროექტორები",
+    "categorySlug": "proeqtorebi",
+    "price": 120,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/Nebula-Projector-jpg.webp",
+    "link": "https://astroman.ge/nebula-projector/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_26",
+    "name": "Nebula bluetooth projector",
+    "categoryName": "პროექტორები",
+    "categorySlug": "proeqtorebi",
+    "price": 120,
+    "image": "https://astroman.ge/wp-content/uploads/2022/11/Nebula-Bluetooth-Projector-1-jpg.webp",
+    "link": "https://astroman.ge/nebula-bluetooth-projector/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_27",
+    "name": "Saturnis chagi grey",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%AD%E1%83%90%E1%83%A6%E1%83%98-%E1%83%9C%E1%83%90%E1%83%AA%E1%83%A0%E1%83%98%E1%83%A1%E1%83%A4%E1%83%94%E1%83%A0%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/saturnis-chagi-grey/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_28",
+    "name": "Saturnis chagi black",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%AD%E1%83%90%E1%83%A6%E1%83%98-%E1%83%A8%E1%83%90%E1%83%95%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/saturnis-chagi-black/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_29",
+    "name": "Proeqtori dedamiwa mtvare",
+    "categoryName": "პროექტორები",
+    "categorySlug": "proeqtorebi",
+    "price": 120,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%93%E1%83%94%E1%83%93%E1%83%90%E1%83%9B%E1%83%98%E1%83%AC%E1%83%90-%E1%83%9B%E1%83%97%E1%83%95%E1%83%90%E1%83%A0%E1%83%94-%E1%83%A8%E1%83%90%E1%83%95%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/proeqtori-dedamiwa-mtvare/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_30",
+    "name": "Starry sky projector",
+    "categoryName": "პროექტორები",
+    "categorySlug": "proeqtorebi",
+    "price": 120,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/Starry-Sky-%E1%83%9E%E1%83%A0%E1%83%9D%E1%83%94%E1%83%A5%E1%83%A2%E1%83%9D%E1%83%A0%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/starry-sky-projector/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_31",
+    "name": "Projector stars",
+    "categoryName": "პროექტორები",
+    "categorySlug": "proeqtorebi",
+    "price": 120,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%9E%E1%83%A0%E1%83%9D%E1%83%94%E1%83%A5%E1%83%A2%E1%83%9D%E1%83%A0%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/projector-stars/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_32",
+    "name": "Mzis sisteimis modeli",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%9B%E1%83%96%E1%83%98%E1%83%A1-%E1%83%A1%E1%83%98%E1%83%A1%E1%83%A2%E1%83%94%E1%83%9B%E1%83%90-%E1%83%9E%E1%83%A0%E1%83%9D%E1%83%94%E1%83%A5%E1%83%A2%E1%83%9D%E1%83%A0%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/mzis-sisteimis-modeli/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_33",
+    "name": "Magidis sanati dedamiwa",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2023/09/-%E1%83%9B%E1%83%90%E1%83%92%E1%83%9C%E1%83%98%E1%83%A2%E1%83%A3%E1%83%A0%E1%83%98-%E1%83%A1%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/magidis-sanati-dedamiwa/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_34",
+    "name": "Magidis sanati ufo",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2023/11/Levitating-Ufo-jpg.webp",
+    "link": "https://astroman.ge/magidis-sanati-ufo/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_35",
+    "name": "Saturnis chagi",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/O1CN0196qdzn1bVlIzkiP77_1134743471.jpg_400x400.jpg",
+    "link": "https://astroman.ge/saturnis-chagi/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_36",
+    "name": "Levitating globe",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2026/08/levitating-globe-1.jpg",
+    "link": "https://astroman.ge/levitating-globe/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_37",
+    "name": "Levitating saturn lamp wood",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2026/08/levitating-saturn-lamp-wood-1.jpg",
+    "link": "https://astroman.ge/levitating-saturn-lamp-wood/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_38",
+    "name": "Levitating bulb lamp",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2026/08/levitating-bulb-lamp-1.jpg",
+    "link": "https://astroman.ge/levitating-bulb-lamp/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_39",
+    "name": "Levitating saturn lamp",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/Levitating-Saturn-Lamp-jpg.webp",
+    "link": "https://astroman.ge/levitating-saturn-lamp/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_40",
+    "name": "Black universe",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2025/12/%E1%83%91%E1%83%94%E1%83%A5%E1%83%98-02.jpg",
+    "link": "https://astroman.ge/black-universe/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_41",
+    "name": "Alien projector",
+    "categoryName": "პროექტორები",
+    "categorySlug": "proeqtorebi",
+    "price": 120,
+    "image": "https://astroman.ge/wp-content/uploads/2026/05/%E1%83%91%E1%83%94%E1%83%A5%E1%83%98-02.jpg",
+    "link": "https://astroman.ge/alien-projector/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_42",
+    "name": "Premium projector",
+    "categoryName": "პროექტორები",
+    "categorySlug": "proeqtorebi",
+    "price": 120,
+    "image": "https://astroman.ge/wp-content/uploads/2026/05/9dqtol-scaled.jpg",
+    "link": "https://astroman.ge/premium-projector/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_43",
+    "name": "Andromeda crystal ball 2",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2026/05/hit3r5-scaled.jpg",
+    "link": "https://astroman.ge/andromeda-crystal-ball-2/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_44",
+    "name": "Medusa crystal ball",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2026/05/m0y16j-scaled.jpg",
+    "link": "https://astroman.ge/medusa-crystal-ball/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_45",
+    "name": "Levitating galaxy lamp",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/Levitating-Galaxy-Lamp-jpg.webp",
+    "link": "https://astroman.ge/levitating-galaxy-lamp/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_46",
+    "name": "Levitating moon lamp",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/%E1%83%91%E1%83%94%E1%83%A5%E1%83%98-01-copy.jpg",
+    "link": "https://astroman.ge/levitating-moon-lamp/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_47",
+    "name": "Air humidifier",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2025/12/Screenshot-2025-12-12-at-13.36.25.png",
+    "link": "https://astroman.ge/air-humidifier/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_48",
+    "name": "Sensoruli sannati",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2025/12/222.jpg",
+    "link": "https://astroman.ge/sensoruli-sannati/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_49",
+    "name": "Naruto lamp",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2025/12/%E1%83%91%E1%83%94%E1%83%A5%E1%83%98-01.jpg",
+    "link": "https://astroman.ge/naruto-lamp/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_50",
+    "name": "Atomic lamp",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2025/12/Screenshot-2025-12-12-at-13.35.27.png",
+    "link": "https://astroman.ge/atomic-lamp/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_51",
+    "name": "Gulis sanati",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2025/11/%E1%83%91%E1%83%94%E1%83%A5%E1%83%98-01.jpg",
+    "link": "https://astroman.ge/gulis-sanati/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_52",
+    "name": "Კედლის სანათი კოსმონავტი",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2024/09/7754344.jpg",
+    "link": "https://astroman.ge/%e1%83%99%e1%83%94%e1%83%93%e1%83%9a%e1%83%98%e1%83%a1-%e1%83%a1%e1%83%90%e1%83%9c%e1%83%90%e1%83%97%e1%83%98-%e1%83%99%e1%83%9d%e1%83%a1%e1%83%9b%e1%83%9d%e1%83%9c%e1%83%90%e1%83%95%e1%83%a2%e1%83%98/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_53",
+    "name": "Fireplace air humidifier lamp",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2024/12/%E1%83%91%E1%83%94%E1%83%A5%E1%83%98-02.jpg",
+    "link": "https://astroman.ge/fireplace-air-humidifier-lamp/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_54",
+    "name": "Magidis sanati guli",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2024/09/3234123.jpg",
+    "link": "https://astroman.ge/magidis-sanati-guli/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_55",
+    "name": "Night lamp",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2025/02/111.jpg",
+    "link": "https://astroman.ge/night-lamp/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_56",
+    "name": "Pnaleta neptuni",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2025/05/ChatGPT-Image-Apr-29-2025-07_51_53-PM.png",
+    "link": "https://astroman.ge/pnaleta-neptuni/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_57",
+    "name": "Raindrop air humidifier",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2025/04/Screenshot-2025-04-28-at-16.03.54.png",
+    "link": "https://astroman.ge/raindrop-air-humidifier/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_58",
+    "name": "Სახლის კინოთეატრი hs9500 pro",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2024/12/hy-black-projector.jpg",
+    "link": "https://astroman.ge/%e1%83%a1%e1%83%90%e1%83%ae%e1%83%9a%e1%83%98%e1%83%a1-%e1%83%99%e1%83%98%e1%83%9c%e1%83%9d%e1%83%97%e1%83%94%e1%83%90%e1%83%a2%e1%83%a0%e1%83%98-hs9500-pro/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_59",
+    "name": "Moon book lamp",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2024/09/pixelcut-export.jpeg",
+    "link": "https://astroman.ge/moon-book-lamp/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_60",
+    "name": "Table lamp cosmonaut",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2024/09/5543324.jpg",
+    "link": "https://astroman.ge/table-lamp-cosmonaut/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_61",
+    "name": "Cosmonaut yoga lamp",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2024/04/34-1-copy-scaled.webp",
+    "link": "https://astroman.ge/cosmonaut-yoga-lamp/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_62",
+    "name": "Ufo air humidierr",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2024/04/223-scaled.webp",
+    "link": "https://astroman.ge/ufo-air-humidierr/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_63",
+    "name": "Cosmonaut moon lamp",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2024/06/%E1%83%91%E1%83%94%E1%83%A5%E1%83%98-01.jpg",
+    "link": "https://astroman.ge/cosmonaut-moon-lamp/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_64",
+    "name": "Volcano air humidifier",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2024/03/34-1-2-scaled.webp",
+    "link": "https://astroman.ge/volcano-air-humidifier/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_65",
+    "name": "Naxevarmtvare led",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2024/06/%E1%83%91%E1%83%94%E1%83%A5%E1%83%98-01-copy.jpg",
+    "link": "https://astroman.ge/naxevarmtvare-led/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_66",
+    "name": "Მაგიდის სანათი მთვარე nordic",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2024/09/665456.jpg",
+    "link": "https://astroman.ge/%e1%83%9b%e1%83%90%e1%83%92%e1%83%98%e1%83%93%e1%83%98%e1%83%a1-%e1%83%a1%e1%83%90%e1%83%9c%e1%83%90%e1%83%97%e1%83%98-%e1%83%9b%e1%83%97%e1%83%95%e1%83%90%e1%83%a0%e1%83%94-nordic/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_67",
+    "name": "Cosmonaut air humidifier",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2023/06/-%E1%83%93%E1%83%90%E1%83%9B%E1%83%90%E1%83%A2%E1%83%94%E1%83%9C%E1%83%98%E1%83%90%E1%83%9C%E1%83%94%E1%83%91%E1%83%94%E1%83%9A%E1%83%98-%E1%83%99%E1%83%9D%E1%83%A1%E1%83%9B%E1%83%9D%E1%83%9C%E1%83%90%E1%83%95%E1%83%A2%E1%83%98-2-jpg.webp",
+    "link": "https://astroman.ge/cosmonaut-air-humidifier/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_68",
+    "name": "Ufo lamp 2",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2023/06/-%E1%83%A1%E1%83%9E%E1%83%98%E1%83%9C%E1%83%94%E1%83%A0%E1%83%98-1-jpg.webp",
+    "link": "https://astroman.ge/ufo-lamp-2/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_69",
+    "name": "Planetebi magidis sanati",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2023/09/-%E1%83%A1%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%94%E1%83%91%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/planetebi-magidis-sanati/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_70",
+    "name": "Moon wall lamp",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2023/10/-%E1%83%99%E1%83%94%E1%83%93%E1%83%9A%E1%83%98%E1%83%A1-%E1%83%A1%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/moon-wall-lamp/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_71",
+    "name": "Mzis sistemis planetebi",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2023/11/-%E1%83%A1%E1%83%98%E1%83%A1%E1%83%A2%E1%83%94%E1%83%9B%E1%83%98%E1%83%A1-%E1%83%A1%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/mzis-sistemis-planetebi/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_72",
+    "name": "Ნახევარმთვარე ვარდისფერ",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2023/12/-%E1%83%A1%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98-1-jpg.webp",
+    "link": "https://astroman.ge/%e1%83%9c%e1%83%90%e1%83%ae%e1%83%94%e1%83%95%e1%83%90%e1%83%a0%e1%83%9b%e1%83%97%e1%83%95%e1%83%90%e1%83%a0%e1%83%94-%e1%83%95%e1%83%90%e1%83%a0%e1%83%93%e1%83%98%e1%83%a1%e1%83%a4%e1%83%94%e1%83%a0/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_73",
+    "name": "Moon crystal ball",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/10/Moon-Crystal-Ball-jpg.webp",
+    "link": "https://astroman.ge/moon-crystal-ball/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_74",
+    "name": "Solar power garden lamp",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/Solar-Power-Garden-Lamp-jpg.webp",
+    "link": "https://astroman.ge/solar-power-garden-lamp/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_75",
+    "name": "Dekoratiuli planetebi",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/10/-%E1%83%9E%E1%83%9A%E1%83%90%E1%83%9C%E1%83%94%E1%83%A2%E1%83%94%E1%83%91%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/dekoratiuli-planetebi/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_76",
+    "name": "Andromeda crystal ball",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2023/02/-%E1%83%A1%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/andromeda-crystal-ball/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_77",
+    "name": "Mfrinavi tefshi",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2023/02/-%E1%83%97%E1%83%94%E1%83%A4%E1%83%A8%E1%83%98-%E1%83%99%E1%83%9D%E1%83%A1%E1%83%9B%E1%83%9D%E1%83%9C%E1%83%90%E1%83%95%E1%83%A2%E1%83%98%E1%83%97-jpg.webp",
+    "link": "https://astroman.ge/mfrinavi-tefshi/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_78",
+    "name": "Haeris damatenianebeli ufo",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2023/01/-%E1%83%93%E1%83%90%E1%83%9B%E1%83%90%E1%83%A2%E1%83%94%E1%83%9C%E1%83%98%E1%83%90%E1%83%9C%E1%83%94%E1%83%91%E1%83%94%E1%83%9A%E1%83%98-UFO-2-jpg.webp",
+    "link": "https://astroman.ge/haeris-damatenianebeli-ufo/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_79",
+    "name": "Feradi galaqsi sanati",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2023/05/%E1%83%A4%E1%83%94%E1%83%A0%E1%83%90%E1%83%93%E1%83%98-%E1%83%92%E1%83%90%E1%83%9A%E1%83%90%E1%83%A5%E1%83%A1%E1%83%98-%E1%83%A1%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98-1.jpg",
+    "link": "https://astroman.ge/feradi-galaqsi-sanati/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_80",
+    "name": "Moon lamp humidifier",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A1%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98-%E1%83%B0%E1%83%90%E1%83%94%E1%83%A0%E1%83%98%E1%83%A1-%E1%83%93%E1%83%90%E1%83%9B%E1%83%90%E1%83%A2%E1%83%94%E1%83%9C%E1%83%98%E1%83%90%E1%83%9C%E1%83%94%E1%83%91%E1%83%94%E1%83%9A%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/moon-lamp-humidifier/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_81",
+    "name": "Moon lamp night",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A6%E1%83%90%E1%83%9B%E1%83%98%E1%83%A1-%E1%83%A1%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/moon-lamp-night/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_82",
+    "name": "Gamis sanati",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A1%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98-%E1%83%A8%E1%83%94%E1%83%A1%E1%83%90%E1%83%94%E1%83%A0%E1%83%97%E1%83%94%E1%83%91%E1%83%94%E1%83%9A%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/gamis-sanati/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_83",
+    "name": "Marsis sanati",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A1%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98-15%E1%83%A1%E1%83%9B-6-jpg.webp",
+    "link": "https://astroman.ge/marsis-sanati/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_84",
+    "name": "Sunset lamp 2",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/Sunset-Lamp-2-2-jpg.webp",
+    "link": "https://astroman.ge/sunset-lamp-2/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_85",
+    "name": "Solar power light",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/Solar-Power-Light-1-jpg.webp",
+    "link": "https://astroman.ge/solar-power-light/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_86",
+    "name": "Planeta venera",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%95%E1%83%94%E1%83%9C%E1%83%94%E1%83%A0%E1%83%90-17-%E1%83%A1%E1%83%9B-jpg.webp",
+    "link": "https://astroman.ge/planeta-venera/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_87",
+    "name": "Cosmonaut decorative lamp",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%93%E1%83%94%E1%83%99%E1%83%9D%E1%83%A0%E1%83%90%E1%83%A2%E1%83%98%E1%83%A3%E1%83%9A%E1%83%98-%E1%83%A1%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/cosmonaut-decorative-lamp/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_88",
+    "name": "Მაღვიძარა რობოტი",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A0%E1%83%9D%E1%83%91%E1%83%9D%E1%83%A2%E1%83%98-6-jpg.webp",
+    "link": "https://astroman.ge/%e1%83%9b%e1%83%90%e1%83%a6%e1%83%95%e1%83%98%e1%83%ab%e1%83%90%e1%83%a0%e1%83%90-%e1%83%a0%e1%83%9d%e1%83%91%e1%83%9d%e1%83%a2%e1%83%98/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_89",
+    "name": "Naxevarmtvare",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A7%E1%83%95%E1%83%98%E1%83%97%E1%83%94%E1%83%9A%E1%83%98-%E1%83%A1%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/naxevarmtvare/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_90",
+    "name": "Saturn crystal ball",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%99%E1%83%A0%E1%83%98%E1%83%A1%E1%83%A2%E1%83%90%E1%83%9A%E1%83%A3%E1%83%A0%E1%83%98-%E1%83%A1%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/saturn-crystal-ball/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_91",
+    "name": "Solar system crystal ball",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%99%E1%83%A0%E1%83%98%E1%83%A1%E1%83%A2%E1%83%90%E1%83%9A%E1%83%A3%E1%83%A0%E1%83%98-%E1%83%A1%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98%E1%83%9D-jpg.webp",
+    "link": "https://astroman.ge/solar-system-crystal-ball/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_92",
+    "name": "Teslas plazmuri burti",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%9E%E1%83%9A%E1%83%90%E1%83%96%E1%83%9B%E1%83%A3%E1%83%A0%E1%83%98-%E1%83%91%E1%83%A3%E1%83%A0%E1%83%97%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/teslas-plazmuri-burti/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_93",
+    "name": "Mtvaris sanati 2d",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A1%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98-2D-%E1%83%A1%E1%83%AE%E1%83%95%E1%83%90%E1%83%93%E1%83%90%E1%83%A1%E1%83%AE%E1%83%95%E1%83%90-%E1%83%A4%E1%83%94%E1%83%A0%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/mtvaris-sanati-2d/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_94",
+    "name": "Naturebi kosmosi",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%99%E1%83%9D%E1%83%A1%E1%83%9B%E1%83%9D%E1%83%A1%E1%83%98-6-jpg.webp",
+    "link": "https://astroman.ge/naturebi-kosmosi/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_95",
+    "name": "Ნეონის რაკეტა",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A0%E1%83%90%E1%83%99%E1%83%94%E1%83%A2%E1%83%90-%E1%83%A1%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/%e1%83%9c%e1%83%94%e1%83%9d%e1%83%9c%e1%83%98%e1%83%a1-%e1%83%a0%e1%83%90%e1%83%99%e1%83%94%e1%83%a2%e1%83%90/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_96",
+    "name": "Usb ufo",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/USB-UFO-jpg.webp",
+    "link": "https://astroman.ge/usb-ufo/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_97",
+    "name": "Sunset lamp astronaut",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/Sunset-Lamp-astronaut-1-jpg.webp",
+    "link": "https://astroman.ge/sunset-lamp-astronaut/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_98",
+    "name": "Earth lampp",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A1%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98-15%E1%83%A1%E1%83%9B-1-jpg.webp",
+    "link": "https://astroman.ge/earth-lampp/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_99",
+    "name": "Half moon lamp",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A1%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98-2%E1%83%93-8-1-jpg.webp",
+    "link": "https://astroman.ge/half-moon-lamp/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_100",
+    "name": "Saturni feradi sanati",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A4%E1%83%94%E1%83%A0%E1%83%90%E1%83%93%E1%83%98-%E1%83%A1%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98-5-jpg.webp",
+    "link": "https://astroman.ge/saturni-feradi-sanati/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_101",
+    "name": "Mzis sistemis sanati2d",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A1%E1%83%98%E1%83%A1%E1%83%A2%E1%83%94%E1%83%9B%E1%83%98%E1%83%A1-2D-%E1%83%A1%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/mzis-sistemis-sanati2d/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_102",
+    "name": "Saturnis manatobeli breloki",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%9B%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%9D%E1%83%91%E1%83%94%E1%83%9A%E1%83%98-%E1%83%91%E1%83%A0%E1%83%94%E1%83%9A%E1%83%9D%E1%83%99%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/saturnis-manatobeli-breloki/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_103",
+    "name": "Mtvaris manatobeli breloki",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%9B%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%9D%E1%83%91%E1%83%94%E1%83%9A%E1%83%98-%E1%83%91%E1%83%A0%E1%83%94%E1%83%9A%E1%83%9D%E1%83%99%E1%83%98--jpg.webp",
+    "link": "https://astroman.ge/mtvaris-manatobeli-breloki/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_104",
+    "name": "Magidis sanati medusa",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A1%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98-%E1%83%9B%E1%83%94%E1%83%93%E1%83%A3%E1%83%96%E1%83%90-jpg.webp",
+    "link": "https://astroman.ge/magidis-sanati-medusa/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_105",
+    "name": "Saturni feradi sanati",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A4%E1%83%94%E1%83%A0%E1%83%90%E1%83%93%E1%83%98-%E1%83%A1%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98-5-jpg.webp",
+    "link": "https://astroman.ge/saturni-feradi-sanati/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_106",
+    "name": "Saturnis led sanati",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A1%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98-%E1%83%9E%E1%83%90%E1%83%A2%E1%83%90%E1%83%A0%E1%83%90-5-jpg.webp",
+    "link": "https://astroman.ge/saturnis-led-sanati/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_107",
+    "name": "Naxevarmtvaris sanati",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A1%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98-%E1%83%A7%E1%83%95%E1%83%98%E1%83%97%E1%83%94%E1%83%9A%E1%83%98-4-1-jpg.webp",
+    "link": "https://astroman.ge/naxevarmtvaris-sanati/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_108",
+    "name": "Gakaqsi sanati",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A1%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98-%E1%83%9B%E1%83%A0%E1%83%92%E1%83%95%E1%83%90%E1%83%9A%E1%83%98-0-jpg.webp",
+    "link": "https://astroman.ge/gakaqsi-sanati/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_109",
+    "name": "Usb astronaut",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/USB-Astronaut-4-jpg.webp",
+    "link": "https://astroman.ge/usb-astronaut/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_110",
+    "name": "Ufo lamp",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%97%E1%83%94%E1%83%A4%E1%83%A8%E1%83%98-%E1%83%93%E1%83%98%E1%83%A1%E1%83%A2%E1%83%90%E1%83%9C%E1%83%AA%E1%83%98%E1%83%A3%E1%83%A0%E1%83%98-%E1%83%9B%E1%83%90%E1%83%A0%E1%83%97%E1%83%95%E1%83%98%E1%83%97-1-jpg.webp",
+    "link": "https://astroman.ge/ufo-lamp/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_111",
+    "name": "Moon lamp",
+    "categoryName": "სანათები",
+    "categorySlug": "sanatebi",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A1%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98-3D--jpg.webp",
+    "link": "https://astroman.ge/moon-lamp/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_112",
+    "name": "Სპაიდერმენის სასკოლო ზურ",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2026/08/spiderman-backpack-set.jpg",
+    "link": "https://astroman.ge/%e1%83%a1%e1%83%9e%e1%83%90%e1%83%98%e1%83%93%e1%83%94%e1%83%a0%e1%83%9b%e1%83%94%e1%83%9c%e1%83%98%e1%83%a1-%e1%83%a1%e1%83%90%e1%83%a1%e1%83%99%e1%83%9d%e1%83%9a%e1%83%9d-%e1%83%96%e1%83%a3%e1%83%a0/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_113",
+    "name": "Eleqtro mannkana",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2024/09/%E1%83%91%E1%83%94%E1%83%A5%E1%83%98-02.jpg",
+    "link": "https://astroman.ge/eleqtro-mannkana/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_114",
+    "name": "3d kalami",
+    "categoryName": "საბავშვო",
+    "categorySlug": "sabavshvo-satamashoebi",
+    "price": 55,
+    "image": "https://astroman.ge/wp-content/uploads/2026/02/%E1%83%91%E1%83%94%E1%83%A5%E1%83%98-02.jpg",
+    "link": "https://astroman.ge/3d-kalami/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_115",
+    "name": "3d კალამი შავი",
+    "categoryName": "საბავშვო",
+    "categorySlug": "sabavshvo-satamashoebi",
+    "price": 55,
+    "image": "https://astroman.ge/wp-content/uploads/2026/02/Screenshot-2026-02-10-at-16.30.17.png",
+    "link": "https://astroman.ge/3d-%e1%83%99%e1%83%90%e1%83%9a%e1%83%90%e1%83%9b%e1%83%98-%e1%83%a8%e1%83%90%e1%83%95%e1%83%98/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_116",
+    "name": "School bag yellow",
+    "categoryName": "საბავშვო",
+    "categorySlug": "sabavshvo-satamashoebi",
+    "price": 55,
+    "image": "https://astroman.ge/wp-content/uploads/2024/08/yelllow-bag.jpg",
+    "link": "https://astroman.ge/school-bag-yellow/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_117",
+    "name": "School bag moon",
+    "categoryName": "საბავშვო",
+    "categorySlug": "sabavshvo-satamashoebi",
+    "price": 55,
+    "image": "https://astroman.ge/wp-content/uploads/2024/08/Blue-bag.jpg",
+    "link": "https://astroman.ge/school-bag-moon/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_118",
+    "name": "School bag spiderman",
+    "categoryName": "საბავშვო",
+    "categorySlug": "sabavshvo-satamashoebi",
+    "price": 55,
+    "image": "https://astroman.ge/wp-content/uploads/2024/08/%E1%83%91%E1%83%94%E1%83%A5%E1%83%98-02.jpg",
+    "link": "https://astroman.ge/school-bag-spiderman/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_119",
+    "name": "Harry potter wand",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2023/12/-%E1%83%9E%E1%83%9D%E1%83%A2%E1%83%94%E1%83%A0%E1%83%98%E1%83%A1-%E1%83%AF%E1%83%9D%E1%83%AE%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/harry-potter-wand/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_120",
+    "name": "Remote helicopter 2",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2024/01/-1-jpg.webp",
+    "link": "https://astroman.ge/remote-helicopter-2/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_121",
+    "name": "Remote helicopter",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2024/01/-%E1%83%95%E1%83%94%E1%83%A0%E1%83%A2%E1%83%9B%E1%83%A4%E1%83%A0%E1%83%94%E1%83%9C%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/remote-helicopter/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_122",
+    "name": "School bag cosmonaut",
+    "categoryName": "საბავშვო",
+    "categorySlug": "sabavshvo-satamashoebi",
+    "price": 55,
+    "image": "https://astroman.ge/wp-content/uploads/2024/08/Green-bag-2.jpg",
+    "link": "https://astroman.ge/school-bag-cosmonaut/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_123",
+    "name": "Penali lurji",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2023/09/-1-jpg.webp",
+    "link": "https://astroman.ge/penali-lurji/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_124",
+    "name": "Სასკოლო ჩანთა cosmoboy",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2023/09/-%E1%83%A9%E1%83%90%E1%83%9C%E1%83%97%E1%83%90-jpg.webp",
+    "link": "https://astroman.ge/%e1%83%a1%e1%83%90%e1%83%a1%e1%83%99%e1%83%9d%e1%83%9a%e1%83%9d-%e1%83%a9%e1%83%90%e1%83%9c%e1%83%97%e1%83%90-cosmoboy/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_125",
+    "name": "Mini microscope",
+    "categoryName": "მიკროსკოპები",
+    "categorySlug": "mikroskopi",
+    "price": 210,
+    "image": "https://astroman.ge/wp-content/uploads/2023/10/-%E1%83%9B%E1%83%98%E1%83%99%E1%83%A0%E1%83%9D%E1%83%A1%E1%83%99%E1%83%9D%E1%83%9E%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/mini-microscope/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_126",
+    "name": "3d xis planetebi",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2023/10/-%E1%83%9E%E1%83%9A%E1%83%90%E1%83%9C%E1%83%94%E1%83%A2%E1%83%94%E1%83%91%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/3d-xis-planetebi/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_127",
+    "name": "Saskolo chanta unicorn",
+    "categoryName": "საბავშვო",
+    "categorySlug": "sabavshvo-satamashoebi",
+    "price": 55,
+    "image": "https://astroman.ge/wp-content/uploads/2023/08/-%E1%83%A9%E1%83%90%E1%83%9C%E1%83%97%E1%83%90-Unicorn-1-jpg.webp",
+    "link": "https://astroman.ge/saskolo-chanta-unicorn/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_128",
+    "name": "Სასკოლო ჩანთა explore cosmos",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2023/08/-%E1%83%A9%E1%83%90%E1%83%9C%E1%83%97%E1%83%90-jpg.webp",
+    "link": "https://astroman.ge/%e1%83%a1%e1%83%90%e1%83%a1%e1%83%99%e1%83%9d%e1%83%9a%e1%83%9d-%e1%83%a9%e1%83%90%e1%83%9c%e1%83%97%e1%83%90-explore-cosmos/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_129",
+    "name": "Penali vardisferi",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2023/08/-%E1%83%9E%E1%83%94%E1%83%9C%E1%83%90%E1%83%9A%E1%83%98-89-jpg.webp",
+    "link": "https://astroman.ge/penali-vardisferi/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_130",
+    "name": "Სასკოლო ჩანთა astrokid",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2023/08/-jpg.webp",
+    "link": "https://astroman.ge/%e1%83%a1%e1%83%90%e1%83%a1%e1%83%99%e1%83%9d%e1%83%9a%e1%83%9d-%e1%83%a9%e1%83%90%e1%83%9c%e1%83%97%e1%83%90-astrokid/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_131",
+    "name": "Satleli kosmonavti",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/10/-%E1%83%99%E1%83%9D%E1%83%A1%E1%83%9B%E1%83%9D%E1%83%9C%E1%83%90%E1%83%95%E1%83%A2%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/satleli-kosmonavti/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_132",
+    "name": "Solar space set 6 in one",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/11/Solar-Space-Set-jpg.webp",
+    "link": "https://astroman.ge/solar-space-set-6-in-one/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_133",
+    "name": "Xis satamashoebi",
+    "categoryName": "საბავშვო",
+    "categorySlug": "sabavshvo-satamashoebi",
+    "price": 55,
+    "image": "https://astroman.ge/wp-content/uploads/2022/11/-%E1%83%9E%E1%83%9A%E1%83%90%E1%83%9C%E1%83%94%E1%83%A2%E1%83%94%E1%83%91%E1%83%981-jpg.webp",
+    "link": "https://astroman.ge/xis-satamashoebi/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_134",
+    "name": "Xis satamasho",
+    "categoryName": "საბავშვო",
+    "categorySlug": "sabavshvo-satamashoebi",
+    "price": 55,
+    "image": "https://astroman.ge/wp-content/uploads/2022/12/-%E1%83%90%E1%83%A1%E1%83%90%E1%83%AC%E1%83%A7%E1%83%9D%E1%83%91%E1%83%98-%E1%83%93%E1%83%90%E1%83%A4%E1%83%90-jpg.webp",
+    "link": "https://astroman.ge/xis-satamasho/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_135",
+    "name": "Satamasho raketa",
+    "categoryName": "საბავშვო",
+    "categorySlug": "sabavshvo-satamashoebi",
+    "price": 55,
+    "image": "https://astroman.ge/wp-content/uploads/2022/12/-%E1%83%92%E1%83%90%E1%83%A1%E1%83%90%E1%83%A8%E1%83%95%E1%83%94%E1%83%91%E1%83%98-%E1%83%A0%E1%83%90%E1%83%99%E1%83%94%E1%83%A2%E1%83%90-jpg.webp",
+    "link": "https://astroman.ge/satamasho-raketa/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_136",
+    "name": "Vr satvale",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2023/04/-%E1%83%A0%E1%83%94%E1%83%90%E1%83%9A%E1%83%9D%E1%83%91%E1%83%98%E1%83%A1-%E1%83%A1%E1%83%90%E1%83%97%E1%83%95%E1%83%90%E1%83%9A%E1%83%94-jpg.webp",
+    "link": "https://astroman.ge/vr-satvale/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_137",
+    "name": "Zurgchanta 30",
+    "categoryName": "საბავშვო",
+    "categorySlug": "sabavshvo-satamashoebi",
+    "price": 55,
+    "image": "https://astroman.ge/wp-content/uploads/2023/07/-30-%E1%83%A1%E1%83%9B-%E1%83%9A%E1%83%A3%E1%83%A0%E1%83%AF%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/zurgchanta-30/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_138",
+    "name": "Zurgchanta bagis",
+    "categoryName": "საბავშვო",
+    "categorySlug": "sabavshvo-satamashoebi",
+    "price": 55,
+    "image": "https://astroman.ge/wp-content/uploads/2023/07/-%E1%83%91%E1%83%90%E1%83%A6%E1%83%98%E1%83%A1-jpg.webp",
+    "link": "https://astroman.ge/zurgchanta-bagis/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_139",
+    "name": "Saskolo chanta astronaut",
+    "categoryName": "საბავშვო",
+    "categorySlug": "sabavshvo-satamashoebi",
+    "price": 55,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-Astronaut-jpg.webp",
+    "link": "https://astroman.ge/saskolo-chanta-astronaut/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_140",
+    "name": "Kedlis saati raketa",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A1%E1%83%90%E1%83%90%E1%83%97%E1%83%98-%E1%83%A0%E1%83%90%E1%83%99%E1%83%94%E1%83%A2%E1%83%90-jpg.webp",
+    "link": "https://astroman.ge/kedlis-saati-raketa/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_141",
+    "name": "Kedlis saati planetebi",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A1%E1%83%90%E1%83%90%E1%83%97%E1%83%98-%E1%83%9E%E1%83%9A%E1%83%90%E1%83%9C%E1%83%94%E1%83%A2%E1%83%94%E1%83%91%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/kedlis-saati-planetebi/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_142",
+    "name": "Kedlis saati marsi",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A1%E1%83%90%E1%83%90%E1%83%97%E1%83%98-%E1%83%9B%E1%83%90%E1%83%A0%E1%83%A1%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/kedlis-saati-marsi/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_143",
+    "name": "Saskolo chanta cosmokid",
+    "categoryName": "საბავშვო",
+    "categorySlug": "sabavshvo-satamashoebi",
+    "price": 55,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A9%E1%83%90%E1%83%9C%E1%83%97%E1%83%90-Cosmokid-2-jpg.webp",
+    "link": "https://astroman.ge/saskolo-chanta-cosmokid/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_144",
+    "name": "Saskolo chanta spaceman",
+    "categoryName": "საბავშვო",
+    "categorySlug": "sabavshvo-satamashoebi",
+    "price": 55,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A9%E1%83%90%E1%83%9C%E1%83%97%E1%83%90-Spaceman-jpg.webp",
+    "link": "https://astroman.ge/saskolo-chanta-spaceman/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_145",
+    "name": "Saskolo chanta cosmo",
+    "categoryName": "საბავშვო",
+    "categorySlug": "sabavshvo-satamashoebi",
+    "price": 55,
+    "image": "https://astroman.ge/wp-content/uploads/2022/10/-%E1%83%A9%E1%83%90%E1%83%9C%E1%83%97%E1%83%90-Cosmo-jpg.webp",
+    "link": "https://astroman.ge/saskolo-chanta-cosmo/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_146",
+    "name": "Saskolo chanta spacegirl",
+    "categoryName": "საბავშვო",
+    "categorySlug": "sabavshvo-satamashoebi",
+    "price": 55,
+    "image": "https://astroman.ge/wp-content/uploads/2022/10/-%E1%83%A9%E1%83%90%E1%83%9C%E1%83%97%E1%83%90-Spacegirl-jpg.webp",
+    "link": "https://astroman.ge/saskolo-chanta-spacegirl/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_147",
+    "name": "Penali raketa",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A0%E1%83%90%E1%83%99%E1%83%94%E1%83%A2%E1%83%90-jpg.webp",
+    "link": "https://astroman.ge/penali-raketa/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_148",
+    "name": "Კედლის სტიკერები",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/unnamed-file.jpeg",
+    "link": "https://astroman.ge/%e1%83%99%e1%83%94%e1%83%93%e1%83%9a%e1%83%98%e1%83%a1-%e1%83%a1%e1%83%a2%e1%83%98%e1%83%99%e1%83%94%e1%83%a0%e1%83%94%e1%83%91%e1%83%98/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_149",
+    "name": "Cyber truck",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/Tesla-Cyber-Truck-jpg.webp",
+    "link": "https://astroman.ge/cyber-truck/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_150",
+    "name": "Wignebis portatuli taro",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%9E%E1%83%9D%E1%83%A0%E1%83%A2%E1%83%90%E1%83%A2%E1%83%A3%E1%83%9A%E1%83%98-%E1%83%97%E1%83%90%E1%83%A0%E1%83%9D-jpg.webp",
+    "link": "https://astroman.ge/wignebis-portatuli-taro/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_151",
+    "name": "Sabavshvo sasachuqre yuti",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A1%E1%83%90%E1%83%A1%E1%83%90%E1%83%A9%E1%83%A3%E1%83%A5%E1%83%A0%E1%83%94-%E1%83%9C%E1%83%90%E1%83%99%E1%83%A0%E1%83%94%E1%83%91%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/sabavshvo-sasachuqre-yuti/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_152",
+    "name": "Tvirmfrinavi 2cali",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-BOEING-2-%E1%83%AA%E1%83%90%E1%83%9A%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/tvirmfrinavi-2cali/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_153",
+    "name": "Balishi jupiter",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/O1CN01tdFGn31Zs5QZiUGad_4227803249.jpg_400x400.jpg",
+    "link": "https://astroman.ge/balishi-jupiter/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_154",
+    "name": "Space shuttle",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A8%E1%83%90%E1%83%A2%E1%83%9A%E1%83%98%E1%83%A1-%E1%83%9B%E1%83%9D%E1%83%93%E1%83%94%E1%83%9A%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/space-shuttle/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_155",
+    "name": "Distanciuri tvitmfrinavi",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%9B%E1%83%90%E1%83%A0%E1%83%97%E1%83%95%E1%83%90%E1%83%93%E1%83%98-%E1%83%97%E1%83%95%E1%83%98%E1%83%97%E1%83%9B%E1%83%A4%E1%83%A0%E1%83%98%E1%83%9C%E1%83%90%E1%83%95%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/distanciuri-tvitmfrinavi/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_156",
+    "name": "Balishis gadasakravi",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%92%E1%83%90%E1%83%93%E1%83%90%E1%83%A1%E1%83%90%E1%83%99%E1%83%A0%E1%83%90%E1%83%95%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/balishis-gadasakravi/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_157",
+    "name": "Სათამაშო კაფსულა",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%99%E1%83%90%E1%83%A4%E1%83%A1%E1%83%A3%E1%83%9A%E1%83%90-jpg.webp",
+    "link": "https://astroman.ge/%e1%83%a1%e1%83%90%e1%83%97%e1%83%90%e1%83%9b%e1%83%90%e1%83%a8%e1%83%9d-%e1%83%99%e1%83%90%e1%83%a4%e1%83%a1%e1%83%a3%e1%83%9a%e1%83%90/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_158",
+    "name": "Bushtebis nakrebi",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%9C%E1%83%90%E1%83%99%E1%83%A0%E1%83%94%E1%83%91%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/bushtebis-nakrebi/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_159",
+    "name": "Bushtebis nakrebi2",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%91%E1%83%A3%E1%83%A8%E1%83%A2%E1%83%94%E1%83%91%E1%83%98%E1%83%A1-%E1%83%9C%E1%83%90%E1%83%99%E1%83%A0%E1%83%94%E1%83%91%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/bushtebis-nakrebi2/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_160",
+    "name": "Planetebis burtebi",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%91%E1%83%A3%E1%83%A0%E1%83%97%E1%83%94%E1%83%91%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/planetebis-burtebi/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_161",
+    "name": "Kedlis saati kosmo",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A1%E1%83%90%E1%83%90%E1%83%97%E1%83%98-2-jpg.webp",
+    "link": "https://astroman.ge/kedlis-saati-kosmo/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_162",
+    "name": "Space kulaba",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/Space-%E1%83%A7%E1%83%A3%E1%83%9A%E1%83%90%E1%83%91%E1%83%90-jpg.webp",
+    "link": "https://astroman.ge/space-kulaba/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_163",
+    "name": "Mysterious space",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/Mysterious-Space-jpg.webp",
+    "link": "https://astroman.ge/mysterious-space/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_164",
+    "name": "Penali kosmonavti",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/%E1%83%91%E1%83%94%E1%83%A5%E1%83%98-02.jpg",
+    "link": "https://astroman.ge/penali-kosmonavti/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_165",
+    "name": "Balishi space shuttle",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-Space-1-jpg.webp",
+    "link": "https://astroman.ge/balishi-space-shuttle/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_166",
+    "name": "Satamasho raketa 2",
+    "categoryName": "საბავშვო",
+    "categorySlug": "sabavshvo-satamashoebi",
+    "price": 55,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A0%E1%83%90%E1%83%99%E1%83%94%E1%83%A2%E1%83%90-%E1%83%99%E1%83%9D%E1%83%A1%E1%83%9B%E1%83%9D%E1%83%9C%E1%83%90%E1%83%95%E1%83%A2%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/satamasho-raketa-2/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_167",
+    "name": "Მაგნიტური მოდელი",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%9B%E1%83%9D%E1%83%93%E1%83%94%E1%83%9A%E1%83%98-1-jpg.webp",
+    "link": "https://astroman.ge/%e1%83%9b%e1%83%90%e1%83%92%e1%83%9c%e1%83%98%e1%83%a2%e1%83%a3%e1%83%a0%e1%83%98-%e1%83%9b%e1%83%9d%e1%83%93%e1%83%94%e1%83%9a%e1%83%98/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_168",
+    "name": "Satamashoebi nakrebi",
+    "categoryName": "საბავშვო",
+    "categorySlug": "sabavshvo-satamashoebi",
+    "price": 55,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%9C%E1%83%90%E1%83%99%E1%83%A0%E1%83%94%E1%83%91%E1%83%98-%E1%83%99%E1%83%9D%E1%83%A1%E1%83%9B%E1%83%9D%E1%83%A1%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/satamashoebi-nakrebi/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_169",
+    "name": "Mzis sistemis modeli",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A1%E1%83%98%E1%83%A1%E1%83%A2%E1%83%94%E1%83%9B%E1%83%98%E1%83%A1-%E1%83%90%E1%83%A1%E1%83%90%E1%83%AC%E1%83%A7%E1%83%9D%E1%83%91%E1%83%98-%E1%83%9B%E1%83%9D%E1%83%93%E1%83%94%E1%83%9A%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/mzis-sistemis-modeli/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_170",
+    "name": "Dedamiwis modeli",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%90%E1%83%A1%E1%83%90%E1%83%AC%E1%83%A7%E1%83%9D%E1%83%91%E1%83%98-%E1%83%9B%E1%83%9D%E1%83%93%E1%83%94%E1%83%9A%E1%83%98-1-jpg.webp",
+    "link": "https://astroman.ge/dedamiwis-modeli/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_171",
+    "name": "Kedlis saati kosmonavt",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A1%E1%83%90%E1%83%90%E1%83%97%E1%83%98-%E1%83%90%E1%83%A1%E1%83%A2%E1%83%A0%E1%83%9D%E1%83%9C%E1%83%90%E1%83%95%E1%83%A2%E1%83%98-1-jpg.webp",
+    "link": "https://astroman.ge/kedlis-saati-kosmonavt/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_172",
+    "name": "Kedlis saati 2",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A1%E1%83%90%E1%83%90%E1%83%97%E1%83%98-%E1%83%90%E1%83%A1%E1%83%A2%E1%83%A0%E1%83%9D%E1%83%9C%E1%83%90%E1%83%95%E1%83%A2%E1%83%98-%E1%83%97%E1%83%94%E1%83%97%E1%83%A0%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/kedlis-saati-2/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_173",
+    "name": "Satamasho roveri",
+    "categoryName": "საბავშვო",
+    "categorySlug": "sabavshvo-satamashoebi",
+    "price": 55,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A0%E1%83%9D%E1%83%95%E1%83%94%E1%83%A0%E1%83%98-1-jpg.webp",
+    "link": "https://astroman.ge/satamasho-roveri/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_174",
+    "name": "Table decoration",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2024/11/88387323.jpg",
+    "link": "https://astroman.ge/table-decoration/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_175",
+    "name": "Iphone case",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/10/Iphone-Case-jpg.webp",
+    "link": "https://astroman.ge/iphone-case/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_176",
+    "name": "Mzis sistemis samajuri",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/10/-%E1%83%9B%E1%83%96%E1%83%98%E1%83%A1-%E1%83%A1%E1%83%98%E1%83%A1%E1%83%A2%E1%83%94%E1%83%9B%E1%83%90-M-jpg.webp",
+    "link": "https://astroman.ge/mzis-sistemis-samajuri/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_177",
+    "name": "Binocular 8x21",
+    "categoryName": "ბინოკლები",
+    "categorySlug": "binokli",
+    "price": 180,
+    "image": "https://astroman.ge/wp-content/uploads/2025/12/Document.jpg",
+    "link": "https://astroman.ge/binocular-8x21/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_178",
+    "name": "Dedamiwis yelsabami",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2023/05/-%E1%83%A7%E1%83%94%E1%83%9A%E1%83%A1%E1%83%90%E1%83%91%E1%83%90%E1%83%9B%E1%83%98-2-jpg.webp",
+    "link": "https://astroman.ge/dedamiwis-yelsabami/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_179",
+    "name": "Სამაჯური მზის სისტემა",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2024/02/-%E1%83%9B%E1%83%96%E1%83%98%E1%83%A1-%E1%83%A1%E1%83%98%E1%83%A1%E1%83%A2%E1%83%94%E1%83%9B%E1%83%90-2-jpg.webp",
+    "link": "https://astroman.ge/%e1%83%a1%e1%83%90%e1%83%9b%e1%83%90%e1%83%af%e1%83%a3%e1%83%a0%e1%83%98-%e1%83%9b%e1%83%96%e1%83%98%e1%83%a1-%e1%83%a1%e1%83%98%e1%83%a1%e1%83%a2%e1%83%94%e1%83%9b%e1%83%90/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_180",
+    "name": "Breloki kosmonavti m",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%99%E1%83%9D%E1%83%A1%E1%83%9B%E1%83%9D%E1%83%9C%E1%83%90%E1%83%95%E1%83%A2%E1%83%98-M-jpg.webp",
+    "link": "https://astroman.ge/breloki-kosmonavti-m/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_181",
+    "name": "Yelsabami naxevarmtvare",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%9C%E1%83%90%E1%83%AE%E1%83%94%E1%83%95%E1%83%90%E1%83%A0%E1%83%9B%E1%83%97%E1%83%95%E1%83%90%E1%83%A0%E1%83%94-1-1-jpg.webp",
+    "link": "https://astroman.ge/yelsabami-naxevarmtvare/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_182",
+    "name": "Planetebis brelokebi",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%91%E1%83%A0%E1%83%94%E1%83%9A%E1%83%9D%E1%83%99%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/planetebis-brelokebi/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_183",
+    "name": "Mzis sistemis samajuri 2",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A1%E1%83%98%E1%83%A1%E1%83%A2%E1%83%94%E1%83%9B%E1%83%98%E1%83%A1-%E1%83%A1%E1%83%90%E1%83%9B%E1%83%90%E1%83%AF%E1%83%A3%E1%83%A0%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/mzis-sistemis-samajuri-2/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_184",
+    "name": "Majis saati cosmos",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A1%E1%83%90%E1%83%90%E1%83%97%E1%83%98-Cosmos-jpg.webp",
+    "link": "https://astroman.ge/majis-saati-cosmos/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_185",
+    "name": "Qolga",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A5%E1%83%9D%E1%83%9A%E1%83%92%E1%83%90-jpg.webp",
+    "link": "https://astroman.ge/qolga/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_186",
+    "name": "Saturni kosmonavti breloki",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A1%E1%83%90%E1%83%A2%E1%83%A3%E1%83%A0%E1%83%9C%E1%83%98-%E1%83%99%E1%83%9D%E1%83%A1%E1%83%9B%E1%83%9D%E1%83%9C%E1%83%90%E1%83%95%E1%83%A2%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/saturni-kosmonavti-breloki/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_187",
+    "name": "Breloki kosmonavti",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%99%E1%83%9D%E1%83%A1%E1%83%9B%E1%83%9D%E1%83%9C%E1%83%90%E1%83%95%E1%83%A2%E1%83%98-3-jpg.webp",
+    "link": "https://astroman.ge/breloki-kosmonavti/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_188",
+    "name": "Სამაჯური 3",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%9E%E1%83%9A%E1%83%90%E1%83%9C%E1%83%94%E1%83%A2%E1%83%94%E1%83%91%E1%83%98-3-jpg.webp",
+    "link": "https://astroman.ge/%e1%83%a1%e1%83%90%e1%83%9b%e1%83%90%e1%83%af%e1%83%a3%e1%83%a0%e1%83%98-3/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_189",
+    "name": "Samajuri 3",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/Screenshot-2025-11-10-at-18.08.26-1.png",
+    "link": "https://astroman.ge/samajuri-3/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_190",
+    "name": "Samajuri 5",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%9E%E1%83%9A%E1%83%90%E1%83%9C%E1%83%94%E1%83%A2%E1%83%90-5-jpg.webp",
+    "link": "https://astroman.ge/samajuri-5/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_191",
+    "name": "Breloki kosmonavti lurji",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%90%E1%83%A1%E1%83%A2%E1%83%A0%E1%83%9D%E1%83%9C%E1%83%90%E1%83%95%E1%83%A2%E1%83%98-%E1%83%9A%E1%83%A3%E1%83%A0%E1%83%AF%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/breloki-kosmonavti-lurji/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_192",
+    "name": "Fosforis kelsabami",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A7%E1%83%94%E1%83%9A%E1%83%A1%E1%83%90%E1%83%91%E1%83%90%E1%83%9B%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/fosforis-kelsabami/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_193",
+    "name": "Varskvlavuri ruka jupiter",
+    "categoryName": "ვარსკვლავური რუკა",
+    "categorySlug": "varskvlavuri-ruka",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A0%E1%83%A3%E1%83%99%E1%83%90-%E1%83%95%E1%83%90%E1%83%9C-%E1%83%92%E1%83%9D%E1%83%92%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/varskvlavuri-ruka-jupiter/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_194",
+    "name": "Breloki astronavti",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%90%E1%83%A1%E1%83%A2%E1%83%A0%E1%83%9D%E1%83%9C%E1%83%90%E1%83%95%E1%83%A2%E1%83%98-1-jpg.webp",
+    "link": "https://astroman.ge/breloki-astronavti/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_195",
+    "name": "Yelsabami saturni 4",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/H850b4346771c484abf8b430468da60e17.jpg",
+    "link": "https://astroman.ge/yelsabami-saturni-4/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_196",
+    "name": "Ყელსაბამი სატურნი 2",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A7%E1%83%94%E1%83%9A%E1%83%A1%E1%83%90%E1%83%91%E1%83%90%E1%83%9B%E1%83%987-jpg.webp",
+    "link": "https://astroman.ge/%e1%83%a7%e1%83%94%e1%83%9a%e1%83%a1%e1%83%90%e1%83%91%e1%83%90%e1%83%9b%e1%83%98-%e1%83%a1%e1%83%90%e1%83%a2%e1%83%a3%e1%83%a0%e1%83%9c%e1%83%98-2/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_197",
+    "name": "Yelsabami saturni 2",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A7%E1%83%94%E1%83%9A%E1%83%A1%E1%83%90%E1%83%91%E1%83%90%E1%83%9B%E1%83%98-45-jpg.webp",
+    "link": "https://astroman.ge/yelsabami-saturni-2/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_198",
+    "name": "Yelsabami saturni",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A7%E1%83%94%E1%83%9A%E1%83%A1%E1%83%90%E1%83%91%E1%83%90%E1%83%9B%E1%83%988-jpg.webp",
+    "link": "https://astroman.ge/yelsabami-saturni/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_199",
+    "name": "Yelsabami saturnn",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A1%E1%83%90%E1%83%9B%E1%83%90%E1%83%AF%E1%83%A3%E1%83%A0%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/yelsabami-saturnn/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_200",
+    "name": "Yelsabami saturni7",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A7%E1%83%94%E1%83%9A%E1%83%A1%E1%83%90%E1%83%91%E1%83%90%E1%83%9B%E1%83%9810-jpg.webp",
+    "link": "https://astroman.ge/yelsabami-saturni7/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_201",
+    "name": "Star map aurora",
+    "categoryName": "ვარსკვლავური რუკა",
+    "categorySlug": "varskvlavuri-ruka",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A0%E1%83%A3%E1%83%99%E1%83%90-%E1%83%90%E1%83%A3%E1%83%A0%E1%83%9D%E1%83%A0%E1%83%90-jpg.webp",
+    "link": "https://astroman.ge/star-map-aurora/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_202",
+    "name": "Piradi ruka",
+    "categoryName": "ვარსკვლავური რუკა",
+    "categorySlug": "varskvlavuri-ruka",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A0%E1%83%A3%E1%83%99%E1%83%90-%E1%83%9D%E1%83%A0%E1%83%98-%E1%83%9A%E1%83%9D%E1%83%99%E1%83%90%E1%83%AA%E1%83%98%E1%83%90-jpg.webp",
+    "link": "https://astroman.ge/piradi-ruka/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_203",
+    "name": "Moon map",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A0%E1%83%A3%E1%83%99%E1%83%90-jpg.webp",
+    "link": "https://astroman.ge/moon-map/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_204",
+    "name": "Piradi ruka varskvlavebi",
+    "categoryName": "ვარსკვლავური რუკა",
+    "categorySlug": "varskvlavuri-ruka",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A0%E1%83%A3%E1%83%99%E1%83%90-%E1%83%9A%E1%83%A3%E1%83%A0%E1%83%AF%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/piradi-ruka-varskvlavebi/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_205",
+    "name": "Piradi ruka galaxy",
+    "categoryName": "ვარსკვლავური რუკა",
+    "categorySlug": "varskvlavuri-ruka",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A0%E1%83%A3%E1%83%99%E1%83%90-%E1%83%92%E1%83%90%E1%83%9A%E1%83%90%E1%83%A5%E1%83%A1%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/piradi-ruka-galaxy/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_206",
+    "name": "Varskvlavuri ruka nebula",
+    "categoryName": "ვარსკვლავური რუკა",
+    "categorySlug": "varskvlavuri-ruka",
+    "price": 65,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A0%E1%83%A3%E1%83%99%E1%83%90-%E1%83%9C%E1%83%94%E1%83%91%E1%83%A3%E1%83%9A%E1%83%90-jpg.webp",
+    "link": "https://astroman.ge/varskvlavuri-ruka-nebula/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_207",
+    "name": "Saskolo chanta kosmonavti lurji",
+    "categoryName": "საბავშვო",
+    "categorySlug": "sabavshvo-satamashoebi",
+    "price": 55,
+    "image": "https://astroman.ge/wp-content/uploads/2026/09/blue_hero.jpg",
+    "link": "https://astroman.ge/saskolo-chanta-kosmonavti-lurji/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_208",
+    "name": "School bag pixel green",
+    "categoryName": "საბავშვო",
+    "categorySlug": "sabavshvo-satamashoebi",
+    "price": 55,
+    "image": "https://astroman.ge/wp-content/uploads/2026/09/pixel-green_hero.jpg",
+    "link": "https://astroman.ge/school-bag-pixel-green/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_209",
+    "name": "School bag blocky blue",
+    "categoryName": "საბავშვო",
+    "categorySlug": "sabavshvo-satamashoebi",
+    "price": 55,
+    "image": "https://astroman.ge/wp-content/uploads/2026/09/blocky-blue_hero.jpg",
+    "link": "https://astroman.ge/school-bag-blocky-blue/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_210",
+    "name": "Kosmosuri yuti",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/12/-%E1%83%A7%E1%83%A3%E1%83%97%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/kosmosuri-yuti/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_211",
+    "name": "Mexsierebis barati",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2023/01/-%E1%83%91%E1%83%90%E1%83%A0%E1%83%90%E1%83%97%E1%83%98-64GB-%E1%83%99%E1%83%9D%E1%83%A1%E1%83%9B%E1%83%9D%E1%83%9C%E1%83%90%E1%83%95%E1%83%A2%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/mexsierebis-barati/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_212",
+    "name": "Astronaut big box",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2023/02/Astronaut-Big-Box-jpg.webp",
+    "link": "https://astroman.ge/astronaut-big-box/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_213",
+    "name": "Vr glasses",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2023/04/VR-%E1%83%A1%E1%83%90%E1%83%97%E1%83%95%E1%83%90%E1%83%9A%E1%83%94-%E1%83%A7%E1%83%A3%E1%83%A0%E1%83%A1%E1%83%90%E1%83%A1%E1%83%9B%E1%83%94%E1%83%9C%E1%83%94%E1%83%91%E1%83%98%E1%83%97-jpg.webp",
+    "link": "https://astroman.ge/vr-glasses/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_214",
+    "name": "Balishi raketa",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2023/05/-%E1%83%A0%E1%83%90%E1%83%99%E1%83%94%E1%83%A2%E1%83%90-jpg.webp",
+    "link": "https://astroman.ge/balishi-raketa/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_215",
+    "name": "Kosmosuri chiqa",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2023/06/-%E1%83%AD%E1%83%98%E1%83%A5%E1%83%90-1-jpg.webp",
+    "link": "https://astroman.ge/kosmosuri-chiqa/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_216",
+    "name": "Termosi",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2023/09/-%E1%83%97%E1%83%94%E1%83%A0%E1%83%9B%E1%83%9D%E1%83%A1%E1%83%98-89-jpg.webp",
+    "link": "https://astroman.ge/termosi/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_217",
+    "name": "Იატაკის საფენი",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2023/11/-%E1%83%A1%E1%83%90%E1%83%A4%E1%83%94%E1%83%9C%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/%e1%83%98%e1%83%90%e1%83%a2%e1%83%90%e1%83%99%e1%83%98%e1%83%a1-%e1%83%a1%e1%83%90%e1%83%a4%e1%83%94%e1%83%9c%e1%83%98/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_218",
+    "name": "Suratis charcho",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2024/10/00912.jpg",
+    "link": "https://astroman.ge/suratis-charcho/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_219",
+    "name": "Wall hang",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2024/11/88293.jpg",
+    "link": "https://astroman.ge/wall-hang/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_220",
+    "name": "Macivris magnitebi",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%9B%E1%83%98%E1%83%A1%E1%83%90%E1%83%99%E1%83%A0%E1%83%9D%E1%83%91%E1%83%94%E1%83%91%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/macivris-magnitebi/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_221",
+    "name": "Chiqa mrgvali",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%90%E1%83%A1%E1%83%A2%E1%83%A0%E1%83%9D%E1%83%9C%E1%83%90%E1%83%95%E1%83%A2%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/chiqa-mrgvali/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_222",
+    "name": "Sadgesaswaulo qudi",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%A5%E1%83%A3%E1%83%93%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/sadgesaswaulo-qudi/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_223",
+    "name": "Volcano",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/Volcano-1-jpg.webp",
+    "link": "https://astroman.ge/volcano/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_224",
+    "name": "Cyber glasses",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/cyber-glasses-jpg.webp",
+    "link": "https://astroman.ge/cyber-glasses/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_225",
+    "name": "Chiqis sasachukre nakrebi",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%AD%E1%83%98%E1%83%A5%E1%83%98%E1%83%A1-%E1%83%A1%E1%83%90%E1%83%A1%E1%83%90%E1%83%A9%E1%83%A3%E1%83%A5%E1%83%A0%E1%83%94-%E1%83%9C%E1%83%90%E1%83%99%E1%83%A0%E1%83%94%E1%83%91%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/chiqis-sasachukre-nakrebi/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_226",
+    "name": "Telefonis sadgami",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/10/-%E1%83%A1%E1%83%90%E1%83%93%E1%83%92%E1%83%90%E1%83%9B%E1%83%98-%E1%83%99%E1%83%9D%E1%83%A1%E1%83%9B%E1%83%9D%E1%83%9C%E1%83%90%E1%83%95%E1%83%A2%E1%83%98-jpg.webp",
+    "link": "https://astroman.ge/telefonis-sadgami/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_227",
+    "name": "Chiqa",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%AD%E1%83%98%E1%83%A5%E1%83%94%E1%83%91%E1%83%98-4-jpg.webp",
+    "link": "https://astroman.ge/chiqa/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_228",
+    "name": "Balishi mtvare",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%9B%E1%83%97%E1%83%95%E1%83%90%E1%83%A0%E1%83%94-1-jpg.webp",
+    "link": "https://astroman.ge/balishi-mtvare/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_229",
+    "name": "Balishi dedamitsa",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%93%E1%83%94%E1%83%93%E1%83%90%E1%83%9B%E1%83%98%E1%83%AC%E1%83%90-1-jpg.webp",
+    "link": "https://astroman.ge/balishi-dedamitsa/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_230",
+    "name": "Kosmosuri stikerebi",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-2-jpg.webp",
+    "link": "https://astroman.ge/kosmosuri-stikerebi/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_231",
+    "name": "Prizma",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-6-jpg.webp",
+    "link": "https://astroman.ge/prizma/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_232",
+    "name": "Ასაწყობი პაზლი დედამიწა",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/%E1%83%93%E1%83%94%E1%83%93%E1%83%90%E1%83%9B%E1%83%98%E1%83%AC%E1%83%98%E1%83%A1-%E1%83%9E%E1%83%90%E1%83%96%E1%83%9A%E1%83%98.jpg",
+    "link": "https://astroman.ge/%e1%83%90%e1%83%a1%e1%83%90%e1%83%ac%e1%83%a7%e1%83%9d%e1%83%91%e1%83%98-%e1%83%9e%e1%83%90%e1%83%96%e1%83%9a%e1%83%98-%e1%83%93%e1%83%94%e1%83%93%e1%83%90%e1%83%9b%e1%83%98%e1%83%ac%e1%83%90/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_233",
+    "name": "Ასაწყობი პაზლი მთვარე",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-%E1%83%90%E1%83%A1%E1%83%90%E1%83%AC%E1%83%A7%E1%83%9D%E1%83%91%E1%83%98-%E1%83%9E%E1%83%90%E1%83%96%E1%83%9A%E1%83%98-4-jpg.webp",
+    "link": "https://astroman.ge/%e1%83%90%e1%83%a1%e1%83%90%e1%83%ac%e1%83%a7%e1%83%9d%e1%83%91%e1%83%98-%e1%83%9e%e1%83%90%e1%83%96%e1%83%9a%e1%83%98-%e1%83%9b%e1%83%97%e1%83%95%e1%83%90%e1%83%a0%e1%83%94/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_234",
+    "name": "Bloknoti",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/-2-jpg.webp",
+    "link": "https://astroman.ge/bloknoti/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_235",
+    "name": "Vynil player",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2024/03/34-1-scaled.webp",
+    "link": "https://astroman.ge/vynil-player/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_236",
+    "name": "Visionking telescope 70mm",
+    "categoryName": "ტელესკოპები",
+    "categorySlug": "teleskopi",
+    "price": 950,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/Visionking-Telescope-jpg.webp",
+    "link": "https://astroman.ge/visionking-telescope-70mm/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_237",
+    "name": "Vixen nature eye 50 360 az1 telescope",
+    "categoryName": "ტელესკოპები",
+    "categorySlug": "teleskopi",
+    "price": 950,
+    "image": "https://astroman.ge/wp-content/uploads/2024/11/778273.jpg",
+    "link": "https://astroman.ge/vixen-nature-eye-50-360-az1-telescope/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_238",
+    "name": "Astronomical telescope",
+    "categoryName": "ტელესკოპები",
+    "categorySlug": "teleskopi",
+    "price": 950,
+    "image": "https://astroman.ge/wp-content/uploads/2026/02/%E1%83%91%E1%83%94%E1%83%A5%E1%83%98-02-1.jpg",
+    "link": "https://astroman.ge/astronomical-telescope/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_239",
+    "name": "National geographic refractor telescope 70 900 ng",
+    "categoryName": "ტელესკოპები",
+    "categorySlug": "teleskopi",
+    "price": 950,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/22122.jpg",
+    "link": "https://astroman.ge/national-geographic-refractor-telescope-70-900-ng/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_240",
+    "name": "Foreseen 400 70 telescope",
+    "categoryName": "ტელესკოპები",
+    "categorySlug": "teleskopi",
+    "price": 950,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/foreseen-tescope-jpg.webp",
+    "link": "https://astroman.ge/foreseen-400-70-telescope/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_241",
+    "name": "National geographic 76 350 telescope",
+    "categoryName": "ტელესკოპები",
+    "categorySlug": "teleskopi",
+    "price": 950,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/National-Geographic-jpg.webp",
+    "link": "https://astroman.ge/national-geographic-76-350-telescope/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_242",
+    "name": "National geographic telescope 2",
+    "categoryName": "ტელესკოპები",
+    "categorySlug": "teleskopi",
+    "price": 950,
+    "image": "https://astroman.ge/wp-content/uploads/2022/12/8878721.jpg",
+    "link": "https://astroman.ge/national-geographic-telescope-2/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_243",
+    "name": "Sabavshvo teleskopi",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/12/3442.jpg",
+    "link": "https://astroman.ge/sabavshvo-teleskopi/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_244",
+    "name": "National geographic 50 600",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2023/11/%E1%83%91%E1%83%94%E1%83%A5%E1%83%98-02.jpg",
+    "link": "https://astroman.ge/national-geographic-50-600/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_245",
+    "name": "Ტელესკოპი firstscope moon",
+    "categoryName": "ტელესკოპები",
+    "categorySlug": "teleskopi",
+    "price": 950,
+    "image": "https://astroman.ge/wp-content/uploads/2024/11/22.jpg",
+    "link": "https://astroman.ge/%e1%83%a2%e1%83%94%e1%83%9a%e1%83%94%e1%83%a1%e1%83%99%e1%83%9d%e1%83%9e%e1%83%98-firstscope-moon/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_246",
+    "name": "Bresser junior 76 300",
+    "categoryName": "ტელესკოპები",
+    "categorySlug": "teleskopi",
+    "price": 950,
+    "image": "https://astroman.ge/wp-content/uploads/2024/11/222.jpg",
+    "link": "https://astroman.ge/bresser-junior-76-300/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_247",
+    "name": "Travel scope 50mm",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2025/12/Document-1.jpg",
+    "link": "https://astroman.ge/travel-scope-50mm/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_248",
+    "name": "National geographic refractor telescope 90 900 eq3",
+    "categoryName": "ტელესკოპები",
+    "categorySlug": "teleskopi",
+    "price": 950,
+    "image": "https://astroman.ge/wp-content/uploads/2022/12/-90-jpg.webp",
+    "link": "https://astroman.ge/national-geographic-refractor-telescope-90-900-eq3/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_249",
+    "name": "National geographic 76700",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2024/08/0144181_national-geographic-114900-reflector-telescope-az_550.jpeg",
+    "link": "https://astroman.ge/national-geographic-76700/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_250",
+    "name": "Telescope foreseen",
+    "categoryName": "ტელესკოპები",
+    "categorySlug": "teleskopi",
+    "price": 950,
+    "image": "https://astroman.ge/wp-content/uploads/2024/08/Telescope.jpg",
+    "link": "https://astroman.ge/telescope-foreseen/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_251",
+    "name": "Celestron travel scope 70 dx",
+    "categoryName": "ტელესკოპები",
+    "categorySlug": "teleskopi",
+    "price": 950,
+    "image": "https://astroman.ge/wp-content/uploads/2024/11/%E1%83%91%E1%83%94%E1%83%A5%E1%83%98-02.jpg",
+    "link": "https://astroman.ge/celestron-travel-scope-70-dx/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_252",
+    "name": "National geographic refractor telescope",
+    "categoryName": "ტელესკოპები",
+    "categorySlug": "teleskopi",
+    "price": 950,
+    "image": "https://astroman.ge/wp-content/uploads/2025/11/%E1%83%91%E1%83%94%E1%83%A5%E1%83%98-02.jpg",
+    "link": "https://astroman.ge/national-geographic-refractor-telescope/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_253",
+    "name": "Bresser venus 76 700 az telescope",
+    "categoryName": "ტელესკოპები",
+    "categorySlug": "teleskopi",
+    "price": 950,
+    "image": "https://astroman.ge/wp-content/uploads/2025/12/2221.jpg",
+    "link": "https://astroman.ge/bresser-venus-76-700-az-telescope/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_254",
+    "name": "Telescope foreseen 80mm",
+    "categoryName": "ტელესკოპები",
+    "categorySlug": "teleskopi",
+    "price": 950,
+    "image": "https://astroman.ge/wp-content/uploads/2024/08/Telescope.jpg",
+    "link": "https://astroman.ge/telescope-foreseen-80mm/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_255",
+    "name": "Bresser sirius 70 900 az",
+    "categoryName": "ტელესკოპები",
+    "categorySlug": "teleskopi",
+    "price": 950,
+    "image": "https://astroman.ge/wp-content/uploads/2026/06/%E1%83%91%E1%83%94%E1%83%A5%E1%83%98-02-1.jpg",
+    "link": "https://astroman.ge/bresser-sirius-70-900-az/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_256",
+    "name": "Teleskopi avtomaturi",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2022/09/National-Geographic-Automatic-jpg.webp",
+    "link": "https://astroman.ge/teleskopi-avtomaturi/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_257",
+    "name": "Celestron astromaster 70az",
+    "categoryName": "ტელესკოპები",
+    "categorySlug": "teleskopi",
+    "price": 950,
+    "image": "https://astroman.ge/wp-content/uploads/2024/11/23312.jpg",
+    "link": "https://astroman.ge/celestron-astromaster-70az/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_258",
+    "name": "Astromaster 114eq telescope",
+    "categoryName": "ტელესკოპები",
+    "categorySlug": "teleskopi",
+    "price": 950,
+    "image": "https://astroman.ge/wp-content/uploads/2026/05/11.jpg",
+    "link": "https://astroman.ge/astromaster-114eq-telescope/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_259",
+    "name": "Celestron starsense explorer lt 70az",
+    "categoryName": "ტელესკოპები",
+    "categorySlug": "teleskopi",
+    "price": 950,
+    "image": "https://astroman.ge/wp-content/uploads/2026/09/celestron-starsense-explorer-lt-70az-telescope-01.jpg",
+    "link": "https://astroman.ge/celestron-starsense-explorer-lt-70az/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_260",
+    "name": "Starsense explorer dx 102 refractor",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2026/05/112.jpg",
+    "link": "https://astroman.ge/starsense-explorer-dx-102-refractor/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_261",
+    "name": "Bresser automatik 80 400 goto",
+    "categoryName": "ტელესკოპები",
+    "categorySlug": "teleskopi",
+    "price": 950,
+    "image": "https://astroman.ge/wp-content/uploads/2026/06/%E1%83%91%E1%83%94%E1%83%A5%E1%83%98-02.jpg",
+    "link": "https://astroman.ge/bresser-automatik-80-400-goto/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_262",
+    "name": "Celestron nexstar 90slt computerized telescope",
+    "categoryName": "ტელესკოპები",
+    "categorySlug": "teleskopi",
+    "price": 950,
+    "image": "https://astroman.ge/wp-content/uploads/2024/11/1222.jpg",
+    "link": "https://astroman.ge/celestron-nexstar-90slt-computerized-telescope/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_263",
+    "name": "National geographic 300x 1200x microscope",
+    "categoryName": "მიკროსკოპები",
+    "categorySlug": "mikroskopi",
+    "price": 210,
+    "image": "https://astroman.ge/wp-content/uploads/2024/11/782.jpg",
+    "link": "https://astroman.ge/national-geographic-300x-1200x-microscope/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_264",
+    "name": "National geographic telescope microscope set",
+    "categoryName": "ტელესკოპები",
+    "categorySlug": "teleskopi",
+    "price": 950,
+    "image": "https://astroman.ge/wp-content/uploads/2024/11/9982.jpg",
+    "link": "https://astroman.ge/national-geographic-telescope-microscope-set/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_265",
+    "name": "Vinrage monocular",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2025/01/%E1%83%91%E1%83%94%E1%83%A5%E1%83%98-02.jpg",
+    "link": "https://astroman.ge/vinrage-monocular/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_266",
+    "name": "Nexstar 4se computerized telescope",
+    "categoryName": "ტელესკოპები",
+    "categorySlug": "teleskopi",
+    "price": 950,
+    "image": "https://astroman.ge/wp-content/uploads/2025/09/%E1%83%91%E1%83%94%E1%83%A5%E1%83%98-02.jpg",
+    "link": "https://astroman.ge/nexstar-4se-computerized-telescope/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_267",
+    "name": "National geographic microscope set",
+    "categoryName": "მიკროსკოპები",
+    "categorySlug": "mikroskopi",
+    "price": 210,
+    "image": "https://astroman.ge/wp-content/uploads/2025/12/Screenshot-2025-12-12-at-13.36.13.png",
+    "link": "https://astroman.ge/national-geographic-microscope-set/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_268",
+    "name": "Starsense explorerr telescope",
+    "categoryName": "ტელესკოპები",
+    "categorySlug": "teleskopi",
+    "price": 950,
+    "image": "https://astroman.ge/wp-content/uploads/2026/05/2233.jpg",
+    "link": "https://astroman.ge/starsense-explorerr-telescope/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_269",
+    "name": "Nexstar 6slt computerized telescope",
+    "categoryName": "ტელესკოპები",
+    "categorySlug": "teleskopi",
+    "price": 950,
+    "image": "https://astroman.ge/wp-content/uploads/2026/05/%E1%83%91%E1%83%94%E1%83%A5%E1%83%98-02-1.jpg",
+    "link": "https://astroman.ge/nexstar-6slt-computerized-telescope/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_270",
+    "name": "Cosmonaut nebula projector",
+    "categoryName": "პროექტორები",
+    "categorySlug": "proeqtorebi",
+    "price": 120,
+    "image": "https://astroman.ge/wp-content/uploads/2022/12/Cosmonaut-Nebula-Projector-1-jpg.webp",
+    "link": "https://astroman.ge/cosmonaut-nebula-projector/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_271",
+    "name": "Usb გალაქტიკის პროექტორი",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2026/10/usb-galaqtikis-proeqtori.jpg",
+    "link": "https://astroman.ge/usb-%e1%83%92%e1%83%90%e1%83%9a%e1%83%90%e1%83%a5%e1%83%a2%e1%83%98%e1%83%99%e1%83%98%e1%83%a1-%e1%83%9e%e1%83%a0%e1%83%9d%e1%83%94%e1%83%a5%e1%83%a2%e1%83%9d%e1%83%a0%e1%83%98/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_272",
+    "name": "Tesla electric speaker",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2026/10/musikaluri-teslas-koci.jpg",
+    "link": "https://astroman.ge/tesla-electric-speaker/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_273",
+    "name": "Ქვიშის საათი ჩანჩქერი",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2026/10/qviSis-saati-lurji.jpg",
+    "link": "https://astroman.ge/%e1%83%a5%e1%83%95%e1%83%98%e1%83%a8%e1%83%98%e1%83%a1-%e1%83%a1%e1%83%90%e1%83%90%e1%83%97%e1%83%98-%e1%83%a9%e1%83%90%e1%83%9c%e1%83%a9%e1%83%a5%e1%83%94%e1%83%a0%e1%83%98/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_274",
+    "name": "Ქვიშის საათი ხის ჩარჩოთი",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2026/10/qvishis-saati-xis-1.jpg",
+    "link": "https://astroman.ge/%e1%83%a5%e1%83%95%e1%83%98%e1%83%a8%e1%83%98%e1%83%a1-%e1%83%a1%e1%83%90%e1%83%90%e1%83%97%e1%83%98-%e1%83%ae%e1%83%98%e1%83%a1-%e1%83%a9%e1%83%90%e1%83%a0%e1%83%a9%e1%83%9d%e1%83%97%e1%83%98/",
+    "inStock": true
+  },
+  {
+    "id": "p_extra_275",
+    "name": "Ნიუტონის ქანქარა",
+    "categoryName": "აქსესუარები",
+    "categorySlug": "aqsesuarebi",
+    "price": 45,
+    "image": "https://astroman.ge/wp-content/uploads/2026/10/niutonis-qanqara-n1.jpg",
+    "link": "https://astroman.ge/%e1%83%9c%e1%83%98%e1%83%a3%e1%83%a2%e1%83%9d%e1%83%9c%e1%83%98%e1%83%a1-%e1%83%a5%e1%83%90%e1%83%9c%e1%83%a5%e1%83%90%e1%83%a0%e1%83%90/",
+    "inStock": true
+  }
+];
+
 export const ALL_PRODUCTS: Product[] = [
+  ...EXTRA_PRODUCTS,
   // ==========================================
   // 1. ტექნიკა (teqnika)
   // ==========================================

@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Telescope, MapPin, Phone, Mail } from "lucide-react";
 
@@ -137,9 +139,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-gray-500 gap-4">
-          <div>
-            © {new Date().getFullYear()} ASTROMAN. ყველა უფლება დაცულია.
-          </div>
+          <div>© 2026 ASTROMAN. ყველა უფლება დაცულია.</div>
           <div className="flex gap-3 text-xs tracking-wider font-semibold text-gray-400">
             <span>VISA</span>
             <span>MASTERCARD</span>

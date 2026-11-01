@@ -226,32 +226,60 @@ function AstromanCarousel({
 export default function HomePage() {
   const [heroSlide, setHeroSlide] = useState(0);
 
+  // 1. ტელესკოპები
   const telescopes = useMemo(
     () => ALL_PRODUCTS.filter((p) => p.categorySlug === "teleskopi"),
     [],
   );
-  const viralItems = useMemo(
+
+  // 2. Top გაყიდვადი (პოპულარული ჰიტები: პროექტორები, მცურავი სფეროები, ბესტსელერები)
+  const topSelling = useMemo(
     () =>
       ALL_PRODUCTS.filter(
         (p) =>
-          p.categorySlug === "sanatebi" || p.categorySlug === "proeqtorebi",
+          p.categorySlug === "proeqtorebi" ||
+          p.name.toLowerCase().includes("projector") ||
+          p.name.toLowerCase().includes("globe") ||
+          p.name.toLowerCase().includes("binokli"),
+      ).slice(0, 10),
+    [],
+  );
+
+  // 3. ახალი დამატებული (სიის ბოლო დამატებული ნივთები)
+  const newlyAdded = useMemo(
+    () => [...ALL_PRODUCTS].reverse().slice(0, 10),
+    [],
+  );
+
+  // 5. ფასდაკლებები
+  const discountedItems = useMemo(
+    () => ALL_PRODUCTS.filter((p) => p.isSale).slice(0, 10),
+    [],
+  );
+
+  // 6. სანათები
+  const lamps = useMemo(
+    () =>
+      ALL_PRODUCTS.filter(
+        (p) =>
+          p.categorySlug === "sanatebi" ||
+          p.name.toLowerCase().includes("sanati") ||
+          p.name.toLowerCase().includes("lamp"),
       ),
     [],
   );
-  const discountedItems = ALL_PRODUCTS.filter((p) => p.isSale)
-    .slice(-5)
-    .reverse();
-  const lamps = useMemo(
-    () => ALL_PRODUCTS.filter((p) => p.categorySlug === "sanatebi"),
-    [],
-  );
+
+  // 7. მხოლოდ ასტრომანში (სასაჩუქრე, ვარსკვლავური რუკები, დინამიკები და ექსკლუზივები)
   const onlyInAstroman = useMemo(
     () =>
       ALL_PRODUCTS.filter(
         (p) =>
           p.categorySlug === "aksesuarebi" ||
           p.categorySlug === "sxvadasxva" ||
-          p.categorySlug === "sabavshvo",
+          p.categorySlug === "sabavshvo" ||
+          p.name.toLowerCase().includes("star map") ||
+          p.name.toLowerCase().includes("star registry") ||
+          p.name.toLowerCase().includes("speaker"),
       ),
     [],
   );
@@ -283,42 +311,11 @@ export default function HomePage() {
     return () => clearInterval(timer);
   }, [HERO_SLIDES.length]);
 
-  const blogPosts = [
-    {
-      id: "blog-1",
-      title:
-        "საახალწლო საჩუქარი: 25+ კოსმოსური იდეა ბავშვს, გოგოს, ბიჭს და შეყვარებულს",
-      image: "https://astroman.ge/wp-content/uploads/2022/04/blog-newyear.jpg",
-      link: "/blog/saaxalwlo-sachuqari",
-    },
-    {
-      id: "blog-2",
-      title:
-        "SpaceX-ის Starship-მა პირველად მიაღწია ორბიტას: რაკეტა, რომელიც მთვარესა და მარსს გვიახლოვებს",
-      image: "https://astroman.ge/wp-content/uploads/2022/04/blog-starship.jpg",
-      link: "/blog/spacex-starship",
-    },
-    {
-      id: "blog-3",
-      title:
-        "მზის დაბნელება 2026: რატომ ხდება, რას ცვლის დედამიწაზე და როდის დაინახავს საქართველო",
-      image: "https://astroman.ge/wp-content/uploads/2022/04/blog-eclipse.jpg",
-      link: "/blog/mzis-dabneleba",
-    },
-    {
-      id: "blog-4",
-      title: "როგორ ავირჩიოთ ტელესკოპი დამწყებთათვის",
-      image:
-        "https://astroman.ge/wp-content/uploads/2022/04/blog-telescope.jpg",
-      link: "/blog/rogor-avirchiot-teleskopi",
-    },
-  ];
-
   return (
     <div className="mx-auto w-full max-w-[1240px] px-4 py-6 sm:px-6 md:px-8">
       <ShopOverlays />
 
-      {/* 1. HERO სექცია */}
+      {/* Hero სექცია */}
       <section className="mb-12 flex flex-col gap-5 lg:flex-row lg:items-stretch">
         <aside className="w-full shrink-0 lg:w-60">
           <div className="h-full overflow-hidden rounded-2xl border border-white/5 bg-[#0d111d]/90 shadow-xl backdrop-blur-md">
@@ -434,11 +431,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 2. ტელესკოპები */}
+      {/* 1. ტელესკოპები */}
       <AstromanCarousel title="ტელესკოპები" items={telescopes} />
 
-      {/* 3. ვირუსული ნივთები */}
-      <AstromanCarousel title="ვირუსული ნივთები" items={viralItems} />
+      {/* 2. Top გაყიდვადი */}
+      <AstromanCarousel title="Top გაყიდვადი" items={topSelling} />
+
+      {/* 3. ახალი დამატებული */}
+      <AstromanCarousel title="ახალი დამატებული" items={newlyAdded} />
 
       {/* 4. ბრენდები */}
       <div className="mb-12">
@@ -448,7 +448,7 @@ export default function HomePage() {
       {/* 5. ფასდაკლებები */}
       <AstromanCarousel title="ფასდაკლებები" items={discountedItems} />
 
-      {/* 6. პრომო ბანერი */}
+      {/* პრომო ბანერი */}
       <section className="relative mb-12 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-r from-purple-950 via-[#0d111d] to-indigo-950 p-6 md:p-8 shadow-xl backdrop-blur-md">
         <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
           <div>
@@ -472,17 +472,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 7. სანათები */}
+      {/* 6. სანათები */}
       <AstromanCarousel title="სანათები" items={lamps} />
 
-      {/* 8. მხოლოდ ასტრომანში */}
+      {/* 7. მხოლოდ ასტრომანში */}
       <AstromanCarousel title="მხოლოდ ასტრომანში" items={onlyInAstroman} />
 
-      {/* 9. ბლოგის სექცია */}
-
+      {/* 8. ბლოგები */}
       <LatestBlogs />
 
-      {/* 10. ქვედა უპირატესობების 4-იანი ზოლი */}
+      {/* 9. ქვედა უპირატესობების 4-იანი ზოლი */}
       <section className="grid grid-cols-2 gap-4 rounded-2xl border border-white/5 bg-[#0d111d]/70 p-6 backdrop-blur-md md:grid-cols-4">
         <div className="flex items-center gap-3">
           <Truck className="h-6 w-6 text-yellow-400 shrink-0" />

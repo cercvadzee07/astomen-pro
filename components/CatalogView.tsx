@@ -18,6 +18,7 @@ import {
 import { ALL_PRODUCTS, Product } from "@/data/products";
 import { useShop } from "@/context/ShopContext";
 import ShopOverlays from "@/components/ShopOverlays";
+import { CATEGORIES, getMainCategorySlug } from "@/data/categories";
 
 function SkeletonCard() {
   return (
@@ -186,7 +187,6 @@ export default function CatalogView({
   categorySlug?: string;
   categoryTitle?: string;
 }) {
-  // მაქსიმალური ფასის დინამიური პოვნა ბაზიდან
   const absoluteMaxPrice = useMemo(() => {
     return Math.max(...ALL_PRODUCTS.map((p) => p.price), 5869);
   }, []);
@@ -204,32 +204,11 @@ export default function CatalogView({
   const [onlySale, setOnlySale] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  // სინქრონიზაცია როცა პროპსიდან კატეგორია იცვლება
   useEffect(() => {
     if (categorySlug) {
       setActiveCategory(categorySlug);
     }
   }, [categorySlug]);
-
-  // კატეგორიების დინამიური სია თავისი მრიცხველებით
-  const categoriesList = useMemo(() => {
-    const counts: Record<string, { name: string; count: number }> = {};
-    ALL_PRODUCTS.forEach((p) => {
-      if (!counts[p.categorySlug]) {
-        counts[p.categorySlug] = { name: p.categoryName, count: 0 };
-      }
-      counts[p.categorySlug].count += 1;
-    });
-
-    return [
-      { slug: "all", name: "ყველა პროდუქტი", count: ALL_PRODUCTS.length },
-      ...Object.entries(counts).map(([slug, data]) => ({
-        slug,
-        name: data.name,
-        count: data.count,
-      })),
-    ];
-  }, []);
 
   useEffect(() => {
     setIsLoading(true);
@@ -268,17 +247,17 @@ export default function CatalogView({
 
   const filteredProducts = useMemo(() => {
     return ALL_PRODUCTS.filter((item) => {
+      const itemMainSlug = getMainCategorySlug(item);
       const matchCategory =
-        activeCategory === "all" || item.categorySlug === activeCategory;
+        activeCategory === "all" || itemMainSlug === activeCategory;
+
       const matchPrice = item.price <= maxPrice;
       const matchSearch =
         searchQuery.trim() === "" ||
-        item.name.toLowerCase().includes(searchQuery.toLowerCase().trim()) ||
-        item.categoryName
-          .toLowerCase()
-          .includes(searchQuery.toLowerCase().trim());
+        item.name.toLowerCase().includes(searchQuery.toLowerCase().trim());
       const matchStock = !onlyInStock || item.inStock;
       const matchSale = !onlySale || item.isSale;
+
       return (
         matchCategory && matchPrice && matchSearch && matchStock && matchSale
       );
@@ -309,44 +288,100 @@ export default function CatalogView({
         {/* საიდბარი */}
         <aside className="w-full shrink-0 lg:w-72">
           <div className="flex flex-col gap-6">
-            {/* კატეგორიების მენიუ საიდბარში */}
-            <div className="rounded-2xl border border-white/5 bg-[#0d111d]/80 p-5 shadow-xl backdrop-blur-md">
-              <h3 className="mb-3 text-xs font-bold uppercase tracking-wider text-white flex items-center gap-2">
-                <Filter className="h-3.5 w-3.5 text-yellow-500" />
-                კატეგორიები
-              </h3>
-              <div className="flex flex-col gap-1">
-                {categoriesList.map((cat) => (
-                  <button
-                    key={cat.slug}
-                    type="button"
-                    onClick={() => {
-                      setActiveCategory(cat.slug);
-                      setCurrentPage(1);
-                    }}
-                    className={`flex items-center justify-between rounded-xl px-3 py-2 text-xs font-semibold transition ${
-                      activeCategory === cat.slug
-                        ? "bg-yellow-500 text-black shadow-md shadow-yellow-500/20 font-bold"
-                        : "text-gray-400 hover:bg-white/5 hover:text-white"
-                    }`}
-                  >
-                    <span>{cat.name}</span>
-                    <span
-                      className={`text-[10px] px-1.5 py-0.5 rounded-md ${
-                        activeCategory === cat.slug
-                          ? "bg-black/20 text-black"
-                          : "bg-white/5 text-gray-500"
-                      }`}
+            {/* კატეგორიების მენიუ - Cosmic / NEONDEV Style */}
+            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#070a12]/80 p-4 shadow-[0_0_30px_rgba(0,0,0,0.8)] backdrop-blur-xl">
+              {/* ფონური რბილი ნათება სექციის შიგნით */}
+              <div className="absolute -top-10 -right-10 h-32 w-32 rounded-full bg-blue-500/10 blur-3xl pointer-events-none" />
+              <div className="absolute -bottom-10 -left-10 h-32 w-32 rounded-full bg-purple-500/10 blur-3xl pointer-events-none" />
+
+              <div className="mb-2 flex items-center justify-between border-b border-white/10 pb-4 px-2 relative z-10">
+                <span className="flex items-center gap-2.5 text-[13px] font-bold tracking-widest text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] uppercase">
+                  <Filter className="h-4 w-4 text-yellow-400 drop-shadow-[0_0_5px_rgba(250,204,21,0.5)]" />
+                  კატეგორიები
+                </span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setActiveCategory("all");
+                    setCurrentPage(1);
+                  }}
+                  className={`text-[11px] font-bold uppercase tracking-wider transition-all px-2.5 py-1 rounded-lg ${
+                    activeCategory === "all"
+                      ? "bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 shadow-[0_0_10px_rgba(250,204,21,0.1)]"
+                      : "text-gray-400 hover:text-white hover:bg-white/5 border border-transparent"
+                  }`}
+                >
+                  ყველა
+                </button>
+              </div>
+
+              <div className="flex flex-col relative z-10 pt-1">
+                {CATEGORIES.map((cat) => {
+                  const Icon = cat.icon;
+                  const isActive = activeCategory === cat.slug;
+                  const isExternal = cat.slug === "varskvlavis-darqmeva";
+
+                  const content = (
+                    <>
+                      <div
+                        className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-black/40 border border-white/5 transition-all duration-300 group-hover:scale-110 group-hover:border-white/20 ${isActive ? "shadow-[0_0_10px_rgba(255,255,255,0.05)]" : ""}`}
+                      >
+                        <Icon
+                          className={`h-4 w-4 ${cat.color} drop-shadow-[0_0_6px_currentColor]`}
+                        />
+                      </div>
+                      <span
+                        className={`text-[13px] font-medium tracking-wide transition-colors duration-300 ${isActive ? "text-white font-bold" : "text-gray-300 group-hover:text-white"}`}
+                      >
+                        {cat.name}
+                      </span>
+                    </>
+                  );
+
+                  const baseClass =
+                    "group flex items-center gap-3.5 px-3 py-2.5 transition-all duration-300 text-left rounded-xl my-0.5 relative overflow-hidden";
+                  const activeClass =
+                    "bg-gradient-to-r from-yellow-500/15 to-transparent border border-yellow-500/30 shadow-[0_0_20px_rgba(234,179,8,0.1)]";
+                  const inactiveClass =
+                    "border border-transparent hover:bg-white/[0.04] hover:border-white/10";
+
+                  if (isExternal) {
+                    return (
+                      <a
+                        key={cat.slug}
+                        href="https://astroman.ge/star-registry/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`${baseClass} ${inactiveClass}`}
+                      >
+                        {content}
+                      </a>
+                    );
+                  }
+
+                  return (
+                    <button
+                      key={cat.slug}
+                      type="button"
+                      onClick={() => {
+                        setActiveCategory(cat.slug);
+                        setCurrentPage(1);
+                      }}
+                      className={`${baseClass} ${isActive ? activeClass : inactiveClass}`}
                     >
-                      {cat.count}
-                    </span>
-                  </button>
-                ))}
+                      {/* კიბერპანკის მარცხენა მანათობელი ზოლი აქტიურ კატეგორიაზე */}
+                      {isActive && (
+                        <div className="absolute left-0 top-0 h-full w-[3px] bg-yellow-400 shadow-[0_0_12px_rgba(250,204,21,0.9)]" />
+                      )}
+                      {content}
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
-            {/* ფილტრები */}
-            <div className="rounded-2xl border border-white/5 bg-[#0d111d]/80 p-5 shadow-xl backdrop-blur-md">
+            {/* პარამეტრები და ფილტრები */}
+            <div className="rounded-2xl border border-white/5 bg-[#0a0d14] p-5 shadow-xl">
               <div className="mb-4 flex items-center justify-between">
                 <h3 className="text-xs font-bold uppercase tracking-wider text-white">
                   პარამეტრები
@@ -430,7 +465,7 @@ export default function CatalogView({
 
             {/* ტოპ ფასდაკლებები */}
             {topDiscountProducts.length > 0 && (
-              <div className="rounded-2xl border border-white/5 bg-[#0d111d]/80 p-5 shadow-xl backdrop-blur-md">
+              <div className="rounded-2xl border border-white/5 bg-[#0a0d14] p-5 shadow-xl">
                 <div className="mb-4 flex items-center justify-between">
                   <h3 className="text-xs font-bold uppercase tracking-wider text-white">
                     ტოპ ფასდაკლებები
@@ -482,8 +517,8 @@ export default function CatalogView({
                 </Link>
                 <ChevronRight className="h-3 w-3" />
                 <span className="font-bold text-white">
-                  {categoriesList.find((c) => c.slug === activeCategory)
-                    ?.name || categoryTitle}
+                  {CATEGORIES.find((c) => c.slug === activeCategory)?.name ||
+                    categoryTitle}
                 </span>
               </div>
               <div className="mt-1 text-xs text-gray-400">
