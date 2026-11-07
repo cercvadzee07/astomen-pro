@@ -149,7 +149,7 @@ export default function ProductGallery({
               <span className="text-yellow-400">{active + 1}</span>
               <span>/</span>
               <span>{count}</span>
-              <span className="ml-2 hidden text-gray-500 sm:inline">| {name}</span>
+              <span className="ml-2 hidden text-gray-400 sm:inline">| {name}</span>
             </div>
 
             <div className="flex items-center gap-2">

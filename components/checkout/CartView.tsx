@@ -15,7 +15,7 @@ export default function CartView() {
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 md:px-8">
       <h1 className="mb-6 text-2xl font-black text-white">
-        კალათა {hydrated && totalCartCount > 0 && <span className="text-gray-500">({totalCartCount})</span>}
+        კალათა {hydrated && totalCartCount > 0 && <span className="text-gray-400">({totalCartCount})</span>}
       </h1>
 
       {!hydrated ? null : cart.length === 0 ? (
@@ -44,13 +44,13 @@ export default function CartView() {
                         {product.name}
                       </Link>
                       {product.priceMax && (
-                        <p className="mt-1 text-[11px] text-gray-500">ვარიანტს ოპერატორი დაგიზუსტებთ</p>
+                        <p className="mt-1 text-[11px] text-gray-400">ვარიანტს ოპერატორი დაგიზუსტებთ</p>
                       )}
                     </div>
                     <button
                       type="button"
                       onClick={() => removeFromCart(product.id)}
-                      className="shrink-0 rounded-lg p-1.5 text-gray-500 transition hover:bg-white/5 hover:text-rose-400"
+                      className="shrink-0 rounded-lg p-1.5 text-gray-400 transition hover:bg-white/5 hover:text-rose-400"
                       aria-label="წაშლა"
                     >
                       <Trash2 className="h-4 w-4" />
@@ -60,7 +60,7 @@ export default function CartView() {
                     <QuantityStepper value={quantity} onChange={(q) => updateQuantity(product.id, q)} />
                     <div className="text-right">
                       {quantity > 1 && (
-                        <p className="text-[10px] text-gray-500">{formatPrice(product.price)} / ც</p>
+                        <p className="text-[10px] text-gray-400">{formatPrice(product.price)} / ც</p>
                       )}
                       <p className="text-sm font-bold text-white">{formatPrice(product.price * quantity)}</p>
                     </div>

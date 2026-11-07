@@ -36,7 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ShopProvider>
           <Starfield />
           <Navbar />
-          <div className="flex-grow">{children}</div>
+          <main id="main-content" className="flex-grow">{children}</main>
           <Footer />
           {/* cart drawer, quick view and compare — shared by every page */}
           <ShopOverlays />

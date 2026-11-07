@@ -175,7 +175,7 @@ function BlogCard({ post, index }: { post: BlogPost; index: number }) {
 
       {/* Content */}
       <div className="flex flex-1 flex-col p-6">
-        <div className="mb-3 flex items-center gap-4 text-[11px] text-gray-500 font-medium">
+        <div className="mb-3 flex items-center gap-4 text-[11px] text-gray-400 font-medium">
           <span className="flex items-center gap-1.5 text-gray-400">
             <Calendar className="h-3.5 w-3.5 text-yellow-500/70" />
             {post.date}
@@ -202,7 +202,7 @@ function BlogCard({ post, index }: { post: BlogPost; index: number }) {
 
         {/* Action Button */}
         <div className="mt-auto flex items-center justify-between border-t border-white/5 pt-4">
-          <span className="text-[11px] font-semibold text-gray-500 uppercase tracking-wider">
+          <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">
             სტატია
           </span>
 
@@ -241,7 +241,7 @@ export default function BlogiPage() {
 
   return (
     <div className="relative min-h-screen w-full text-slate-200 py-12 selection:bg-yellow-500 selection:text-black">
-      <main className="relative mx-auto max-w-7xl px-4 sm:px-6 md:px-12 lg:px-16">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 md:px-12 lg:px-16">
         {/* Breadcrumb */}
         <nav className="mb-6 flex items-center gap-2 text-xs font-semibold text-gray-400">
           <Link href="/" className="hover:text-yellow-400 transition-colors">
@@ -295,7 +295,7 @@ export default function BlogiPage() {
             </button>
           </div>
         )}
-      </main>
+      </div>
     </div>
   );
 }

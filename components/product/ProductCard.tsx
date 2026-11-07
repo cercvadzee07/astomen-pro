@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Heart, ShoppingBag, Scale, Eye } from "lucide-react";
@@ -35,7 +35,6 @@ export default function ProductCard({
   priority = false,
 }: ProductCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const [rotate, setRotate] = useState({ x: 0, y: 0 });
   const {
     favorites,
     toggleFavorite,
@@ -49,28 +48,31 @@ export default function ProductCard({
   const isCompared = compareList.some((p) => p.id === product.id);
   const href = `/product/${product.id}`;
 
+  // tilt is applied straight to the element's style — no React re-render on every mouse move
+  const setTilt = (x: number, y: number, fast: boolean) => {
+    const el = cardRef.current;
+    if (!el) return;
+    el.style.transition = fast ? "transform 0.08s ease-out" : "transform 0.4s ease-out";
+    el.style.transform = `perspective(1000px) rotateX(${x}deg) rotateY(${y}deg)`;
+  };
+
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
+    const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    setRotate({
-      x: ((y - rect.height / 2) / (rect.height / 2)) * -MAX_TILT,
-      y: ((x - rect.width / 2) / (rect.width / 2)) * MAX_TILT,
-    });
+    setTilt(
+      ((y - rect.height / 2) / (rect.height / 2)) * -MAX_TILT,
+      ((x - rect.width / 2) / (rect.width / 2)) * MAX_TILT,
+      true,
+    );
   };
 
   return (
     <div
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      onMouseLeave={() => setRotate({ x: 0, y: 0 })}
-      style={{
-        ...style,
-        transform: `perspective(1000px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
-        transition:
-          rotate.x === 0 ? "transform 0.4s ease-out" : "transform 0.08s ease-out",
-      }}
+      onMouseLeave={() => setTilt(0, 0, false)}
+      style={style}
       className={`group relative flex flex-col overflow-hidden rounded-2xl border border-white/5 bg-[#0e1320] shadow-md transition-colors will-change-transform hover:border-yellow-500/40 hover:shadow-xl hover:shadow-yellow-500/5 ${className}`}
     >
       {/* Badges */}
@@ -173,7 +175,7 @@ export default function ProductCard({
         <div className="mt-auto flex items-end justify-between border-t border-white/5 pt-3">
           <div>
             {product.oldPrice && (
-              <div className="text-[11px] text-gray-500 line-through">
+              <div className="text-[11px] text-gray-400 line-through">
                 {formatPrice(product.oldPrice)}
               </div>
             )}
@@ -184,7 +186,7 @@ export default function ProductCard({
 
           <span
             className={`hidden text-[10px] font-semibold sm:inline ${
-              product.inStock ? "text-emerald-400" : "text-gray-500"
+              product.inStock ? "text-emerald-400" : "text-gray-400"
             }`}
           >
             {product.inStock ? "მარაგშია" : "ამოიწურა"}

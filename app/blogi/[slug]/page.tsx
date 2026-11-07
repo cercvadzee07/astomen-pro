@@ -34,7 +34,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blogi/[slug]"
     <div className="relative min-h-screen w-full text-slate-200 overflow-hidden py-12 selection:bg-yellow-500 selection:text-black">
       {/* მთავარი გლობალური ფონი ავტომატურად გამოჩნდება ამ გამჭვირვალე კონტეინერის უკან */}
 
-      <main className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 md:px-8">
+      <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 md:px-8">
         {/* Navigation & Breadcrumb */}
         <div className="mb-8 flex items-center justify-between">
           <Link
@@ -109,7 +109,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blogi/[slug]"
             </a>
           </div>
         )}
-      </main>
+      </div>
     </div>
   );
 }

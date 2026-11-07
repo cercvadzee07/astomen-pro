@@ -21,7 +21,7 @@ type Fields = Partial<Record<keyof OrderInput, string>>;
 
 const inputCls =
   "w-full rounded-xl border bg-[#151b2b] px-4 py-3 text-sm text-white placeholder-gray-600 transition focus:bg-[#1a2133] focus:outline-none focus:ring-4 focus:ring-yellow-500/10";
-const labelCls = "mb-1.5 block pl-1 text-[11px] font-bold uppercase tracking-wider text-gray-500";
+const labelCls = "mb-1.5 block pl-1 text-[11px] font-bold uppercase tracking-wider text-gray-400";
 
 function Field({
   label,

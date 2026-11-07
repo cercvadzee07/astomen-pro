@@ -38,7 +38,7 @@ export default function FavoritesView({ products }: { products: ProductSummary[]
         <div className="flex flex-col items-center rounded-2xl border border-white/5 bg-[#0d111d]/70 px-6 py-16 text-center">
           <Heart className="mb-4 h-12 w-12 text-gray-600" />
           <p className="text-sm font-semibold text-gray-300">ფავორიტების სია ცარიელია</p>
-          <p className="mt-1 text-xs text-gray-500">
+          <p className="mt-1 text-xs text-gray-400">
             დააჭირე ♥ ღილაკს ნებისმიერ პროდუქტზე, რომ აქ შეინახო.
           </p>
           <Link

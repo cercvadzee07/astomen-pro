@@ -77,7 +77,7 @@ export default async function ProductPage({ params }: PageProps<"/product/[id]">
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
       />
 
-      <main className="mx-auto max-w-[1240px] px-4 py-6 sm:px-6 md:px-8">
+      <div className="mx-auto max-w-[1240px] px-4 py-6 sm:px-6 md:px-8">
         <nav aria-label="breadcrumb" className="mb-6 flex flex-wrap items-center gap-2 text-xs font-semibold text-gray-400">
           <Link href="/" className="transition hover:text-yellow-400">მთავარი</Link>
           <span className="text-gray-600">/</span>
@@ -131,7 +131,7 @@ export default async function ProductPage({ params }: PageProps<"/product/[id]">
         />
 
         <ServiceHighlights className="mb-6" />
-      </main>
+      </div>
     </div>
   );
 }

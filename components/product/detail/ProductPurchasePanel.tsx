@@ -60,7 +60,7 @@ export default function ProductPurchasePanel({
             {formatProductPrice(product)}
           </span>
           {product.oldPrice && (
-            <span className="text-base text-gray-500 line-through">
+            <span className="text-base text-gray-400 line-through">
               {formatPrice(product.oldPrice)}
             </span>
           )}

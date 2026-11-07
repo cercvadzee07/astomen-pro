@@ -13,7 +13,8 @@ import Brands from "@/components/Brands";
 import LatestBlogs from "@/components/LatestBlogs";
 import ServiceHighlights from "@/components/ServiceHighlights";
 
-const CAROUSEL_SIZE = 10;
+// each card is interactive, so keep the home page light: show a few, link to the rest
+const CAROUSEL_SIZE = 12;
 
 const summaries = (list: Product[], limit?: number) =>
   (limit ? list.slice(0, limit) : list).map(toSummary);
@@ -53,9 +54,9 @@ export default function HomePage() {
     <div className="mx-auto w-full max-w-[1240px] px-4 py-6 sm:px-6 md:px-8">
       <HomeHero slides={buildHeroSlides(telescopes)} />
 
-      <ProductCarousel title="ტელესკოპები" items={summaries(telescopes)} href="/category/teleskopi" />
+      <ProductCarousel title="ტელესკოპები" items={summaries(telescopes, CAROUSEL_SIZE)} href="/category/teleskopi" />
       <ProductCarousel title="Top გაყიდვადი" items={summaries(topSelling, CAROUSEL_SIZE)} href="/category/ganateba" />
-      <ProductCarousel title="ახალი დამატებული" items={summaries(newlyAdded, CAROUSEL_SIZE)} />
+      <ProductCarousel title="ახალი დამატებული" items={summaries(newlyAdded, CAROUSEL_SIZE)} href="/magazia" />
 
       <div className="mb-12">
         <Brands />
@@ -89,12 +90,12 @@ export default function HomePage() {
 
       <ProductCarousel
         title="სანათები"
-        items={summaries(getProductsByCategory("sanatebi"))}
+        items={summaries(getProductsByCategory("sanatebi"), CAROUSEL_SIZE)}
         href="/category/sanatebi"
       />
       <ProductCarousel
         title="მხოლოდ ასტრომანში"
-        items={summaries(getProductsByCategory("mxolod-astromanshi"))}
+        items={summaries(getProductsByCategory("mxolod-astromanshi"), CAROUSEL_SIZE)}
         href="/category/mxolod-astromanshi"
       />
 

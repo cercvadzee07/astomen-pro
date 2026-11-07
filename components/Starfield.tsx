@@ -40,7 +40,7 @@ export default function Starfield() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let animationFrameId: number;
+    let animationFrameId = 0;
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
@@ -53,7 +53,8 @@ export default function Starfield() {
     window.addEventListener("resize", handleResize);
 
     // 1. ვარსკვლავები
-    const NUM_STARS = 400;
+    // fewer stars on phones — the animation runs every frame
+    const NUM_STARS = width < 768 ? 160 : 400;
     const SPEED = 2.2;
     const stars: Star[] = [];
 
@@ -353,13 +354,31 @@ export default function Starfield() {
         ctx.restore();
       }
 
-      animationFrameId = requestAnimationFrame(render);
+      if (!reduceMotion) animationFrameId = requestAnimationFrame(render);
     };
 
-    render();
+    // people who asked their system for less motion get one still frame
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // start after the page has loaded and the browser is idle, so the
+    // animation doesn't compete with the first render and hydration
+    let idleId: number | undefined;
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
+    const start = () => {
+      if ("requestIdleCallback" in window) {
+        idleId = window.requestIdleCallback(() => render(), { timeout: 2000 });
+      } else {
+        timeoutId = setTimeout(render, 300);
+      }
+    };
+    if (document.readyState === "complete") start();
+    else window.addEventListener("load", start, { once: true });
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("load", start);
+      if (idleId !== undefined) window.cancelIdleCallback(idleId);
+      if (timeoutId !== undefined) clearTimeout(timeoutId);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);

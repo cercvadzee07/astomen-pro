@@ -121,17 +121,22 @@ export default function HomeHero({ slides }: { slides: HeroSlide[] }) {
               <span className="text-lg font-black tracking-widest text-white drop-shadow-md md:text-xl">
                 {slide.brand}
               </span>
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-0.5">
                 {slides.map((_, idx) => (
                   <button
                     key={idx}
                     type="button"
                     onClick={() => setCurrent(idx)}
-                    className={`h-1.5 rounded-full transition-all duration-300 ${
-                      current === idx ? "w-7 bg-white" : "w-2.5 bg-white/40"
-                    }`}
+                    className="flex h-6 min-w-6 items-center justify-center"
                     aria-label={`სლაიდი ${idx + 1}`}
-                  />
+                    aria-current={current === idx}
+                  >
+                    <span
+                      className={`h-1.5 rounded-full transition-all duration-300 ${
+                        current === idx ? "w-7 bg-white" : "w-2.5 bg-white/40"
+                      }`}
+                    />
+                  </button>
                 ))}
               </div>
             </div>

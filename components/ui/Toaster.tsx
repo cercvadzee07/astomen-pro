@@ -32,7 +32,7 @@ export default function Toaster() {
             <button
               type="button"
               onClick={() => dismissToast(t.id)}
-              className="text-gray-500 hover:text-white"
+              className="text-gray-400 hover:text-white"
               aria-label="დახურვა"
             >
               <X className="h-3.5 w-3.5" />

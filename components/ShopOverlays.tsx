@@ -88,7 +88,7 @@ export default function ShopOverlays() {
                         </h4>
                         <button
                           onClick={() => removeFromCart(product.id)}
-                          className="text-gray-500 hover:text-rose-400"
+                          className="text-gray-400 hover:text-rose-400"
                         >
                           <Trash2 className="h-4 w-4" />
                         </button>
@@ -194,7 +194,7 @@ export default function ShopOverlays() {
                       {formatProductPrice(quickViewProduct)}
                     </span>
                     {quickViewProduct.oldPrice && (
-                      <span className="text-xs text-gray-500 line-through">
+                      <span className="text-xs text-gray-400 line-through">
                         {formatPrice(quickViewProduct.oldPrice)}
                       </span>
                     )}
@@ -202,7 +202,7 @@ export default function ShopOverlays() {
                       className={`text-[11px] font-semibold ${
                         quickViewProduct.inStock
                           ? "text-emerald-400"
-                          : "text-gray-500"
+                          : "text-gray-400"
                       }`}
                     >
                       {quickViewProduct.inStock ? "მარაგშია" : "ამოწურულია"}
@@ -319,7 +319,7 @@ export default function ShopOverlays() {
                     >
                       <button
                         onClick={() => removeFromCompare(p.id)}
-                        className="absolute top-2 right-2 text-gray-500 hover:text-rose-400"
+                        className="absolute top-2 right-2 text-gray-400 hover:text-rose-400"
                       >
                         <X className="h-4 w-4" />
                       </button>

@@ -75,10 +75,10 @@ export default function AboutUsPage() {
       <div className="pointer-events-none absolute top-0 right-0 h-[600px] w-[600px] -translate-y-1/2 translate-x-1/3 rounded-full bg-yellow-500/10 blur-[120px]" />
       <div className="pointer-events-none absolute bottom-0 left-0 h-[500px] w-[500px] translate-y-1/3 -translate-x-1/3 rounded-full bg-blue-600/10 blur-[130px]" />
 
-      <main className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-12 lg:px-16">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-12 lg:px-16">
         
         {/* Navigation */}
-        <nav className="mb-14 flex items-center gap-2 text-xs font-bold text-gray-500 tracking-wider uppercase">
+        <nav className="mb-14 flex items-center gap-2 text-xs font-bold text-gray-400 tracking-wider uppercase">
           <Link href="/" className="hover:text-yellow-400 transition-colors">
             მთავარი
           </Link>
@@ -162,13 +162,13 @@ export default function AboutUsPage() {
                   <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-b from-yellow-500/20 to-transparent opacity-0 blur-sm transition-opacity duration-500 group-hover:opacity-100" />
                   
                   <div className="relative flex flex-col items-start">
-                    <Icon className="h-6 w-6 text-gray-500 mb-4 transition-colors duration-500 group-hover:text-yellow-400" />
+                    <Icon className="h-6 w-6 text-gray-400 mb-4 transition-colors duration-500 group-hover:text-yellow-400" />
                     
                     <div className="text-3xl sm:text-4xl font-black tracking-tight drop-shadow-md">
                       <GrandAnimatedNumber target={stat.target} duration={2500} delay={stat.delay} />
                     </div>
                     
-                    <span className="mt-2 text-xs font-bold uppercase tracking-wider text-gray-500 transition-colors duration-500 group-hover:text-gray-300">
+                    <span className="mt-2 text-xs font-bold uppercase tracking-wider text-gray-400 transition-colors duration-500 group-hover:text-gray-300">
                       {stat.label}
                     </span>
                   </div>
@@ -179,7 +179,7 @@ export default function AboutUsPage() {
 
         </div>
 
-      </main>
+      </div>
     </div>
   );
 }   

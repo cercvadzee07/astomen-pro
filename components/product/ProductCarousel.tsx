@@ -34,10 +34,14 @@ export default function ProductCarousel({
     setCanNext(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
   }, []);
 
+  // measure after the browser has painted, so hydration doesn't force a layout
   useEffect(() => {
-    updateArrows();
+    const id = requestAnimationFrame(updateArrows);
     window.addEventListener("resize", updateArrows);
-    return () => window.removeEventListener("resize", updateArrows);
+    return () => {
+      cancelAnimationFrame(id);
+      window.removeEventListener("resize", updateArrows);
+    };
   }, [updateArrows, items.length]);
 
   // scroll by one "page" of visible cards
@@ -53,7 +57,11 @@ export default function ProductCarousel({
       <div className="mb-4 flex items-end justify-between gap-4">
         <h2 className="text-base font-black uppercase tracking-wider text-white">{title}</h2>
         {href && (
-          <Link href={href} className="shrink-0 text-xs font-bold text-yellow-400 transition hover:text-yellow-300">
+          <Link
+            href={href}
+            aria-label={`ყველა — ${title}`}
+            className="shrink-0 text-xs font-bold text-yellow-400 transition hover:text-yellow-300"
+          >
             ყველა →
           </Link>
         )}

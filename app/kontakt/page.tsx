@@ -47,9 +47,9 @@ export default function ContactPage() {
     <div className="relative min-h-screen w-full text-slate-200 overflow-hidden py-16 selection:bg-yellow-500 selection:text-black">
       {/* მთავარი გლობალური ფონი ავტომატურად გამოჩნდება ამ გამჭვირვალე კონტეინერის უკან */}
 
-      <main className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-12">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-12">
         {/* Breadcrumb */}
-        <nav className="mb-10 flex items-center gap-2 text-xs font-bold text-gray-500 tracking-wider uppercase">
+        <nav className="mb-10 flex items-center gap-2 text-xs font-bold text-gray-400 tracking-wider uppercase">
           <Link href="/" className="hover:text-yellow-400 transition-colors">
             მთავარი
           </Link>
@@ -97,7 +97,7 @@ export default function ContactPage() {
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div className="space-y-2">
-                      <label className="text-[11px] font-bold text-gray-500 uppercase tracking-wider pl-1">
+                      <label className="text-[11px] font-bold text-gray-400 uppercase tracking-wider pl-1">
                         სახელი და გვარი
                       </label>
                       <input
@@ -110,7 +110,7 @@ export default function ContactPage() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[11px] font-bold text-gray-500 uppercase tracking-wider pl-1">
+                      <label className="text-[11px] font-bold text-gray-400 uppercase tracking-wider pl-1">
                         ელ-ფოსტა
                       </label>
                       <input
@@ -123,7 +123,7 @@ export default function ContactPage() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[11px] font-bold text-gray-500 uppercase tracking-wider pl-1">
+                      <label className="text-[11px] font-bold text-gray-400 uppercase tracking-wider pl-1">
                         ტელ ნომერი
                       </label>
                       <input
@@ -135,7 +135,7 @@ export default function ContactPage() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[11px] font-bold text-gray-500 uppercase tracking-wider pl-1">
+                      <label className="text-[11px] font-bold text-gray-400 uppercase tracking-wider pl-1">
                         კომპანია (სურვილისამებრ)
                       </label>
                       <input
@@ -149,7 +149,7 @@ export default function ContactPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-[11px] font-bold text-gray-500 uppercase tracking-wider pl-1">
+                    <label className="text-[11px] font-bold text-gray-400 uppercase tracking-wider pl-1">
                       წერილი
                     </label>
                     <textarea
@@ -198,7 +198,7 @@ export default function ContactPage() {
                 <Phone className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-1">
+                <h3 className="text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-1">
                   ტელეფონი
                 </h3>
                 <p className="text-sm font-bold text-white transition-colors duration-300 group-hover:text-yellow-400">
@@ -218,7 +218,7 @@ export default function ContactPage() {
                 <Mail className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-1">
+                <h3 className="text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-1">
                   ელ-ფოსტა
                 </h3>
                 <p className="text-sm font-bold text-white transition-colors duration-300 group-hover:text-yellow-400">
@@ -232,7 +232,7 @@ export default function ContactPage() {
                 <MapPin className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-1">
+                <h3 className="text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-1">
                   მისამართი
                 </h3>
                 <p className="text-sm font-bold text-white leading-relaxed">
@@ -246,7 +246,7 @@ export default function ContactPage() {
                 <Clock className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-1">
+                <h3 className="text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-1">
                   სამუშაო საათები
                 </h3>
                 <p className="text-sm font-bold text-white">
@@ -276,7 +276,7 @@ export default function ContactPage() {
             className="opacity-90 invert hue-rotate-180 brightness-90 contrast-125 transition-all duration-500 hover:opacity-100 hover:brightness-100"
           />
         </div>
-      </main>
+      </div>
     </div>
   );
 }

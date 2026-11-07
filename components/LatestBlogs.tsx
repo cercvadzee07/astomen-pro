@@ -77,7 +77,7 @@ export default function LatestBlogs() {
 
                 {/* Footer ბარათის შიგნით (ინტერაქციული ღილაკი) */}
                 <div className="mt-auto flex items-center justify-between border-t border-white/5 pt-4">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-gray-500 transition-colors duration-300 group-hover:text-white">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-gray-400 transition-colors duration-300 group-hover:text-white">
                     სრულად ნახვა
                   </span>
                   <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/5 text-gray-300 transition-all duration-300 group-hover:bg-yellow-500 group-hover:text-black group-hover:scale-110">

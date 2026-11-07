@@ -315,7 +315,7 @@ export default function CatalogView({
                           {item.name}
                         </h4>
                         <div className="mt-1 flex items-center gap-2 text-[11px]">
-                          <span className="text-gray-500 line-through">
+                          <span className="text-gray-400 line-through">
                             {formatPrice(item.oldPrice!)}
                           </span>
                           <span className="font-bold text-white">
@@ -332,7 +332,7 @@ export default function CatalogView({
         </aside>
 
         {/* მთავარი კატალოგი */}
-        <main className="min-w-0 flex-1">
+        <div className="min-w-0 flex-1">
           <div className="mb-6 flex flex-col gap-4 rounded-2xl border border-white/5 bg-[#0d111d]/70 p-4 shadow-xl backdrop-blur-md md:flex-row md:items-center md:justify-between">
             <div>
               <div className="flex items-center gap-2 text-xs text-gray-400">
@@ -459,7 +459,7 @@ export default function CatalogView({
               </button>
             </div>
           )}
-        </main>
+        </div>
       </div>
     </div>
   );

@@ -122,7 +122,7 @@ export default function LiveSearch({
       className={`relative flex w-full ${className}`}
     >
       <div className="relative flex-1">
-        <Search className="pointer-events-none absolute top-1/2 left-3.5 h-4 w-4 -translate-y-1/2 text-gray-500" />
+        <Search className="pointer-events-none absolute top-1/2 left-3.5 h-4 w-4 -translate-y-1/2 text-gray-400" />
         <input
           ref={inputRef}
           type="search"
@@ -153,7 +153,7 @@ export default function LiveSearch({
               setQuery("");
               inputRef.current?.focus();
             }}
-            className="absolute top-1/2 right-2.5 -translate-y-1/2 rounded-md p-1 text-gray-500 hover:text-white"
+            className="absolute top-1/2 right-2.5 -translate-y-1/2 rounded-md p-1 text-gray-400 hover:text-white"
             aria-label="გასუფთავება"
           >
             <X className="h-3.5 w-3.5" />
@@ -175,7 +175,7 @@ export default function LiveSearch({
         >
           {!hasQuery && (
             <div className="p-4">
-              <p className="mb-3 text-[11px] font-bold uppercase tracking-wider text-gray-500">
+              <p className="mb-3 text-[11px] font-bold uppercase tracking-wider text-gray-400">
                 პოპულარული
               </p>
               <div className="flex flex-wrap gap-2">
@@ -229,7 +229,7 @@ export default function LiveSearch({
                       <span className="block truncate text-xs font-semibold text-white">
                         {item.name}
                       </span>
-                      <span className="block truncate text-[10px] text-gray-500">
+                      <span className="block truncate text-[10px] text-gray-400">
                         {item.categoryName}
                         {item.brand ? ` · ${item.brand}` : ""}
                         {!item.inStock && " · არაა მარაგში"}
@@ -237,7 +237,7 @@ export default function LiveSearch({
                     </span>
                     <span className="shrink-0 text-right">
                       {item.oldPrice && (
-                        <span className="block text-[10px] text-gray-500 line-through">
+                        <span className="block text-[10px] text-gray-400 line-through">
                           {item.oldPrice.toFixed(2)}₾
                         </span>
                       )}

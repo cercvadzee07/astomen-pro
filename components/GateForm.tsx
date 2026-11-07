@@ -28,7 +28,7 @@ export default function GateForm() {
   return (
     <form onSubmit={submit} className="space-y-4">
       <div className="relative">
-        <Lock className="pointer-events-none absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-gray-500" />
+        <Lock className="pointer-events-none absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-gray-400" />
         <input
           type={show ? "text" : "password"}
           value={password}
@@ -45,7 +45,7 @@ export default function GateForm() {
         <button
           type="button"
           onClick={() => setShow((s) => !s)}
-          className="absolute top-1/2 right-3 -translate-y-1/2 rounded-md p-1.5 text-gray-500 hover:text-white"
+          className="absolute top-1/2 right-3 -translate-y-1/2 rounded-md p-1.5 text-gray-400 hover:text-white"
           aria-label={show ? "დამალვა" : "ჩვენება"}
         >
           {show ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}

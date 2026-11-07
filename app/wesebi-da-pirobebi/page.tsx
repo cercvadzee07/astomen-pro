@@ -60,7 +60,7 @@ export default function TermsPage() {
         {/* Table of contents */}
         <aside className="shrink-0 lg:w-72">
           <nav className="rounded-2xl border border-white/10 bg-[#0d111d]/80 p-4 lg:sticky lg:top-28 lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto">
-            <p className="mb-2 px-2 text-[11px] font-bold uppercase tracking-wider text-gray-500">სარჩევი</p>
+            <p className="mb-2 px-2 text-[11px] font-bold uppercase tracking-wider text-gray-400">სარჩევი</p>
             <ol className="space-y-0.5 text-xs">
               {data.sections.map((s, i) => (
                 <li key={s.title}>

@@ -261,7 +261,7 @@ export default function Navbar() {
               ))}
             </ul>
 
-            <p className="px-5 pt-4 pb-1 text-[11px] font-bold uppercase tracking-wider text-gray-500">
+            <p className="px-5 pt-4 pb-1 text-[11px] font-bold uppercase tracking-wider text-gray-400">
               კატეგორიები
             </p>
             <ul className="flex flex-col px-2 text-sm">
