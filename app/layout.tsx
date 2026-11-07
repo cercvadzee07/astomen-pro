@@ -7,6 +7,7 @@ import Starfield from "@/components/Starfield";
 import ShopOverlays from "@/components/ShopOverlays";
 import Toaster from "@/components/ui/Toaster";
 import { ShopProvider } from "@/context/ShopContext";
+import { SITE_URL } from "@/lib/site";
 
 const georgian = Noto_Sans_Georgian({
   subsets: ["georgian", "latin"],
@@ -15,7 +16,7 @@ const georgian = Noto_Sans_Georgian({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://astroman.ge"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "ASTROMAN - ასტრონომიული ტექნიკა და დეკორაცია",
     template: "%s | ASTROMAN",

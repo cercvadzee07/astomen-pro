@@ -12,7 +12,6 @@ import {
   Phone,
   Search,
   ShoppingBag,
-  User,
   X,
 } from "lucide-react";
 import { CATEGORIES } from "@/data/categories";
@@ -218,9 +217,7 @@ export default function Navbar() {
               </span>
             </button>
 
-            <a href="#" className={`${iconBtn} hidden md:flex`} aria-label="ანგარიში">
-              <User className="h-5 w-5 text-gray-200" />
-            </a>
+            {/* account button returns when login/registration is built */}
           </div>
         </div>
 
