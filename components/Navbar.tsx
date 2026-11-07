@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   MapPin,
   Phone,
@@ -14,11 +15,24 @@ import {
 } from "lucide-react";
 import { CATEGORIES } from "@/data/categories";
 import { useShop } from "@/context/ShopContext";
+import CategoryLink from "@/components/CategoryLink";
+import { formatPrice } from "@/lib/products";
+import { SEARCH_EVENT } from "@/lib/events";
 
 export default function Navbar() {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const router = useRouter();
   const { totalCartCount, totalCartPrice, favorites, setIsCartOpen } =
     useShop();
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    const q = query.trim();
+    router.push(q ? `/magazia?q=${encodeURIComponent(q)}` : "/magazia");
+    // if the shop page is already open, tell it about the new query
+    window.dispatchEvent(new CustomEvent(SEARCH_EVENT, { detail: q }));
+  };
 
   return (
     <header className="sticky top-0 z-50 transition-all duration-300">
@@ -167,7 +181,11 @@ export default function Navbar() {
             </Link>
 
             {/* Dropdown & Search */}
-            <div className="relative hidden max-w-2xl grow md:flex">
+            <form
+              role="search"
+              onSubmit={handleSearch}
+              className="relative hidden max-w-2xl grow md:flex"
+            >
               <button
                 type="button"
                 onClick={() => setIsCategoryOpen(!isCategoryOpen)}
@@ -193,8 +211,8 @@ export default function Navbar() {
                       const Icon = cat.icon;
                       return (
                         <li key={cat.slug}>
-                          <Link
-                            href={`/category/${cat.slug}`}
+                          <CategoryLink
+                            category={cat}
                             onClick={() => setIsCategoryOpen(false)}
                             className="group flex w-full items-center gap-3 px-3 py-2.5 font-semibold text-gray-300 rounded-lg transition-all duration-200 hover:bg-white/10 hover:text-white"
                           >
@@ -204,7 +222,7 @@ export default function Navbar() {
                             <span className="transition-transform duration-200 group-hover:translate-x-1.5">
                               {cat.name}
                             </span>
-                          </Link>
+                          </CategoryLink>
                         </li>
                       );
                     })}
@@ -213,17 +231,21 @@ export default function Navbar() {
               )}
 
               <input
-                type="text"
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
                 placeholder="პროდუქტის ძიება..."
+                aria-label="პროდუქტის ძიება"
                 className="search-input w-full px-4 py-2.5 text-sm transition-all focus:ring-1 focus:ring-yellow-500/50"
               />
               <button
-                type="button"
+                type="submit"
                 className="flex items-center justify-center rounded-r-md bg-yellow-500 px-6 text-black transition-all duration-200 hover:bg-yellow-400 active:scale-95"
+                aria-label="ძიება"
               >
                 <Search className="h-4 w-4 stroke-[2.5]" />
               </button>
-            </div>
+            </form>
 
             {/* Wishlist, Cart & User Controls */}
             <div className="flex shrink-0 items-center gap-4">
@@ -256,7 +278,7 @@ export default function Navbar() {
                   )}
                 </div>
                 <span className="hidden text-sm font-bold sm:block transition-colors group-hover:text-yellow-400">
-                  {totalCartPrice.toFixed(2)}₾
+                  {formatPrice(totalCartPrice)}
                 </span>
               </button>
 

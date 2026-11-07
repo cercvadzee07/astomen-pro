@@ -1,82 +1,52 @@
-"use client";
-
-import { useEffect } from "react";
-import { useParams } from "next/navigation";
+import type { Metadata } from "next";
+import { notFound, permanentRedirect, redirect } from "next/navigation";
 import CatalogView from "@/components/CatalogView";
+import {
+  CATEGORY_ALIASES,
+  SHOP_CATEGORIES,
+  getCategory,
+} from "@/data/categories";
+import { getProductsByCategory, toSummary } from "@/lib/products";
 
-const SLUG_ALIASES: Record<string, string> = {
-  // 1. Teleskoopit
-  teleskopi: "teleskopi",
-  telescope: "teleskopi",
-  teleskopebi: "teleskopi",
+export function generateStaticParams() {
+  return [
+    ...SHOP_CATEGORIES.map((c) => ({ slug: c.slug })),
+    // old slugs are prerendered too, as permanent redirects
+    ...Object.entries(CATEGORY_ALIASES)
+      .filter(([, target]) => SHOP_CATEGORIES.some((c) => c.slug === target))
+      .map(([slug]) => ({ slug })),
+  ];
+}
 
-  // 2. Projektorit
-  proeqtorebi: "proeqtorebi",
-  projector: "proeqtorebi",
-  proeqtori: "proeqtorebi",
+export async function generateMetadata({
+  params,
+}: PageProps<"/category/[slug]">): Promise<Metadata> {
+  const { slug } = await params;
+  const category = getCategory(slug);
+  if (!category) return {};
+  return {
+    title: category.name,
+    description: `${category.name} — Astroman, პირველი ასტრო მაღაზია საქართველოში.`,
+    alternates: { canonical: `/category/${category.slug}` },
+  };
+}
 
-  // 3. Valaisimet
-  sanatebi: "sanatebi",
-  sanati: "sanatebi",
-  lamp: "sanatebi",
+export default async function CategoryPage({
+  params,
+}: PageProps<"/category/[slug]">) {
+  const { slug } = await params;
+  const category = getCategory(slug);
 
-  // 4. Tähtikartat
-  "varskvlavuri-ruka": "varskvlavuri-ruka",
-  ruka: "varskvlavuri-ruka",
-  "star-map": "varskvlavuri-ruka",
+  if (!category) notFound();
+  if (category.externalUrl) redirect(category.externalUrl);
+  // old slugs (e.g. /category/proeqtorebi) → the real one
+  if (category.slug !== slug) permanentRedirect(`/category/${category.slug}`);
 
-  // 5. Tekniikka (optiikka, kaiuttimet, mikroskoopit)
-  teqnika: "teqnika",
-  binokli: "teqnika",
-  mikroskopi: "teqnika",
-
-  // 6. Lasten lelut ja tarvikkeet
-  "sabavshvo-satamashoebi": "sabavshvo-satamashoebi",
-  sabavshvo: "sabavshvo-satamashoebi",
-  satamashoebi: "sabavshvo-satamashoebi",
-
-  // 7. Asusteet
-  aqsesuarebi: "aqsesuarebi",
-  aksesuarebi: "aqsesuarebi",
-  accessories: "aqsesuarebi",
-
-  // 8. Sekalaista
-  sxvadasxva: "sxvadasxva",
-  other: "sxvadasxva",
-};
-
-const CATEGORY_TITLES: Record<string, string> = {
-  teleskopi: "ტელესკოპები",
-  proeqtorebi: "პროექტორები",
-  sanatebi: "სანათები",
-  "varskvlavuri-ruka": "ვარსკვლავური რუკა",
-  teqnika: "ტექნიკა",
-  "sabavshvo-satamashoebi": "საბავშვო სათამაშოები",
-  aqsesuarebi: "აქსესუარები",
-  sxvadasxva: "სხვადასხვა",
-};
-
-export default function CategoryDynamicPage() {
-  const params = useParams();
-  const rawSlug = (params?.slug as string) || "all";
-
-  // Uudelleenohjaus ulkoiselle rekisterisivulle
-  useEffect(() => {
-    if (rawSlug === "varskvlavis-darqmeva" || rawSlug === "star-registry") {
-      window.location.href = "https://astroman.ge/star-registry/";
-    }
-  }, [rawSlug]);
-
-  if (rawSlug === "varskvlavis-darqmeva" || rawSlug === "star-registry") {
-    return (
-      <div className="flex min-h-[60vh] items-center justify-center text-sm text-gray-400">
-        გადამისამართება Astroman Star Registry-ზე...
-      </div>
-    );
-  }
-
-  const normalizedSlug = SLUG_ALIASES[rawSlug] || rawSlug;
-  const title = CATEGORY_TITLES[normalizedSlug] || "მაღაზია";
-
-  return <CatalogView categorySlug={normalizedSlug} categoryTitle={title} />;
+  return (
+    <CatalogView
+      products={getProductsByCategory(category.slug).map(toSummary)}
+      activeCategory={category.slug}
+      title={category.name}
+    />
+  );
 }

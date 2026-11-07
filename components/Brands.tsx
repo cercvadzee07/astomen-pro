@@ -1,5 +1,3 @@
-"use client";
-
 export default function Brands() {
   return (
     <section className="mb-14">

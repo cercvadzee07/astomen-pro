@@ -1,232 +1,76 @@
 "use client";
 
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Grid2x2,
   LayoutGrid,
   ChevronRight,
   ChevronLeft,
-  ShoppingBag,
   Search,
   RotateCcw,
-  Heart,
-  Scale,
-  Eye,
   Filter,
 } from "lucide-react";
-import { ALL_PRODUCTS, Product } from "@/data/products";
-import { useShop } from "@/context/ShopContext";
-import ShopOverlays from "@/components/ShopOverlays";
-import { CATEGORIES, getMainCategorySlug } from "@/data/categories";
+import type { ProductSummary } from "@/types/product";
+import { CATEGORIES } from "@/data/categories";
+import CategoryLink from "@/components/CategoryLink";
+import ProductCard from "@/components/product/ProductCard";
+import { formatPrice } from "@/lib/products";
+import { SEARCH_EVENT } from "@/lib/events";
 
-function SkeletonCard() {
-  return (
-    <div className="flex flex-col overflow-hidden rounded-2xl border border-white/5 bg-[#0e1320] p-4 animate-pulse">
-      <div className="aspect-square w-full rounded-xl bg-white/5 mb-4" />
-      <div className="h-3 w-16 bg-white/5 rounded mb-2" />
-      <div className="h-4 w-full bg-white/5 rounded mb-4" />
-      <div className="mt-auto flex justify-between items-center pt-3 border-t border-white/5">
-        <div className="h-5 w-16 bg-white/5 rounded" />
-        <div className="h-3 w-12 bg-white/5 rounded" />
-      </div>
-    </div>
-  );
-}
+type SortKey = "default" | "price-asc" | "price-desc";
 
-function TiltProductCard({ prod }: { prod: Product }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [rotate, setRotate] = useState({ x: 0, y: 0 });
-  const {
-    favorites,
-    toggleFavorite,
-    addToCart,
-    addToCompare,
-    compareList,
-    setQuickViewProduct,
-  } = useShop();
-
-  const isFavorite = favorites?.includes(prod.id) ?? false;
-  const isCompared = compareList?.some((p) => p.id === prod.id) ?? false;
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    setRotate({
-      x: ((y - rect.height / 2) / (rect.height / 2)) * -5,
-      y: ((x - rect.width / 2) / (rect.width / 2)) * 5,
-    });
-  };
-
-  return (
-    <div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={() => setRotate({ x: 0, y: 0 })}
-      style={{
-        transform: `perspective(1000px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
-        transition:
-          rotate.x === 0
-            ? "transform 0.4s ease-out"
-            : "transform 0.08s ease-out",
-      }}
-      className="product-card group relative flex flex-col overflow-hidden rounded-2xl border border-white/5 bg-[#0e1320] shadow-md transition-colors hover:border-yellow-500/40 hover:shadow-xl hover:shadow-yellow-500/5"
-    >
-      <div className="absolute top-3 left-3 z-20 flex flex-col gap-1.5 pointer-events-none">
-        {prod.isSale && (
-          <span className="rounded-md bg-red-600 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-white shadow-sm">
-            SALE
-          </span>
-        )}
-        {!prod.inStock && (
-          <span className="rounded-md border border-white/10 bg-black/85 px-2 py-0.5 text-[9px] font-bold text-gray-300 backdrop-blur-sm">
-            არაა მარაგში
-          </span>
-        )}
-      </div>
-
-      <div className="absolute top-3 right-3 z-30 flex flex-col gap-2 opacity-0 translate-x-2 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-x-0">
-        <button
-          type="button"
-          onClick={() => toggleFavorite(prod.id)}
-          className={`flex h-8 w-8 items-center justify-center rounded-xl border backdrop-blur-md transition active:scale-90 ${
-            isFavorite
-              ? "border-yellow-500 bg-yellow-500 text-black shadow-lg shadow-yellow-500/20"
-              : "border-white/10 bg-black/60 text-gray-300 hover:border-yellow-500/40 hover:bg-yellow-500 hover:text-black"
-          }`}
-          title="ფავორიტები"
-        >
-          <Heart className={`h-4 w-4 ${isFavorite ? "fill-black" : ""}`} />
-        </button>
-
-        <button
-          type="button"
-          disabled={!prod.inStock}
-          onClick={() => addToCart(prod)}
-          className="flex h-8 w-8 items-center justify-center rounded-xl border border-white/10 bg-black/60 text-gray-300 backdrop-blur-md transition hover:border-yellow-500/40 hover:bg-yellow-500 hover:text-black active:scale-90 disabled:pointer-events-none disabled:opacity-30"
-          title="კალათაში დამატება"
-        >
-          <ShoppingBag className="h-4 w-4" />
-        </button>
-
-        <button
-          type="button"
-          onClick={() => addToCompare(prod)}
-          className={`flex h-8 w-8 items-center justify-center rounded-xl border backdrop-blur-md transition active:scale-90 ${
-            isCompared
-              ? "border-yellow-500 bg-yellow-500 text-black"
-              : "border-white/10 bg-black/60 text-gray-300 hover:border-yellow-500/40 hover:bg-yellow-500 hover:text-black"
-          }`}
-          title="შედარება"
-        >
-          <Scale className="h-4 w-4" />
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setQuickViewProduct(prod)}
-          className="flex h-8 w-8 items-center justify-center rounded-xl border border-white/10 bg-black/60 text-gray-300 backdrop-blur-md transition hover:border-yellow-500/40 hover:bg-yellow-500 hover:text-black active:scale-90"
-          title="სწრაფი გადახედვა"
-        >
-          <Eye className="h-4 w-4" />
-        </button>
-      </div>
-
-      <Link
-        href={`/product/${prod.id}`}
-        className="relative block aspect-square w-full overflow-hidden bg-[#070a12] border-b border-white/5 p-3 flex items-center justify-center"
-      >
-        <img
-          src={prod.image}
-          alt={prod.name}
-          className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-105"
-          loading="lazy"
-        />
-      </Link>
-
-      <div className="flex grow flex-col p-4">
-        <div className="mb-1 text-[10px] font-bold uppercase tracking-wider text-yellow-500/80">
-          {prod.categoryName}
-        </div>
-        <Link
-          href={`/product/${prod.id}`}
-          className="line-clamp-2 min-h-9 text-xs font-semibold text-white transition hover:text-yellow-400"
-        >
-          {prod.name}
-        </Link>
-        <div className="mt-auto flex items-end justify-between pt-3 border-t border-white/5">
-          <div>
-            {prod.oldPrice && (
-              <div className="text-[11px] text-gray-500 line-through">
-                {prod.oldPrice.toFixed(2)}₾
-              </div>
-            )}
-            <div className="text-base font-bold text-white">
-              {prod.price.toFixed(2)}₾
-            </div>
-          </div>
-          <span
-            className={`text-[10px] font-semibold ${
-              prod.inStock ? "text-emerald-400" : "text-gray-500"
-            }`}
-          >
-            {prod.inStock ? "მარაგშია" : "ამოიწურა"}
-          </span>
-        </div>
-      </div>
-    </div>
-  );
-}
+const PAGE_SIZES = [12, 24, 48, 100];
+const TOP_DISCOUNTS = 5;
 
 export default function CatalogView({
-  categorySlug,
-  categoryTitle = "მაღაზია",
+  products,
+  activeCategory = "all",
+  title = "მაღაზია",
 }: {
-  categorySlug?: string;
-  categoryTitle?: string;
+  /** Products to list (already limited to the category on category pages) */
+  products: ProductSummary[];
+  /** Current category slug, or "all" on the shop page */
+  activeCategory?: string;
+  title?: string;
 }) {
-  const absoluteMaxPrice = useMemo(() => {
-    return Math.max(...ALL_PRODUCTS.map((p) => p.price), 5869);
-  }, []);
-
-  const [activeCategory, setActiveCategory] = useState<string>(
-    categorySlug || "all",
+  const absoluteMaxPrice = useMemo(
+    () => Math.ceil(Math.max(0, ...products.map((p) => p.priceMax ?? p.price))),
+    [products],
   );
+
   const [searchQuery, setSearchQuery] = useState("");
   const [maxPrice, setMaxPrice] = useState(absoluteMaxPrice);
-  const [sortBy, setSortBy] = useState("default");
-  const [gridCols, setGridCols] = useState(3);
+  const [sortBy, setSortBy] = useState<SortKey>("default");
+  const [gridCols, setGridCols] = useState<3 | 4>(3);
   const [itemsPerPage, setItemsPerPage] = useState(12);
   const [currentPage, setCurrentPage] = useState(1);
   const [onlyInStock, setOnlyInStock] = useState(false);
   const [onlySale, setOnlySale] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
 
+  // header search sends people here as /magazia?q=...
+  // (read from window instead of useSearchParams so the page stays static)
   useEffect(() => {
-    if (categorySlug) {
-      setActiveCategory(categorySlug);
-    }
-  }, [categorySlug]);
+    const q = new URLSearchParams(window.location.search).get("q");
+    if (q) setSearchQuery(q);
 
-  useEffect(() => {
-    setIsLoading(true);
-    const timer = setTimeout(() => setIsLoading(false), 200);
-    return () => clearTimeout(timer);
-  }, [
-    activeCategory,
-    itemsPerPage,
-    maxPrice,
-    sortBy,
-    searchQuery,
-    onlyInStock,
-    onlySale,
-    currentPage,
-  ]);
+    const onSearch = (e: Event) => {
+      setSearchQuery((e as CustomEvent<string>).detail);
+      setCurrentPage(1);
+    };
+    window.addEventListener(SEARCH_EVENT, onSearch);
+    return () => window.removeEventListener(SEARCH_EVENT, onSearch);
+  }, []);
+
+  const hasActiveFilters =
+    searchQuery !== "" ||
+    maxPrice < absoluteMaxPrice ||
+    onlyInStock ||
+    onlySale ||
+    sortBy !== "default";
 
   const handleResetFilters = () => {
-    setActiveCategory("all");
     setSearchQuery("");
     setMaxPrice(absoluteMaxPrice);
     setSortBy("default");
@@ -235,38 +79,28 @@ export default function CatalogView({
     setCurrentPage(1);
   };
 
-  const topDiscountProducts = useMemo(() => {
-    return ALL_PRODUCTS.filter(
-      (item) => item.isSale && item.oldPrice && item.oldPrice > item.price,
-    )
-      .sort(
-        (a, b) => (b.oldPrice || 0) - b.price - ((a.oldPrice || 0) - a.price),
-      )
-      .slice(0, 5);
-  }, []);
+  const topDiscountProducts = useMemo(
+    () =>
+      products
+        .filter((p) => p.oldPrice && p.oldPrice > p.price)
+        .sort((a, b) => b.oldPrice! - b.price - (a.oldPrice! - a.price))
+        .slice(0, TOP_DISCOUNTS),
+    [products],
+  );
 
   const filteredProducts = useMemo(() => {
-    return ALL_PRODUCTS.filter((item) => {
-      const itemMainSlug = getMainCategorySlug(item);
-      const matchCategory =
-        activeCategory === "all" || itemMainSlug === activeCategory;
-
-      const matchPrice = item.price <= maxPrice;
-      const matchSearch =
-        searchQuery.trim() === "" ||
-        item.name.toLowerCase().includes(searchQuery.toLowerCase().trim());
-      const matchStock = !onlyInStock || item.inStock;
-      const matchSale = !onlySale || item.isSale;
-
-      return (
-        matchCategory && matchPrice && matchSearch && matchStock && matchSale
-      );
-    }).sort((a, b) => {
-      if (sortBy === "price-asc") return a.price - b.price;
-      if (sortBy === "price-desc") return b.price - a.price;
-      return 0;
-    });
-  }, [activeCategory, maxPrice, sortBy, searchQuery, onlyInStock, onlySale]);
+    const query = searchQuery.toLowerCase().trim();
+    const list = products.filter(
+      (item) =>
+        item.price <= maxPrice &&
+        (!query || item.name.toLowerCase().includes(query)) &&
+        (!onlyInStock || item.inStock) &&
+        (!onlySale || item.isSale),
+    );
+    if (sortBy === "price-asc") return [...list].sort((a, b) => a.price - b.price);
+    if (sortBy === "price-desc") return [...list].sort((a, b) => b.price - a.price);
+    return list;
+  }, [products, maxPrice, sortBy, searchQuery, onlyInStock, onlySale]);
 
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage) || 1;
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -282,8 +116,6 @@ export default function CatalogView({
 
   return (
     <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 md:px-12 lg:px-16">
-      <ShopOverlays />
-
       <div className="flex flex-col gap-8 lg:flex-row">
         {/* საიდბარი */}
         <aside className="w-full shrink-0 lg:w-72">
@@ -299,12 +131,8 @@ export default function CatalogView({
                   <Filter className="h-4 w-4 text-yellow-400 drop-shadow-[0_0_5px_rgba(250,204,21,0.5)]" />
                   კატეგორიები
                 </span>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setActiveCategory("all");
-                    setCurrentPage(1);
-                  }}
+                <Link
+                  href="/magazia"
                   className={`text-[11px] font-bold uppercase tracking-wider transition-all px-2.5 py-1 rounded-lg ${
                     activeCategory === "all"
                       ? "bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 shadow-[0_0_10px_rgba(250,204,21,0.1)]"
@@ -312,14 +140,13 @@ export default function CatalogView({
                   }`}
                 >
                   ყველა
-                </button>
+                </Link>
               </div>
 
               <div className="flex flex-col relative z-10 pt-1">
                 {CATEGORIES.map((cat) => {
                   const Icon = cat.icon;
                   const isActive = activeCategory === cat.slug;
-                  const isExternal = cat.slug === "varskvlavis-darqmeva";
 
                   const content = (
                     <>
@@ -345,36 +172,17 @@ export default function CatalogView({
                   const inactiveClass =
                     "border border-transparent hover:bg-white/[0.04] hover:border-white/10";
 
-                  if (isExternal) {
-                    return (
-                      <a
-                        key={cat.slug}
-                        href="https://astroman.ge/star-registry/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`${baseClass} ${inactiveClass}`}
-                      >
-                        {content}
-                      </a>
-                    );
-                  }
-
                   return (
-                    <button
+                    <CategoryLink
                       key={cat.slug}
-                      type="button"
-                      onClick={() => {
-                        setActiveCategory(cat.slug);
-                        setCurrentPage(1);
-                      }}
+                      category={cat}
                       className={`${baseClass} ${isActive ? activeClass : inactiveClass}`}
                     >
-                      {/* კიბერპანკის მარცხენა მანათობელი ზოლი აქტიურ კატეგორიაზე */}
                       {isActive && (
                         <div className="absolute left-0 top-0 h-full w-[3px] bg-yellow-400 shadow-[0_0_12px_rgba(250,204,21,0.9)]" />
                       )}
                       {content}
-                    </button>
+                    </CategoryLink>
                   );
                 })}
               </div>
@@ -386,12 +194,7 @@ export default function CatalogView({
                 <h3 className="text-xs font-bold uppercase tracking-wider text-white">
                   პარამეტრები
                 </h3>
-                {(searchQuery ||
-                  maxPrice < absoluteMaxPrice ||
-                  onlyInStock ||
-                  onlySale ||
-                  sortBy !== "default" ||
-                  activeCategory !== "all") && (
+                {hasActiveFilters && (
                   <button
                     onClick={handleResetFilters}
                     className="flex items-center gap-1 text-[11px] font-semibold text-rose-400 hover:text-rose-300"
@@ -481,21 +284,25 @@ export default function CatalogView({
                       href={`/product/${item.id}`}
                       className="group flex items-center gap-3 py-3 hover:bg-white/[0.02]"
                     >
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="h-12 w-12 rounded-xl object-contain bg-white/5 p-1"
-                      />
+                      <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl bg-white/5">
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          fill
+                          sizes="48px"
+                          className="object-cover"
+                        />
+                      </div>
                       <div className="min-w-0 flex-1">
                         <h4 className="truncate text-xs font-semibold text-gray-200 group-hover:text-yellow-400">
                           {item.name}
                         </h4>
                         <div className="mt-1 flex items-center gap-2 text-[11px]">
                           <span className="text-gray-500 line-through">
-                            {item.oldPrice?.toFixed(2)}₾
+                            {formatPrice(item.oldPrice!)}
                           </span>
                           <span className="font-bold text-white">
-                            {item.price.toFixed(2)}₾
+                            {formatPrice(item.price)}
                           </span>
                         </div>
                       </div>
@@ -517,8 +324,7 @@ export default function CatalogView({
                 </Link>
                 <ChevronRight className="h-3 w-3" />
                 <span className="font-bold text-white">
-                  {CATEGORIES.find((c) => c.slug === activeCategory)?.name ||
-                    categoryTitle}
+                  {title}
                 </span>
               </div>
               <div className="mt-1 text-xs text-gray-400">
@@ -526,14 +332,14 @@ export default function CatalogView({
                 <span className="font-bold text-white">
                   {filteredProducts.length}
                 </span>{" "}
-                პროდუქტი (სულ: {ALL_PRODUCTS.length})
+                პროდუქტი (სულ: {products.length})
               </div>
             </div>
 
             <div className="flex flex-wrap items-center gap-3 text-xs">
               <div className="flex items-center gap-1.5 text-gray-400 border-r border-white/10 pr-3">
                 <span>ნახვა:</span>
-                {[12, 24, 48, 100].map((num) => (
+                {PAGE_SIZES.map((num) => (
                   <button
                     key={num}
                     type="button"
@@ -580,7 +386,7 @@ export default function CatalogView({
               <select
                 value={sortBy}
                 onChange={(e) => {
-                  setSortBy(e.target.value);
+                  setSortBy(e.target.value as SortKey);
                   setCurrentPage(1);
                 }}
                 className="cursor-pointer rounded-xl border border-white/10 bg-[#141824] px-3 py-2 text-xs text-white focus:outline-none"
@@ -598,13 +404,9 @@ export default function CatalogView({
               gridCols === 4 ? "lg:grid-cols-4" : "lg:grid-cols-3"
             }`}
           >
-            {isLoading
-              ? Array.from({ length: itemsPerPage }).map((_, i) => (
-                  <SkeletonCard key={i} />
-                ))
-              : currentProducts.map((prod) => (
-                  <TiltProductCard key={prod.id} prod={prod} />
-                ))}
+            {currentProducts.map((prod, i) => (
+              <ProductCard key={prod.id} product={prod} showExtras priority={i < 3} />
+            ))}
           </div>
 
           {/* პაგინაცია */}

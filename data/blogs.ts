@@ -6,7 +6,10 @@ export interface BlogPost {
   date: string;
   author: string;
   image: string;
+  /** Original article on astroman.ge */
   link: string;
+  /** Full article HTML — when missing, the page links to the original */
+  content?: string;
 }
 
 export const BLOG_POSTS: BlogPost[] = [

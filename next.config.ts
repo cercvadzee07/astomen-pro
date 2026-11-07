@@ -1,9 +1,18 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   cacheComponents: true,
   partialPrefetching: true,
+  images: {
+    // product & blog photos are served from the WordPress site
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "astroman.ge",
+        pathname: "/wp-content/uploads/**",
+      },
+    ],
+  },
   turbopack: {
     rules: {
       "*.css": {

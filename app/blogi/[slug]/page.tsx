@@ -1,34 +1,34 @@
-"use client";
-
-import { use } from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
-import { Calendar, User, ArrowLeft, Share2, Sparkles } from "lucide-react";
+import { Calendar, User, ArrowLeft, ArrowUpRight, Sparkles } from "lucide-react";
 import { BLOG_POSTS } from "@/data/blogs";
+import ShareButton from "@/components/blog/ShareButton";
 
-export default function BlogPostDetail({
+const findPost = (slug: string) =>
+  BLOG_POSTS.find((p) => p.slug === slug || p.id === slug);
+
+export function generateStaticParams() {
+  return BLOG_POSTS.map((p) => ({ slug: p.slug }));
+}
+
+export async function generateMetadata({
   params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = use(params);
-  const post = BLOG_POSTS.find((p) => p.slug === slug || p.id === slug);
-
-  if (!post) {
-    notFound();
-  }
-
-  const handleShare = () => {
-    if (navigator.share) {
-      navigator.share({
-        title: post.title,
-        url: window.location.href,
-      });
-    } else {
-      navigator.clipboard.writeText(window.location.href);
-      alert("სტატიის ბმული დაკოპირებულია!");
-    }
+}: PageProps<"/blogi/[slug]">): Promise<Metadata> {
+  const post = findPost((await params).slug);
+  if (!post) return {};
+  return {
+    title: post.title,
+    description: post.excerpt,
+    alternates: { canonical: `/blogi/${post.slug}` },
+    openGraph: { type: "article", title: post.title, description: post.excerpt, images: [post.image] },
   };
+}
+
+export default async function BlogPostPage({ params }: PageProps<"/blogi/[slug]">) {
+  const post = findPost((await params).slug);
+  if (!post) notFound();
 
   return (
     <div className="relative min-h-screen w-full text-slate-200 overflow-hidden py-12 selection:bg-yellow-500 selection:text-black">
@@ -45,14 +45,7 @@ export default function BlogPostDetail({
             ყველა სტატია
           </Link>
 
-          <button
-            type="button"
-            onClick={handleShare}
-            className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-[#0e1320]/60 backdrop-blur-md px-3.5 py-2 text-xs font-bold text-gray-300 transition hover:border-yellow-400 hover:text-white"
-          >
-            <Share2 className="h-3.5 w-3.5" />
-            გაზიარება
-          </button>
+          <ShareButton title={post.title} />
         </div>
 
         {/* Article Header */}
@@ -79,16 +72,19 @@ export default function BlogPostDetail({
         </header>
 
         {/* Featured Cover Image */}
-        <div className="mb-10 overflow-hidden rounded-2xl border border-white/10 bg-[#0e1320]/60 shadow-2xl">
-          <img
+        <div className="relative mb-10 aspect-[16/9] overflow-hidden rounded-2xl border border-white/10 bg-[#0e1320]/60 shadow-2xl">
+          <Image
             src={post.image}
             alt={post.title}
-            referrerPolicy="no-referrer"
-            className="aspect-[16/9] w-full object-cover"
+            fill
+            priority
+            sizes="(max-width: 896px) 100vw, 896px"
+            className="object-cover"
           />
         </div>
 
-        {/* Article Full Body */}
+        {/* Article body — until the full text is migrated, show the intro and link to the original */}
+        {post.content ? (
         <div
           className="prose prose-invert max-w-none text-sm sm:text-base leading-relaxed text-gray-300 space-y-4
           [&>p]:mb-5 [&>p]:leading-relaxed
@@ -99,6 +95,20 @@ export default function BlogPostDetail({
           [&>blockquote]:border-l-4 [&>blockquote]:border-yellow-400 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-gray-400"
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
+        ) : (
+          <div className="space-y-6">
+            <p className="text-sm leading-relaxed text-gray-300 sm:text-base">{post.excerpt}</p>
+            <a
+              href={post.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl bg-yellow-500 px-5 py-3 text-xs font-bold text-black transition hover:bg-yellow-400"
+            >
+              სრული სტატია astroman.ge-ზე
+              <ArrowUpRight className="h-4 w-4" />
+            </a>
+          </div>
+        )}
       </main>
     </div>
   );

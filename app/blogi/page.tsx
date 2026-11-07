@@ -2,6 +2,7 @@
 
 import { useState, useRef, useCallback, MouseEvent } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Calendar,
   User,
@@ -151,19 +152,17 @@ function BlogCard({ post, index }: { post: BlogPost; index: number }) {
       )}
 
       {/* Featured Image with Zoom & Dark Gradient */}
-      <a
+      <Link
         href={`/blogi/${post.slug}`}
-        target="_blank"
-        rel="noopener noreferrer"
         onClick={() => audio.playClick()}
         className="relative aspect-[16/10] w-full overflow-hidden bg-[#070a12] border-b border-white/5 block"
       >
-        <img
+        <Image
           src={post.image}
           alt={post.title}
-          referrerPolicy="no-referrer"
-          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
-          loading="lazy"
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-108"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0e1320] via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-500" />
 
@@ -172,7 +171,7 @@ function BlogCard({ post, index }: { post: BlogPost; index: number }) {
           <Sparkles className="h-3 w-3 text-yellow-400" />
           Astroman
         </div>
-      </a>
+      </Link>
 
       {/* Content */}
       <div className="flex flex-1 flex-col p-6">
@@ -187,17 +186,15 @@ function BlogCard({ post, index }: { post: BlogPost; index: number }) {
           </span>
         </div>
 
-        <a
-          href={post.link}
-          target="_blank"
-          rel="noopener noreferrer"
+        <Link
+          href={`/blogi/${post.slug}`}
           onClick={() => audio.playClick()}
           className="group/link mb-2.5 block"
         >
           <h2 className="line-clamp-2 text-base font-bold text-white transition-colors duration-200 group-hover/link:text-yellow-400 leading-snug">
             {post.title}
           </h2>
-        </a>
+        </Link>
 
         <p className="mb-6 line-clamp-3 text-xs text-gray-400/90 leading-relaxed font-normal">
           {post.excerpt}
@@ -209,16 +206,14 @@ function BlogCard({ post, index }: { post: BlogPost; index: number }) {
             სტატია
           </span>
 
-          <a
-            href={post.link}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href={`/blogi/${post.slug}`}
             onClick={() => audio.playClick()}
             className="inline-flex items-center gap-1.5 rounded-lg border border-yellow-500/20 bg-yellow-500/10 px-3 py-1.5 text-xs font-bold text-yellow-400 transition-all duration-300 hover:border-yellow-400 hover:bg-yellow-400 hover:text-black group-hover:shadow-md group-hover:shadow-yellow-500/20"
           >
             სრულად ნახვა
             <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </a>
+          </Link>
         </div>
       </div>
     </article>

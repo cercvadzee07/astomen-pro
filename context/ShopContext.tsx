@@ -1,177 +1,225 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
-import { Product, ALL_PRODUCTS } from "@/data/products";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+import type { ProductSummary } from "@/types/product";
 
 export interface CartItem {
-  product: Product;
+  product: ProductSummary;
   quantity: number;
+}
+
+export interface Toast {
+  id: number;
+  message: string;
+  tone: "info" | "error" | "success";
 }
 
 interface ShopContextType {
   cart: CartItem[];
   favorites: string[];
-  compareList: Product[];
+  compareList: ProductSummary[];
   isCartOpen: boolean;
-  quickViewProduct: Product | null;
-  addToCart: (product: Product, quantity?: number) => void;
+  quickViewProduct: ProductSummary | null;
+  toasts: Toast[];
+  addToCart: (product: ProductSummary, quantity?: number) => void;
   removeFromCart: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
   toggleFavorite: (productId: string) => void;
-  addToCompare: (product: Product) => void;
+  addToCompare: (product: ProductSummary) => void;
   removeFromCompare: (productId: string) => void;
   clearCompare: () => void;
   setIsCartOpen: (open: boolean) => void;
-  setQuickViewProduct: (product: Product | null) => void;
+  setQuickViewProduct: (product: ProductSummary | null) => void;
+  showToast: (message: string, tone?: Toast["tone"]) => void;
+  dismissToast: (id: number) => void;
   totalCartCount: number;
   totalCartPrice: number;
 }
 
 const ShopContext = createContext<ShopContextType | undefined>(undefined);
 
-export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+const CART_KEY = "astroman_cart_v2";
+const FAVS_KEY = "astroman_favs";
+const MAX_COMPARE = 4;
+
+// localStorage can throw (private mode, blocked storage) — never let it break the shop
+function readStorage<T>(key: string, fallback: T): T {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? (JSON.parse(raw) as T) : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+function writeStorage(key: string, value: unknown) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch {
+    /* ignore */
+  }
+}
+
+export function ShopProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [favorites, setFavorites] = useState<string[]>([]);
-  const [compareList, setCompareList] = useState<Product[]>([]);
+  const [compareList, setCompareList] = useState<ProductSummary[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(
-    null,
-  );
+  const [quickViewProduct, setQuickViewProduct] =
+    useState<ProductSummary | null>(null);
+  const [toasts, setToasts] = useState<Toast[]>([]);
+  const [hydrated, setHydrated] = useState(false);
 
-  // localStorage-დან ჩატვირთვა
+  // Load saved cart & favorites once on the client
   useEffect(() => {
-    const savedFavs = localStorage.getItem("astroman_favs");
-    if (savedFavs) {
-      try {
-        setFavorites(JSON.parse(savedFavs));
-      } catch (e) {}
-    }
-
-    const savedCart = localStorage.getItem("astroman_cart");
-    if (savedCart) {
-      try {
-        const rawCart: { id: string; quantity: number }[] =
-          JSON.parse(savedCart);
-        const hydrated = rawCart
-          .map((item) => {
-            const product = ALL_PRODUCTS.find((p) => p.id === item.id);
-            return product ? { product, quantity: item.quantity } : null;
-          })
-          .filter(Boolean) as CartItem[];
-        setCart(hydrated);
-      } catch (e) {}
-    }
+    setCart(readStorage<CartItem[]>(CART_KEY, []));
+    setFavorites(readStorage<string[]>(FAVS_KEY, []));
+    setHydrated(true);
   }, []);
 
-  const saveCart = (newCart: CartItem[]) => {
-    setCart(newCart);
-    const serialized = newCart.map((i) => ({
-      id: i.product.id,
-      quantity: i.quantity,
-    }));
-    localStorage.setItem("astroman_cart", JSON.stringify(serialized));
-  };
+  useEffect(() => {
+    if (hydrated) writeStorage(CART_KEY, cart);
+  }, [cart, hydrated]);
 
-  const addToCart = (product: Product, quantity = 1) => {
-    let updated: CartItem[];
-    const exists = cart.find((i) => i.product.id === product.id);
-    if (exists) {
-      updated = cart.map((i) =>
-        i.product.id === product.id
-          ? { ...i, quantity: i.quantity + quantity }
-          : i,
-      );
-    } else {
-      updated = [...cart, { product, quantity }];
-    }
-    saveCart(updated);
+  useEffect(() => {
+    if (hydrated) writeStorage(FAVS_KEY, favorites);
+  }, [favorites, hydrated]);
+
+  const dismissToast = useCallback((id: number) => {
+    setToasts((prev) => prev.filter((t) => t.id !== id));
+  }, []);
+
+  const showToast = useCallback(
+    (message: string, tone: Toast["tone"] = "info") => {
+      const id = Date.now() + Math.random();
+      setToasts((prev) => [...prev, { id, message, tone }]);
+      setTimeout(() => dismissToast(id), 3500);
+    },
+    [dismissToast],
+  );
+
+  const addToCart = useCallback((product: ProductSummary, quantity = 1) => {
+    setCart((prev) => {
+      const exists = prev.some((i) => i.product.id === product.id);
+      return exists
+        ? prev.map((i) =>
+            i.product.id === product.id
+              ? { ...i, quantity: i.quantity + quantity }
+              : i,
+          )
+        : [...prev, { product, quantity }];
+    });
     setIsCartOpen(true);
-  };
+  }, []);
 
-  const removeFromCart = (productId: string) => {
-    saveCart(cart.filter((i) => i.product.id !== productId));
-  };
+  const removeFromCart = useCallback((productId: string) => {
+    setCart((prev) => prev.filter((i) => i.product.id !== productId));
+  }, []);
 
-  const updateQuantity = (productId: string, quantity: number) => {
-    if (quantity <= 0) {
-      removeFromCart(productId);
-      return;
-    }
-    saveCart(
-      cart.map((i) => (i.product.id === productId ? { ...i, quantity } : i)),
+  const updateQuantity = useCallback((productId: string, quantity: number) => {
+    setCart((prev) =>
+      quantity <= 0
+        ? prev.filter((i) => i.product.id !== productId)
+        : prev.map((i) =>
+            i.product.id === productId ? { ...i, quantity } : i,
+          ),
     );
-  };
+  }, []);
 
-  const toggleFavorite = (productId: string) => {
-    setFavorites((prev) => {
-      const updated = prev.includes(productId)
+  const toggleFavorite = useCallback((productId: string) => {
+    setFavorites((prev) =>
+      prev.includes(productId)
         ? prev.filter((id) => id !== productId)
-        : [...prev, productId];
-      localStorage.setItem("astroman_favs", JSON.stringify(updated));
-      return updated;
-    });
-  };
+        : [...prev, productId],
+    );
+  }, []);
 
-  // შედარება მხოლოდ ერთი და იგივე კატეგორიის ნივთებზე (მაქსიმუმ 4)
-  const addToCompare = (product: Product) => {
-    setCompareList((prev) => {
-      if (prev.find((p) => p.id === product.id)) return prev;
-      if (prev.length > 0 && prev[0].categorySlug !== product.categorySlug) {
-        alert(
-          `შედარება შესაძლებელია მხოლოდ ერთი და იგივე კატეგორიის ნივთებს შორის (${prev[0].categoryName}).`,
+  // Compare works only within one category, max 4 items
+  const addToCompare = useCallback(
+    (product: ProductSummary) => {
+      if (compareList.some((p) => p.id === product.id)) return;
+      if (
+        compareList.length > 0 &&
+        compareList[0].categorySlug !== product.categorySlug
+      ) {
+        showToast(
+          `შედარება შესაძლებელია მხოლოდ ერთი კატეგორიის ნივთებს შორის (${compareList[0].categoryName}).`,
+          "error",
         );
-        return prev;
+        return;
       }
-      if (prev.length >= 4) {
-        alert("შესადარებლად შეგიძლიათ აირჩიოთ მაქსიმუმ 4 პროდუქტი.");
-        return prev;
+      if (compareList.length >= MAX_COMPARE) {
+        showToast(`შესადარებლად შეგიძლიათ აირჩიოთ მაქსიმუმ ${MAX_COMPARE} პროდუქტი.`, "error");
+        return;
       }
-      return [...prev, product];
-    });
-  };
+      setCompareList((prev) => [...prev, product]);
+      showToast("დაემატა შედარებაში", "success");
+    },
+    [compareList, showToast],
+  );
 
-  const removeFromCompare = (productId: string) => {
+  const removeFromCompare = useCallback((productId: string) => {
     setCompareList((prev) => prev.filter((p) => p.id !== productId));
-  };
+  }, []);
 
-  const clearCompare = () => setCompareList([]);
+  const clearCompare = useCallback(() => setCompareList([]), []);
 
-  const totalCartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
-  const totalCartPrice = cart.reduce(
-    (acc, item) => acc + item.product.price * item.quantity,
-    0,
+  const value = useMemo<ShopContextType>(
+    () => ({
+      cart,
+      favorites,
+      compareList,
+      isCartOpen,
+      quickViewProduct,
+      toasts,
+      addToCart,
+      removeFromCart,
+      updateQuantity,
+      toggleFavorite,
+      addToCompare,
+      removeFromCompare,
+      clearCompare,
+      setIsCartOpen,
+      setQuickViewProduct,
+      showToast,
+      dismissToast,
+      totalCartCount: cart.reduce((acc, i) => acc + i.quantity, 0),
+      totalCartPrice: cart.reduce(
+        (acc, i) => acc + i.product.price * i.quantity,
+        0,
+      ),
+    }),
+    [
+      cart,
+      favorites,
+      compareList,
+      isCartOpen,
+      quickViewProduct,
+      toasts,
+      addToCart,
+      removeFromCart,
+      updateQuantity,
+      toggleFavorite,
+      addToCompare,
+      removeFromCompare,
+      clearCompare,
+      showToast,
+      dismissToast,
+    ],
   );
 
-  return (
-    <ShopContext.Provider
-      value={{
-        cart,
-        favorites,
-        compareList,
-        isCartOpen,
-        quickViewProduct,
-        addToCart,
-        removeFromCart,
-        updateQuantity,
-        toggleFavorite,
-        addToCompare,
-        removeFromCompare,
-        clearCompare,
-        setIsCartOpen,
-        setQuickViewProduct,
-        totalCartCount,
-        totalCartPrice,
-      }}
-    >
-      {children}
-    </ShopContext.Provider>
-  );
-};
+  return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;
+}
 
-export const useShop = () => {
+export function useShop() {
   const context = useContext(ShopContext);
   if (!context) throw new Error("useShop must be used within ShopProvider");
   return context;
-};
+}

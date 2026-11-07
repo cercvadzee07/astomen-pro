@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { Telescope, MapPin, Phone, Mail } from "lucide-react";
 

@@ -6,16 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "import-products": "node scripts/import-astroman.mjs",
+    "typecheck": "next typegen && tsc --noEmit"
   },
   "dependencies": {
-    "clsx": "^2.1.1",
-    "lightweight-charts": "^5.2.1",
     "lucide-react": "^1.64.0",
     "next": "16.4.3",
     "react": "19.3.0",
-    "react-dom": "19.3.0",
-    "tailwind-merge": "^3.7.0"
+    "react-dom": "19.3.0"
   },
   "devDependencies": {
     "@tailwindcss/turbopack": "^4",

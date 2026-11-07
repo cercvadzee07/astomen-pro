@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   X,
   Plus,
@@ -14,6 +15,7 @@ import {
   Check,
 } from "lucide-react";
 import { useShop } from "@/context/ShopContext";
+import { formatPrice, formatProductPrice } from "@/lib/products";
 
 export default function ShopOverlays() {
   const {
@@ -70,11 +72,15 @@ export default function ShopOverlays() {
               ) : (
                 cart.map(({ product, quantity }) => (
                   <div key={product.id} className="flex gap-4 py-4 first:pt-0">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="h-16 w-16 rounded-xl border border-white/10 bg-[#070a12] object-cover shrink-0"
-                    />
+                    <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl border border-white/10 bg-[#070a12]">
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        fill
+                        sizes="64px"
+                        className="object-cover"
+                      />
+                    </div>
                     <div className="flex flex-1 flex-col justify-between">
                       <div className="flex justify-between gap-2">
                         <h4 className="text-xs font-semibold text-white line-clamp-1">
@@ -110,7 +116,7 @@ export default function ShopOverlays() {
                           </button>
                         </div>
                         <div className="text-xs font-bold text-yellow-400">
-                          {(product.price * quantity).toFixed(2)}₾
+                          {formatPrice(product.price * quantity)}
                         </div>
                       </div>
                     </div>
@@ -124,7 +130,7 @@ export default function ShopOverlays() {
                 <div className="mb-4 flex justify-between text-sm">
                   <span className="text-gray-400">სულ ჯამი:</span>
                   <span className="text-base font-bold text-white">
-                    {totalCartPrice.toFixed(2)}₾
+                    {formatPrice(totalCartPrice)}
                   </span>
                 </div>
                 <Link
@@ -157,11 +163,13 @@ export default function ShopOverlays() {
             </button>
 
             <div className="grid gap-6 md:grid-cols-2">
-              <div className="aspect-square w-full overflow-hidden rounded-xl border border-white/5 bg-[#070a12]">
-                <img
+              <div className="relative aspect-square w-full overflow-hidden rounded-xl border border-white/5 bg-[#070a12]">
+                <Image
                   src={quickViewProduct.image}
                   alt={quickViewProduct.name}
-                  className="h-full w-full object-cover"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 320px"
+                  className="object-cover"
                 />
               </div>
 
@@ -176,11 +184,11 @@ export default function ShopOverlays() {
 
                   <div className="mt-3 flex items-center gap-3">
                     <span className="text-xl font-bold text-white">
-                      {quickViewProduct.price.toFixed(2)}₾
+                      {formatProductPrice(quickViewProduct)}
                     </span>
                     {quickViewProduct.oldPrice && (
                       <span className="text-xs text-gray-500 line-through">
-                        {quickViewProduct.oldPrice.toFixed(2)}₾
+                        {formatPrice(quickViewProduct.oldPrice)}
                       </span>
                     )}
                     <span
@@ -194,10 +202,11 @@ export default function ShopOverlays() {
                     </span>
                   </div>
 
-                  <p className="mt-4 text-xs text-gray-400 leading-relaxed">
-                    მაღალი ხარისხის ოპტიკური და ასტრონომიული ინსტრუმენტი
-                    ოფიციალური გარანტიით.
-                  </p>
+                  {quickViewProduct.shortDescription && (
+                    <p className="mt-4 text-xs leading-relaxed text-gray-400">
+                      {quickViewProduct.shortDescription}
+                    </p>
+                  )}
                 </div>
 
                 <div className="mt-6 flex flex-col gap-3">
@@ -307,16 +316,20 @@ export default function ShopOverlays() {
                       >
                         <X className="h-4 w-4" />
                       </button>
-                      <img
-                        src={p.image}
-                        alt={p.name}
-                        className="h-32 w-full object-cover rounded-lg mb-3"
-                      />
+                      <div className="relative mb-3 h-32 w-full overflow-hidden rounded-lg">
+                        <Image
+                          src={p.image}
+                          alt={p.name}
+                          fill
+                          sizes="200px"
+                          className="object-cover"
+                        />
+                      </div>
                       <h4 className="text-xs font-bold text-white line-clamp-2 min-h-8">
                         {p.name}
                       </h4>
                       <div className="mt-2 text-sm font-bold text-yellow-400">
-                        {p.price.toFixed(2)}₾
+                        {formatProductPrice(p)}
                       </div>
                       <div className="mt-1 text-[11px] text-gray-400">
                         {p.inStock ? "მარაგშია" : "ამოწურულია"}

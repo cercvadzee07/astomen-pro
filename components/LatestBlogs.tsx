@@ -1,6 +1,5 @@
-"use client";
-
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Calendar, Sparkles, ArrowUpRight } from "lucide-react";
 import { BLOG_POSTS } from "@/data/blogs";
 
@@ -47,10 +46,12 @@ export default function LatestBlogs() {
             >
               {/* ზედა ნაწილი: ზუსტი 16:9 იმიჯი - აღარასოდეს მოიჭრება ცუდად */}
               <div className="relative w-full aspect-video overflow-hidden bg-[#05070d]">
-                <img
+                <Image
                   src={post.image}
                   alt={post.title}
-                  className="h-full w-full object-cover transition-transform duration-[1500ms] group-hover:scale-110"
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 300px"
+                  className="object-cover transition-transform duration-[1500ms] group-hover:scale-110"
                 />
                 {/* რბილი გრადიენტი იმიჯის ქვედა კიდეზე, რომ ტექსტს შეერწყას */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e17] via-transparent to-transparent opacity-90" />
