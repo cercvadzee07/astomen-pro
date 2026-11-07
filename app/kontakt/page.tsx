@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import Link from "next/link";
 import {
   MapPin,
@@ -11,19 +11,36 @@ import {
   Clock,
   CheckCircle2,
 } from "lucide-react";
+import { sendContactMessage } from "@/app/actions/contact";
 
 export default function ContactPage() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, startTransition] = useTransition();
   const [isSent, setIsSent] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSent(true);
-      setTimeout(() => setIsSent(false), 5000);
-    }, 1500);
+    const form = e.currentTarget;
+    const f = new FormData(form);
+    const get = (k: string) => String(f.get(k) ?? "");
+    setError("");
+    startTransition(async () => {
+      const res = await sendContactMessage({
+        name: get("name"),
+        email: get("email"),
+        phone: get("phone"),
+        company: get("company"),
+        message: get("message"),
+        website: get("website"),
+      });
+      if (res.ok) {
+        form.reset();
+        setIsSent(true);
+        setTimeout(() => setIsSent(false), 6000);
+      } else {
+        setError(res.error);
+      }
+    });
   };
 
   return (
@@ -84,8 +101,10 @@ export default function ContactPage() {
                         სახელი და გვარი
                       </label>
                       <input
+                        name="name"
                         type="text"
                         required
+                        autoComplete="name"
                         className="w-full rounded-xl border border-white/5 bg-[#151b2b] px-4 py-3.5 text-sm text-white placeholder-gray-600 transition-all focus:border-yellow-500/50 focus:bg-[#1a2133] focus:outline-none focus:ring-4 focus:ring-yellow-500/10"
                         placeholder="მაგ: ნიკა გიორგაძე"
                       />
@@ -95,8 +114,10 @@ export default function ContactPage() {
                         ელ-ფოსტა
                       </label>
                       <input
+                        name="email"
                         type="email"
                         required
+                        autoComplete="email"
                         className="w-full rounded-xl border border-white/5 bg-[#151b2b] px-4 py-3.5 text-sm text-white placeholder-gray-600 transition-all focus:border-yellow-500/50 focus:bg-[#1a2133] focus:outline-none focus:ring-4 focus:ring-yellow-500/10"
                         placeholder="your@email.com"
                       />
@@ -106,7 +127,9 @@ export default function ContactPage() {
                         ტელ ნომერი
                       </label>
                       <input
+                        name="phone"
                         type="tel"
+                        autoComplete="tel"
                         className="w-full rounded-xl border border-white/5 bg-[#151b2b] px-4 py-3.5 text-sm text-white placeholder-gray-600 transition-all focus:border-yellow-500/50 focus:bg-[#1a2133] focus:outline-none focus:ring-4 focus:ring-yellow-500/10"
                         placeholder="555 XX XX XX"
                       />
@@ -116,7 +139,9 @@ export default function ContactPage() {
                         კომპანია (სურვილისამებრ)
                       </label>
                       <input
+                        name="company"
                         type="text"
+                        autoComplete="organization"
                         className="w-full rounded-xl border border-white/5 bg-[#151b2b] px-4 py-3.5 text-sm text-white placeholder-gray-600 transition-all focus:border-yellow-500/50 focus:bg-[#1a2133] focus:outline-none focus:ring-4 focus:ring-yellow-500/10"
                         placeholder="კომპანიის სახელი"
                       />
@@ -128,12 +153,22 @@ export default function ContactPage() {
                       წერილი
                     </label>
                     <textarea
+                      name="message"
                       required
                       rows={4}
                       className="w-full resize-none rounded-xl border border-white/5 bg-[#151b2b] px-4 py-3.5 text-sm text-white placeholder-gray-600 transition-all focus:border-yellow-500/50 focus:bg-[#1a2133] focus:outline-none focus:ring-4 focus:ring-yellow-500/10"
                       placeholder="დაწერეთ თქვენი შეტყობინება აქ..."
                     />
                   </div>
+
+                  {/* honeypot — hidden from people */}
+                  <input name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
+
+                  {error && (
+                    <p role="alert" className="rounded-xl border border-rose-500/30 bg-rose-500/10 p-3 text-xs font-semibold text-rose-300">
+                      {error}
+                    </p>
+                  )}
 
                   <button
                     type="submit"

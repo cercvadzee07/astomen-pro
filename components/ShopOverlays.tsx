@@ -134,12 +134,19 @@ export default function ShopOverlays() {
                   </span>
                 </div>
                 <Link
-                  href="/checkout"
+                  href="/shekveta"
                   onClick={() => setIsCartOpen(false)}
                   className="flex w-full items-center justify-center gap-2 rounded-xl bg-yellow-500 py-3 text-xs font-bold text-black transition hover:bg-yellow-400"
                 >
                   <span>შეკვეთის გაფორმება</span>
                   <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link
+                  href="/kalata"
+                  onClick={() => setIsCartOpen(false)}
+                  className="mt-2 block text-center text-xs text-gray-400 hover:text-white"
+                >
+                  კალათის ნახვა
                 </Link>
               </div>
             )}

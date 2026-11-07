@@ -32,6 +32,7 @@ const CATEGORY_SLUGS = [
 
 const PAGES: Record<string, string> = {
   "/kontaqti": "/kontakt",
+  "/checkout": "/shekveta",
 };
 
 export function legacyRedirects(): Redirect[] {

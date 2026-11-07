@@ -30,6 +30,7 @@ interface ShopContextType {
   toasts: Toast[];
   addToCart: (product: ProductSummary, quantity?: number) => void;
   removeFromCart: (productId: string) => void;
+  clearCart: () => void;
   updateQuantity: (productId: string, quantity: number) => void;
   toggleFavorite: (productId: string) => void;
   addToCompare: (product: ProductSummary) => void;
@@ -125,6 +126,8 @@ export function ShopProvider({ children }: { children: React.ReactNode }) {
     setCart((prev) => prev.filter((i) => i.product.id !== productId));
   }, []);
 
+  const clearCart = useCallback(() => setCart([]), []);
+
   const updateQuantity = useCallback((productId: string, quantity: number) => {
     setCart((prev) =>
       quantity <= 0
@@ -183,6 +186,7 @@ export function ShopProvider({ children }: { children: React.ReactNode }) {
       toasts,
       addToCart,
       removeFromCart,
+      clearCart,
       updateQuantity,
       toggleFavorite,
       addToCompare,
@@ -208,6 +212,7 @@ export function ShopProvider({ children }: { children: React.ReactNode }) {
       toasts,
       addToCart,
       removeFromCart,
+      clearCart,
       updateQuantity,
       toggleFavorite,
       addToCompare,
