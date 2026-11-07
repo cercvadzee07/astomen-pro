@@ -41,6 +41,8 @@ interface ShopContextType {
   dismissToast: (id: number) => void;
   totalCartCount: number;
   totalCartPrice: number;
+  /** false until cart & favorites are loaded from localStorage */
+  hydrated: boolean;
 }
 
 const ShopContext = createContext<ShopContextType | undefined>(undefined);
@@ -195,6 +197,7 @@ export function ShopProvider({ children }: { children: React.ReactNode }) {
         (acc, i) => acc + i.product.price * i.quantity,
         0,
       ),
+      hydrated,
     }),
     [
       cart,
@@ -212,6 +215,7 @@ export function ShopProvider({ children }: { children: React.ReactNode }) {
       clearCompare,
       showToast,
       dismissToast,
+      hydrated,
     ],
   );
 

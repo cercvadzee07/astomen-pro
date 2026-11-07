@@ -18,6 +18,7 @@ import CategoryLink from "@/components/CategoryLink";
 import ProductCard from "@/components/product/ProductCard";
 import { formatPrice } from "@/lib/products";
 import { SEARCH_EVENT } from "@/lib/events";
+import { matchesQuery } from "@/lib/search";
 
 type SortKey = "default" | "price-asc" | "price-desc";
 
@@ -48,12 +49,16 @@ export default function CatalogView({
   const [currentPage, setCurrentPage] = useState(1);
   const [onlyInStock, setOnlyInStock] = useState(false);
   const [onlySale, setOnlySale] = useState(false);
+  // phones: sidebar (categories + filters) is folded away behind a button
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   // header search sends people here as /magazia?q=...
   // (read from window instead of useSearchParams so the page stays static)
   useEffect(() => {
-    const q = new URLSearchParams(window.location.search).get("q");
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get("q");
     if (q) setSearchQuery(q);
+    if (params.get("sale") === "1") setOnlySale(true);
 
     const onSearch = (e: Event) => {
       setSearchQuery((e as CustomEvent<string>).detail);
@@ -89,11 +94,11 @@ export default function CatalogView({
   );
 
   const filteredProducts = useMemo(() => {
-    const query = searchQuery.toLowerCase().trim();
+    const query = searchQuery;
     const list = products.filter(
       (item) =>
         item.price <= maxPrice &&
-        (!query || item.name.toLowerCase().includes(query)) &&
+        matchesQuery(item, query) &&
         (!onlyInStock || item.inStock) &&
         (!onlySale || item.isSale),
     );
@@ -115,10 +120,22 @@ export default function CatalogView({
   };
 
   return (
-    <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 md:px-12 lg:px-16">
-      <div className="flex flex-col gap-8 lg:flex-row">
-        {/* საიდბარი */}
-        <aside className="w-full shrink-0 lg:w-72">
+    <div className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 md:px-12 md:py-8 lg:px-16">
+      <div className="flex flex-col gap-6 lg:flex-row lg:gap-8">
+        {/* Mobile: show/hide sidebar */}
+        <button
+          type="button"
+          onClick={() => setFiltersOpen((o) => !o)}
+          aria-expanded={filtersOpen}
+          className="flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-[#0d111d]/80 py-3 text-xs font-bold uppercase tracking-wider text-white lg:hidden"
+        >
+          <Filter className="h-4 w-4 text-yellow-400" />
+          {filtersOpen ? "ფილტრების დამალვა" : "კატეგორიები და ფილტრები"}
+          {hasActiveFilters && <span className="h-2 w-2 rounded-full bg-yellow-400" />}
+        </button>
+
+        {/* Sidebar */}
+        <aside className={`w-full shrink-0 lg:block lg:w-72 ${filtersOpen ? "block" : "hidden"}`}>
           <div className="flex flex-col gap-6">
             {/* კატეგორიების მენიუ - Cosmic / NEONDEV Style */}
             <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#070a12]/80 p-4 shadow-[0_0_30px_rgba(0,0,0,0.8)] backdrop-blur-xl">
@@ -268,7 +285,7 @@ export default function CatalogView({
 
             {/* ტოპ ფასდაკლებები */}
             {topDiscountProducts.length > 0 && (
-              <div className="rounded-2xl border border-white/5 bg-[#0a0d14] p-5 shadow-xl">
+              <div className="hidden rounded-2xl border border-white/5 bg-[#0a0d14] p-5 shadow-xl lg:block">
                 <div className="mb-4 flex items-center justify-between">
                   <h3 className="text-xs font-bold uppercase tracking-wider text-white">
                     ტოპ ფასდაკლებები
@@ -337,7 +354,7 @@ export default function CatalogView({
             </div>
 
             <div className="flex flex-wrap items-center gap-3 text-xs">
-              <div className="flex items-center gap-1.5 text-gray-400 border-r border-white/10 pr-3">
+              <div className="hidden items-center gap-1.5 border-r border-white/10 pr-3 text-gray-400 md:flex">
                 <span>ნახვა:</span>
                 {PAGE_SIZES.map((num) => (
                   <button
@@ -358,7 +375,7 @@ export default function CatalogView({
                 ))}
               </div>
 
-              <div className="flex items-center gap-1 rounded-xl border border-white/10 bg-[#141824] p-1">
+              <div className="hidden items-center gap-1 rounded-xl border border-white/10 bg-[#141824] p-1 lg:flex">
                 <button
                   onClick={() => setGridCols(3)}
                   className={`rounded-lg p-1.5 ${
@@ -389,7 +406,8 @@ export default function CatalogView({
                   setSortBy(e.target.value as SortKey);
                   setCurrentPage(1);
                 }}
-                className="cursor-pointer rounded-xl border border-white/10 bg-[#141824] px-3 py-2 text-xs text-white focus:outline-none"
+                aria-label="დალაგება"
+                className="w-full cursor-pointer rounded-xl border border-white/10 bg-[#141824] px-3 py-2 text-xs text-white focus:outline-none sm:w-auto"
               >
                 <option value="default">ნაგულისხმევი</option>
                 <option value="price-asc">ფასით: დაბლიდან მაღლა</option>
@@ -400,7 +418,7 @@ export default function CatalogView({
 
           {/* პროდუქტების სია */}
           <div
-            className={`grid gap-5 sm:grid-cols-2 ${
+            className={`grid grid-cols-2 gap-3 md:gap-5 ${
               gridCols === 4 ? "lg:grid-cols-4" : "lg:grid-cols-3"
             }`}
           >
@@ -411,7 +429,7 @@ export default function CatalogView({
 
           {/* პაგინაცია */}
           {totalPages > 1 && (
-            <div className="mt-12 flex items-center justify-center gap-2">
+            <div className="mt-12 flex flex-wrap items-center justify-center gap-2">
               <button
                 disabled={currentPage === 1}
                 onClick={() => goToPage(currentPage - 1)}

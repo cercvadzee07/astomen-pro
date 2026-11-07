@@ -88,7 +88,7 @@ export default function ProductCard({
       </div>
 
       {/* Hover actions */}
-      <div className="absolute top-3 right-3 z-30 flex translate-x-2 flex-col gap-2 opacity-0 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:opacity-100 group-focus-within:translate-x-0 group-focus-within:opacity-100">
+      <div className="absolute top-2 right-2 z-30 flex flex-col gap-2 transition-all duration-300 ease-out md:top-3 md:right-3 md:translate-x-2 md:opacity-0 md:group-hover:translate-x-0 md:group-hover:opacity-100 md:group-focus-within:translate-x-0 md:group-focus-within:opacity-100">
         <button
           type="button"
           onClick={() => toggleFavorite(product.id)}
@@ -112,7 +112,7 @@ export default function ProductCard({
         </button>
 
         {showExtras && (
-          <>
+          <div className="hidden flex-col gap-2 md:flex">
             <button
               type="button"
               onClick={() => addToCompare(product)}
@@ -132,7 +132,7 @@ export default function ProductCard({
             >
               <Eye className="h-4 w-4" />
             </button>
-          </>
+          </div>
         )}
       </div>
 
@@ -158,7 +158,7 @@ export default function ProductCard({
       </Link>
 
       {/* Info */}
-      <div className="flex grow flex-col bg-[#0e1320] p-4">
+      <div className="flex grow flex-col bg-[#0e1320] p-3 md:p-4">
         <div className="mb-1 text-[10px] font-bold uppercase tracking-wider text-yellow-500/80">
           {product.categoryName}
         </div>
@@ -177,13 +177,13 @@ export default function ProductCard({
                 {formatPrice(product.oldPrice)}
               </div>
             )}
-            <div className="text-base font-bold text-white">
+            <div className="text-sm font-bold text-white md:text-base">
               {formatProductPrice(product)}
             </div>
           </div>
 
           <span
-            className={`text-[10px] font-semibold ${
+            className={`hidden text-[10px] font-semibold sm:inline ${
               product.inStock ? "text-emerald-400" : "text-gray-500"
             }`}
           >

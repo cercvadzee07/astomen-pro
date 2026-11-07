@@ -53,15 +53,15 @@ export default function HomePage() {
     <div className="mx-auto w-full max-w-[1240px] px-4 py-6 sm:px-6 md:px-8">
       <HomeHero slides={buildHeroSlides(telescopes)} />
 
-      <ProductCarousel title="ტელესკოპები" items={summaries(telescopes)} />
-      <ProductCarousel title="Top გაყიდვადი" items={summaries(topSelling, CAROUSEL_SIZE)} />
+      <ProductCarousel title="ტელესკოპები" items={summaries(telescopes)} href="/category/teleskopi" />
+      <ProductCarousel title="Top გაყიდვადი" items={summaries(topSelling, CAROUSEL_SIZE)} href="/category/ganateba" />
       <ProductCarousel title="ახალი დამატებული" items={summaries(newlyAdded, CAROUSEL_SIZE)} />
 
       <div className="mb-12">
         <Brands />
       </div>
 
-      <ProductCarousel title="ფასდაკლებები" items={summaries(discounted, CAROUSEL_SIZE)} />
+      <ProductCarousel title="ფასდაკლებები" items={summaries(discounted, CAROUSEL_SIZE)} href="/magazia?sale=1" />
 
       {/* Promo banner */}
       <section className="relative mb-12 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-r from-purple-950 via-[#0d111d] to-indigo-950 p-6 shadow-xl backdrop-blur-md md:p-8">
@@ -87,10 +87,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      <ProductCarousel title="სანათები" items={summaries(getProductsByCategory("sanatebi"))} />
+      <ProductCarousel
+        title="სანათები"
+        items={summaries(getProductsByCategory("sanatebi"))}
+        href="/category/sanatebi"
+      />
       <ProductCarousel
         title="მხოლოდ ასტრომანში"
         items={summaries(getProductsByCategory("mxolod-astromanshi"))}
+        href="/category/mxolod-astromanshi"
       />
 
       <LatestBlogs />

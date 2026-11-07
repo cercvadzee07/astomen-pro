@@ -79,7 +79,7 @@ export default function ProductGallery({
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="group relative flex h-[480px] w-full cursor-zoom-in items-center justify-center overflow-hidden rounded-3xl border border-white/10 bg-black/60 p-4 shadow-2xl sm:h-[540px]"
+        className="group relative flex aspect-square w-full cursor-zoom-in items-center justify-center overflow-hidden rounded-3xl border border-white/10 bg-black/60 p-4 shadow-2xl sm:aspect-auto sm:h-[540px]"
         aria-label="ფოტოს გადიდება"
       >
         {badges && (

@@ -19,7 +19,7 @@ const SLIDE_INTERVAL_MS = 7000;
 function HeroImage({ src, alt }: { src: string; alt: string }) {
   if (!src) return null;
   return (
-    <div className="relative h-48 w-full md:h-56">
+    <div className="relative h-36 w-full sm:h-48 md:h-56">
       <Image
         src={src}
         alt={alt}
@@ -45,9 +45,26 @@ export default function HomeHero({ slides }: { slides: HeroSlide[] }) {
   const slide = slides[current];
 
   return (
-    <section className="mb-12 flex flex-col gap-5 lg:flex-row lg:items-stretch">
-      {/* Category menu */}
-      <aside className="w-full shrink-0 lg:w-60">
+    <section className="mb-12 flex flex-col gap-4 lg:flex-row lg:items-stretch lg:gap-5">
+      {/* Mobile: category chips */}
+      <nav className="scrollbar-none -mx-4 flex gap-2 overflow-x-auto px-4 lg:hidden" aria-label="კატეგორიები">
+        {CATEGORIES.map((cat) => {
+          const Icon = cat.icon;
+          return (
+            <CategoryLink
+              key={cat.slug}
+              category={cat}
+              className="flex shrink-0 items-center gap-2 rounded-full border border-white/10 bg-[#0d111d]/90 px-3.5 py-2 text-xs font-semibold text-gray-200"
+            >
+              <Icon className={`h-3.5 w-3.5 ${cat.color}`} />
+              {cat.name}
+            </CategoryLink>
+          );
+        })}
+      </nav>
+
+      {/* Desktop: category menu */}
+      <aside className="hidden w-60 shrink-0 lg:block">
         <nav className="h-full overflow-hidden rounded-2xl border border-white/5 bg-[#0d111d]/90 shadow-xl backdrop-blur-md">
           <ul className="flex flex-col divide-y divide-white/5 text-xs font-semibold">
             {CATEGORIES.map((cat) => {
@@ -74,7 +91,7 @@ export default function HomeHero({ slides }: { slides: HeroSlide[] }) {
 
       {/* Slider */}
       {slide && (
-        <div className="group/hero relative flex min-h-[350px] flex-1 overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
+        <div className="group/hero relative flex min-h-[300px] flex-1 sm:min-h-[350px] overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
           <div className="absolute inset-0 flex">
             <div className="relative h-full w-[52%] overflow-hidden bg-gradient-to-br from-orange-500 via-amber-600 to-red-600 [clip-path:polygon(0_0,100%_0,85%_100%,0_100%)]">
               <div className="absolute inset-0 opacity-20 [background-image:radial-gradient(circle_at_center,#fff_1.5px,transparent_1.5px)] [background-size:16px_16px]" />
@@ -87,15 +104,15 @@ export default function HomeHero({ slides }: { slides: HeroSlide[] }) {
           <div className="relative z-10 flex h-full w-full flex-col justify-between p-5 md:p-6">
             <div className="grid grid-cols-2 gap-4">
               {[slide.leftBadge, slide.rightBadge].map((badge, i) => (
-                <div key={i} className="flex justify-center">
-                  <span className="rounded-lg bg-black/60 px-4 py-1 text-xs font-bold text-white shadow-md backdrop-blur-md">
+                <div key={i} className="flex min-w-0 justify-center">
+                  <span className="max-w-full truncate rounded-lg bg-black/60 px-3 py-1 text-[10px] font-bold text-white shadow-md backdrop-blur-md sm:px-4 sm:text-xs">
                     {badge}
                   </span>
                 </div>
               ))}
             </div>
 
-            <div className="my-auto grid w-full grid-cols-2 items-center justify-items-center gap-6 px-4">
+            <div className="my-auto grid w-full grid-cols-2 items-center justify-items-center gap-3 px-1 sm:gap-6 sm:px-4">
               <HeroImage src={slide.leftImg} alt={slide.leftBadge} />
               <HeroImage src={slide.rightImg} alt={slide.rightBadge} />
             </div>

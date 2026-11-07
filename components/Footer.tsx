@@ -38,9 +38,9 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition">
+                <Link href="/wesebi-da-pirobebi" className="hover:text-white transition">
                   წესები და პირობები
-                </a>
+                </Link>
               </li>
               <li>
                 <Link href="/kontakt" className="hover:text-white transition">

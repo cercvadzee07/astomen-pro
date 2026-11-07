@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Brands() {
   return (
     <section className="mb-14">
@@ -10,7 +12,11 @@ export default function Brands() {
       <div className="rounded-2xl border border-white/5 bg-[#0d111d]/70 p-6 md:p-8 backdrop-blur-md">
         <div className="grid grid-cols-2 gap-6 items-center justify-items-center sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7">
           {/* 1. BRESSER Junior */}
-          <div className="flex h-14 w-full items-center justify-center p-2 opacity-60 transition-all duration-300 hover:opacity-100 hover:scale-105 cursor-pointer">
+          <Link
+            href="/brand/bresser-junior"
+            aria-label="Bresser Junior"
+            className="flex h-14 w-full items-center justify-center p-2 opacity-60 transition-all duration-300 hover:scale-105 hover:opacity-100"
+          >
             <svg viewBox="0 0 160 50" className="h-9 w-auto">
               <circle
                 cx="20"
@@ -75,10 +81,14 @@ export default function Brands() {
                 </text>
               </g>
             </svg>
-          </div>
+          </Link>
 
           {/* 2. National Geographic */}
-          <div className="flex h-14 w-full items-center justify-center p-2 opacity-60 transition-all duration-300 hover:opacity-100 hover:scale-105 cursor-pointer">
+          <Link
+            href="/brand/national-geographic"
+            aria-label="National Geographic"
+            className="flex h-14 w-full items-center justify-center p-2 opacity-60 transition-all duration-300 hover:scale-105 hover:opacity-100"
+          >
             <svg viewBox="0 0 140 45" className="h-9 w-auto">
               <rect
                 x="2"
@@ -112,10 +122,14 @@ export default function Brands() {
                 GEOGRAPHIC
               </text>
             </svg>
-          </div>
+          </Link>
 
           {/* 3. Celestron */}
-          <div className="flex h-14 w-full items-center justify-center p-2 opacity-60 transition-all duration-300 hover:opacity-100 hover:scale-105 cursor-pointer">
+          <Link
+            href="/brand/celestron"
+            aria-label="Celestron"
+            className="flex h-14 w-full items-center justify-center p-2 opacity-60 transition-all duration-300 hover:scale-105 hover:opacity-100"
+          >
             <svg viewBox="0 0 140 45" className="h-8 w-auto">
               <circle cx="16" cy="22" r="12" fill="#f97316" />
               <circle cx="21" cy="22" r="10" fill="#0d111d" />
@@ -132,10 +146,14 @@ export default function Brands() {
                 CELESTRON
               </text>
             </svg>
-          </div>
+          </Link>
 
           {/* 4. BRESSER */}
-          <div className="flex h-14 w-full items-center justify-center p-2 opacity-60 transition-all duration-300 hover:opacity-100 hover:scale-105 cursor-pointer">
+          <Link
+            href="/brand/bresser"
+            aria-label="Bresser"
+            className="flex h-14 w-full items-center justify-center p-2 opacity-60 transition-all duration-300 hover:scale-105 hover:opacity-100"
+          >
             <svg viewBox="0 0 140 45" className="h-8 w-auto">
               <circle
                 cx="18"
@@ -167,10 +185,14 @@ export default function Brands() {
                 BRESSER
               </text>
             </svg>
-          </div>
+          </Link>
 
           {/* 5. FORESEEN */}
-          <div className="flex h-14 w-full items-center justify-center p-2 opacity-60 transition-all duration-300 hover:opacity-100 hover:scale-105 cursor-pointer">
+          <Link
+            href="/brand/foreseen"
+            aria-label="Foreseen"
+            className="flex h-14 w-full items-center justify-center p-2 opacity-60 transition-all duration-300 hover:scale-105 hover:opacity-100"
+          >
             <svg viewBox="0 0 140 45" className="h-8 w-auto">
               <text
                 x="4"
@@ -198,10 +220,14 @@ export default function Brands() {
                 RESEEN
               </text>
             </svg>
-          </div>
+          </Link>
 
           {/* 6. STEM */}
-          <div className="flex h-14 w-full items-center justify-center p-2 opacity-60 transition-all duration-300 hover:opacity-100 hover:scale-105 cursor-pointer">
+          <Link
+            href="/category/sabavshvo-satamashoebi"
+            aria-label="STEM"
+            className="flex h-14 w-full items-center justify-center p-2 opacity-60 transition-all duration-300 hover:scale-105 hover:opacity-100"
+          >
             <svg viewBox="0 0 65 65" className="h-11 w-auto">
               <path d="M 32 32 L 32 8 A 24 24 0 0 0 8 32 Z" fill="#ec4899" />
               <path d="M 32 32 L 56 32 A 24 24 0 0 0 32 8 Z" fill="#0284c7" />
@@ -220,10 +246,14 @@ export default function Brands() {
                 STEM
               </text>
             </svg>
-          </div>
+          </Link>
 
           {/* 7. Vixen */}
-          <div className="flex h-14 w-full items-center justify-center p-2 opacity-60 transition-all duration-300 hover:opacity-100 hover:scale-105 cursor-pointer">
+          <Link
+            href="/brand/vixen"
+            aria-label="Vixen"
+            className="flex h-14 w-full items-center justify-center p-2 opacity-60 transition-all duration-300 hover:scale-105 hover:opacity-100"
+          >
             <svg viewBox="0 0 120 45" className="h-8 w-auto">
               <text
                 x="50%"
@@ -240,7 +270,7 @@ export default function Brands() {
                 Vixen
               </text>
             </svg>
-          </div>
+          </Link>
         </div>
       </div>
     </section>

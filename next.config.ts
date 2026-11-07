@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { legacyRedirects } from "./lib/legacy-redirects";
 
 const nextConfig: NextConfig = {
   cacheComponents: true,
@@ -12,6 +13,9 @@ const nextConfig: NextConfig = {
         pathname: "/wp-content/uploads/**",
       },
     ],
+  },
+  async redirects() {
+    return legacyRedirects();
   },
   turbopack: {
     rules: {

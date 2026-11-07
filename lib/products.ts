@@ -46,3 +46,7 @@ export function toSummary(p: Product): ProductSummary {
   const { description, attributes, wpSlug, wpId, ...summary } = p;
   return summary;
 }
+
+export function getProductsByBrand(brand: string): Product[] {
+  return ALL_PRODUCTS.filter((p) => p.brand === brand);
+}
